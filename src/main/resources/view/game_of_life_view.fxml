@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<!--<?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>-->
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.GameOfLifeController">
+    <center>
+        <AnchorPane fx:id="gameAnchorPane" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+   <top>
+       <MenuBar prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="TOP_LEFT">
+           <menus>
+               <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="File">
+                   <items>
+                       <MenuItem onAction="#saveState" mnemonicParsing="false" text="Save" />
+                   </items>
+                   <items>
+                       <MenuItem onAction="#loadSave" mnemonicParsing="false" text="Load" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Edit">
+                   <items>
+                       <MenuItem onAction="#cleanGrid" mnemonicParsing="false" text="Clean" />
+                   </items>
+                   <items>
+                       <MenuItem onAction="#setModeToMove" mnemonicParsing="false" text="Move mode" />
+                   </items>
+                   <items>
+                       <MenuItem onAction="#setModeToReverse" mnemonicParsing="false" text="Reverse mode" />
+                   </items>
+                   <items>
+                       <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Change cells colors">
+                           <items>
+                               <MenuItem fx:id="aliveMenuItem" mnemonicParsing="false" text="Alive" />
+                           </items>
+                           <items>
+                               <MenuItem fx:id="deadMenuItem" mnemonicParsing="false" text="Dead" />
+                           </items>
+                           <items>
+                               <MenuItem fx:id="bonusMenuItem" mnemonicParsing="false" text="Bonus" />
+                           </items>
+                       </Menu>
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Help">
+                   <items>
+                       <MenuItem mnemonicParsing="false" text="About" />
+                   </items>
+               </Menu>
+           </menus>
+       </MenuBar>
+   </top>
+   <bottom>
+       <HBox fx:id="hbox" prefHeight="19.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" BorderPane.alignment="CENTER">
+           <children>
+               <Label text="generation: " />
+               <Label fx:id="generationNumberLabel" minWidth="30" text="0" />
+               <Label text="propagation: " />
+               <Label fx:id="onPropagationLabel" minWidth="30" text="off" />
+           </children></HBox>
+   </bottom>
+
+</BorderPane>
