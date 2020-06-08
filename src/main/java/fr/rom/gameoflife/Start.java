@@ -1,5 +1,6 @@
-package fr.rom;
+package fr.rom.gameoflife;
 
+import fr.rom.gameoflife.controller.GameOfLifeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class GameOfLife extends Application {
+public class Start extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -20,8 +21,8 @@ public class GameOfLife extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        double width = 800;//primaryScreenBounds.getWidth();
-        double height = 600;//primaryScreenBounds.getHeight() - 25;
+        double width = primaryScreenBounds.getWidth();
+        double height = primaryScreenBounds.getHeight() - 25;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/game_of_life_view.fxml"));
         BorderPane root = fxmlLoader.load();
@@ -34,7 +35,5 @@ public class GameOfLife extends Application {
         controller.init(primaryStage);
 
         primaryStage.show();
-        primaryStage.setMinWidth(600);
-        primaryStage.setMinHeight(400);
     }
 }
