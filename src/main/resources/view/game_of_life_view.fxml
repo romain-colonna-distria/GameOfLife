@@ -14,12 +14,18 @@
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Fichier">
                 <MenuItem mnemonicParsing="false" onAction="#saveState" text="Sauvegarder"/>
                 <MenuItem mnemonicParsing="false" onAction="#loadSave" text="Charger"/>
+                <SeparatorMenuItem/>
                 <MenuItem mnemonicParsing="false" onAction="#showSettings" text="Paramètres"/>
+                <SeparatorMenuItem/>
+                <MenuItem mnemonicParsing="false" onAction="#exit" text="Quitter"/>
             </Menu>
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Édition">
-                <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer"/>
                 <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Mode déplacement"/>
                 <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Mode retournement"/>
+                <SeparatorMenuItem/>
+                <MenuItem mnemonicParsing="false" onAction="#showOption" text="Option"/>
+                <SeparatorMenuItem/>
+                <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer"/>
                 <MenuItem mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser"/>
             </Menu>
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">

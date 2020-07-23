@@ -164,27 +164,32 @@ public class GameOfLifeController {
 
         stage.getScene().setOnKeyPressed(this.onKeyPressed);
         stage.setOnCloseRequest((event -> {
-            if(settingsStage != null) settingsStage.close();
-            if (isOnPropagation()) stopPropagation();
-            pool.shutdown();
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
-                AnchorPane root = fxmlLoader.load();
-
-                Stage s = new Stage();
-                s.setScene(new Scene(root));
-
-                InitController controller = fxmlLoader.getController();
-                controller.init(s);
-
-                s.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            doOnClose();
         }));
         double time2 = System.currentTimeMillis();
         System.out.println("Init grid: " + (time2 - time1) + " ms");
+    }
+
+    private void doOnClose(){
+        if(settingsStage != null) settingsStage.close();
+        if (isOnPropagation()) stopPropagation();
+        pool.shutdown();
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
+            AnchorPane root = fxmlLoader.load();
+
+            Stage s = new Stage();
+            s.setTitle("Jeu de la vie v2.0");
+            s.setScene(new Scene(root));
+
+            InitController controller = fxmlLoader.getController();
+            controller.init(s);
+
+            s.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void startPropagation(){
@@ -295,7 +300,7 @@ public class GameOfLifeController {
     private void initCells(int nbCols, int nbRws){
         ICell cell;
 
-        if(this.properties.getShapeString().equals("carré")){
+        if(this.properties.getShapeString().equals("rectangle")){
             for(int i = 0; i < nbCols; ++i){
                 for(int j = 0; j < nbRws; ++j) {
                     cell = new CellRectangle(this.properties.getCellWidth(), this.properties.getCellHeight(), i, j);
@@ -405,6 +410,7 @@ public class GameOfLifeController {
             VBox root = fxmlLoader.load();
 
             this.settingsStage = new Stage();
+            this.settingsStage.setTitle("Paramètres");
             this.settingsStage.setAlwaysOnTop(true);
             this.settingsStage.setResizable(false);
             this.settingsStage.setScene(new Scene(root));
@@ -418,7 +424,13 @@ public class GameOfLifeController {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
 
+    @FXML
+    public void exit(){
+        doOnClose();
+        Stage stage = (Stage) this.gameAnchorPane.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -442,6 +454,10 @@ public class GameOfLifeController {
     @FXML
     public void setModeToReverse(){
         this.grid.setOnMouseDragged(this.onMouseDragForReverse);
+    }
+
+    @FXML
+    public void showOption(){
     }
 
     //TODO: optimiser

@@ -59,6 +59,7 @@ public class InitController {
                 root.setPrefSize(width, height);
 
                 Stage stage = new Stage();
+                stage.setTitle("Jeu de la vie v2.0");
                 stage.setScene(new Scene(root));
 
                 GameOfLifeController controller = fxmlLoader.getController();
@@ -80,7 +81,7 @@ public class InitController {
             Integer.parseInt(nbRowsTextField.getText());
             Integer.parseInt(nbColomnsTextField.getText());
 
-            if(!shapeMenuButton.getValue().toString().equals("carré") && !shapeMenuButton.getValue().toString().equals("ovale")) return false;
+            if(!shapeMenuButton.getValue().toString().equals("rectangle") && !shapeMenuButton.getValue().toString().equals("ovale")) return false;
 
             Double.parseDouble(cellHeightTextField.getText());
             Double.parseDouble(cellWidthTextField.getText());

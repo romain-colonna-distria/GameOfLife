@@ -3,7 +3,7 @@ package fr.rom.gameoflife.objects;
 
 import java.util.Set;
 
-public interface ICell {
+public interface ICell { //TODO: faire etendre shape et construire la forme dynamiquement (liteto
     void makeAlive();
     void makeDead();
     void reverseState();
