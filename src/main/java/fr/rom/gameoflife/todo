@@ -1,2 +1,6 @@
 - Ajouter un système de langues
-- ajouter une option pour déterminer la durée du cycle a partir d'une sauvegarde
+- Ajouter un système de log
+- Améliorer l'interface (ajout de checkbox pour choisir le mode, ajouter des racourcis, refonte de la barre d'outil du bas)
+- Ajouter une interface regroupant des statistique sur la partie en cours (évolution de la population dans le temps (graphique) etc)
+ - ajouter une option pour déterminer la durée du cycle a partir d'une sauvegarde
+- Ajouter un "market" de modèles
