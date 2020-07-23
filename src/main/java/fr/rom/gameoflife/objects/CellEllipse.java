@@ -1,30 +1,27 @@
-package fr.rom.gameoflife.object;
-
+package fr.rom.gameoflife.objects;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Ellipse;
 
 import java.io.Serializable;
-
 import java.util.HashSet;
 import java.util.Set;
 
-
-
-public class Cell extends Rectangle implements Serializable {
+public class CellEllipse extends Ellipse implements ICell, Serializable {
     private static final long serialVersionUID = 42L;
 
-    private int positionX, positionY;
+    private final int positionX;
+    private final int positionY;
     private boolean isAlive = false;
 
     private String aliveColor = "black";
     private String deadColor = "white";
 
-    private Set<Cell> aroundCells;
+    private transient Set<ICell> aroundCells;
 
 
 
-    public Cell(double width, double height, int positionX, int positionY){
+    public CellEllipse(double width, double height, int positionX, int positionY){
         super(width, height);
 
         this.positionX = positionX;
@@ -80,11 +77,11 @@ public class Cell extends Rectangle implements Serializable {
             this.setFill(Color.valueOf(deadColor));
     }
 
-    public Set<Cell> getAroundCells() {
+    public Set<ICell> getAroundCells() {
         return aroundCells;
     }
 
-    public void setAroundCells(Set<Cell> aroundCells) {
+    public void setAroundCells(Set<ICell> aroundCells) {
         this.aroundCells = aroundCells;
     }
 
@@ -94,18 +91,33 @@ public class Cell extends Rectangle implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
-        return positionX == cell.positionX &&
-                positionY == cell.positionY;
+        CellEllipse cellEllipse = (CellEllipse) o;
+        return positionX == cellEllipse.positionX &&
+                positionY == cellEllipse.positionY;
+    }
+
+
+    public double getShapeWidth(){
+        return this.getRadiusX();
+    }
+    public double getShapeHeight(){
+        return this.getRadiusY();
+    }
+
+    public void setShapeWidth(double width){
+        this.setRadiusX(width);
+    }
+    public void setShapeHeight(double height){
+        this.setRadiusY(height);
     }
 
     @Override
     public String toString() {
         return "Cell{" +
-                //"positionX:" + positionX +
-                //", positionY:" + positionY +
+                "positionX:" + positionX +
+                ", positionY:" + positionY +
                 ", isAlive:" + isAlive +
-                ", nbAround:" + aroundCells.size() +
+                //", nbAround:" + aroundCells.size() +
                 '}';
     }
 }

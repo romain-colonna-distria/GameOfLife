@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class PropertyValuesGetter implements Serializable {
     private static final long serialVersionUID = 42L;
-    private InputStream inputStream;
+    private final InputStream inputStream;
     private Properties properties;
 
 
@@ -19,7 +19,6 @@ public class PropertyValuesGetter implements Serializable {
         checkValidityFile();
         readValues();
     }
-
 
 
     public String getPropertyValue(String property){

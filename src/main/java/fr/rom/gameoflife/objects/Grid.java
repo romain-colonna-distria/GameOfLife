@@ -1,4 +1,4 @@
-package fr.rom.gameoflife.object;
+package fr.rom.gameoflife.objects;
 
 
 import javafx.scene.Node;
@@ -9,8 +9,8 @@ import java.util.List;
 
 
 public class Grid extends GridPane {
-    private int nbColumns, nbRows;
-
+    private final int nbColumns;
+    private final int nbRows;
 
 
     public Grid(int nbColumns, int nbRows){
@@ -22,25 +22,32 @@ public class Grid extends GridPane {
 
 
 
-    public List<Cell> getCells() {
-        List<Cell> cells = new ArrayList<>();
+    public List<ICell> getCells() {
+        List<ICell> cells = new ArrayList<>();
 
         for(Node n : this.getChildren())
-            cells.add((Cell) n);
+            cells.add((ICell) n);
 
         return cells;
     }
 
-    public Cell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
+    public ICell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
         if(i < 0 || i > this.nbColumns - 1 ) throw new IndexOutOfBoundsException();
         if(j < 0 || j > this.nbRows - 1 ) throw new IndexOutOfBoundsException();
 
-        return (Cell) this.getChildren().get(i * nbColumns + j);
+        return (ICell) this.getChildren().get(i * nbColumns + j);
     }
 
-    public Cell getCellAtCoordinates(double x, double y){
-        double cellWidth = this.getCells().get(0).getWidth();
-        double cellHeight = this.getCells().get(0).getHeight();
+    public void addCell(ICell cell){
+        //TODO: trouver meilleur moyen que cast
+        this.add((Node) cell, cell.getPositionX(), cell.getPositionY());
+    }
+}
+
+/*
+    public ICell getCellAtCoordinates(double x, double y){
+        double cellWidth = this.getCells().get(0).getShapeWidth();
+        double cellHeight = this.getCells().get(0).getShapeHeight();
 
         int i = (int)(x / cellWidth);
         int j = (int)(y / cellHeight);
@@ -51,8 +58,4 @@ public class Grid extends GridPane {
             return null;
         }
     }
-
-    public void addCell(Cell cell){
-        this.add(cell, cell.getPositionX(), cell.getPositionY());
-    }
-}
+ */

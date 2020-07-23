@@ -5,62 +5,47 @@
 
 <!--<?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>-->
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.gameoflife.controller.GameOfLifeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.gameoflife.controller.GameOfLifeController">
     <center>
         <AnchorPane fx:id="gameAnchorPane" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
     </center>
     <top>
         <MenuBar prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="TOP_LEFT">
-            <menus>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#saveState" text="Save" />
-                    </items>
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#loadSave" text="Load" />
-                    </items>
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showSettings" text="Settings" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#cleanGrid" text="Clean" />
-                    </items>
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Move mode" />
-                    </items>
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Reverse mode" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
+            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Fichier">
+                <MenuItem mnemonicParsing="false" onAction="#saveState" text="Sauvegarder"/>
+                <MenuItem mnemonicParsing="false" onAction="#loadSave" text="Charger"/>
+                <MenuItem mnemonicParsing="false" onAction="#showSettings" text="Paramètres"/>
+            </Menu>
+            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Édition">
+                <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer"/>
+                <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Mode déplacement"/>
+                <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Mode retournement"/>
+                <MenuItem mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser"/>
+            </Menu>
+            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">
+                <MenuItem mnemonicParsing="false" text="À propos"/>
+            </Menu>
         </MenuBar>
     </top>
     <bottom>
-        <HBox fx:id="hbox" prefHeight="19.0" prefWidth="600.0" style="-fx-background-color: #eeeeee; -fx-padding: 0px 0px 0px 20px;" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="generation: " />
-                <Label fx:id="generationNumberLabel" minWidth="40" text="0" />
-                <Separator orientation="VERTICAL" prefHeight="200.0" />
-                <Label text="propagation: " />
-                <Label fx:id="onPropagationLabel" minWidth="30" text="off" />
-                <Separator orientation="VERTICAL" prefHeight="200.0" />
-                <Label text="zoom:" />
-                <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseDragged="#updateZoomLabel" onMouseReleased="#makeZoom" value="100.0" />
-                <Label fx:id="zoomLabel" text="100" />
-                <Label text="\%  " />
-                <Separator orientation="VERTICAL" prefHeight="200.0" />
-                <Label text="rafraichissement:" />
-                <Slider fx:id="speedSlider" max="1000.0" min="10.0" onMouseDragged="#changeSpeed" value="200.0" />
-                <Label fx:id="speedLabel" minWidth="30" text="200" />
-                <Label text="ms" />
-            </children>
+        <HBox prefHeight="19.0" prefWidth="600.0"
+              style="-fx-background-color: #eeeeee; -fx-padding: 0px 0px 0px 20px;" BorderPane.alignment="CENTER">
+            <Label text="generation: "/>
+            <Label fx:id="generationNumberLabel" minWidth="40" text="0"/>
+            <Separator orientation="VERTICAL" prefHeight="200.0"/>
+            <Label text="propagation: "/>
+            <Label fx:id="onPropagationLabel" minWidth="30" text="off"/>
+            <Separator orientation="VERTICAL" prefHeight="200.0"/>
+            <Label text="zoom:"/>
+            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseDragged="#updateZoomLabel"
+                    onMouseReleased="#makeZoom" value="100.0"/>
+            <Label fx:id="zoomLabel" text="100"/>
+            <Label text="\%  "/>
+            <Separator orientation="VERTICAL" prefHeight="200.0"/>
+            <Label text="rafraichissement:"/>
+            <Slider fx:id="speedSlider" max="1000.0" min="10.0" onMouseDragged="#changeSpeed" value="200.0"/>
+            <Label fx:id="speedLabel" minWidth="30" text="200"/>
+            <Label text="ms"/>
         </HBox>
     </bottom>
 
