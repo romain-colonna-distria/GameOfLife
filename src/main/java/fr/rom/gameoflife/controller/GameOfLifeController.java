@@ -47,7 +47,6 @@ public class GameOfLifeController {
     private int propagationNumber = 0;
     private AtomicBoolean onPropagation;
 
-    private boolean wantStatistics = true;
     private File statisticsFile;
     private FileWriter statisticsWriter;
 
@@ -173,6 +172,24 @@ public class GameOfLifeController {
             doOnClose();
         }));
         double time2 = System.currentTimeMillis();
+
+        if(statisticsFile == null){
+            statisticsFile = new File("stats.txt");
+            try {
+                if(!statisticsFile.createNewFile()){
+                    if(statisticsFile.delete()) {
+                        if(!statisticsFile.createNewFile()){
+                            System.err.println("1?????");
+                        }
+                    } else {
+                        System.err.println("2?????");
+                    }
+                }
+                statisticsWriter = new FileWriter(statisticsFile);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
         System.out.println("Init grid: " + (time2 - time1) + " ms");
     }
 
@@ -255,32 +272,12 @@ public class GameOfLifeController {
         for(ICell cell : toAlive) cell.makeAlive();
         for(ICell cell : toDead) cell.makeDead();
 
-        if(wantStatistics){
-            if(statisticsFile == null){
-                statisticsFile = new File("stats.txt");
-                try {
-                    if(!statisticsFile.createNewFile()){
-                        if(statisticsFile.delete()) {
-                            if(!statisticsFile.createNewFile()){
-                                System.err.println("1?????");
-                            }
-                        } else {
-                            System.err.println("2?????");
-                        }
-                    }
-                    statisticsWriter = new FileWriter(statisticsFile);
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
-
-            try {
-                statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
-                statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
-                statisticsWriter.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
+            statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
+            statisticsWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
