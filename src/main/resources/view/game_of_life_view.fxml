@@ -23,7 +23,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Mode déplacement" />
                 <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Mode retournement" />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#showOption" text="Option" />
+                <MenuItem mnemonicParsing="false" onAction="#showStats" text="Statistiques..." />
                 <SeparatorMenuItem />
                 <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer" />
                 <MenuItem mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser" />
