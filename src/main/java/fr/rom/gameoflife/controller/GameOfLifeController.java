@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -21,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -32,6 +34,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameOfLifeController {
     private Stage settingsStage;
+    private Stage statisticsStage;
     private Grid grid;
     private Properties properties;
     private ExecutorService pool;
@@ -44,6 +47,8 @@ public class GameOfLifeController {
     private int propagationNumber = 0;
     private AtomicBoolean onPropagation;
 
+    private File statisticsFile;
+    private FileWriter statisticsWriter;
 
     @FXML
     private AnchorPane gameAnchorPane;
@@ -167,6 +172,24 @@ public class GameOfLifeController {
             doOnClose();
         }));
         double time2 = System.currentTimeMillis();
+
+        if(statisticsFile == null){
+            statisticsFile = new File("stats.txt");
+            try {
+                if(!statisticsFile.createNewFile()){
+                    if(statisticsFile.delete()) {
+                        if(!statisticsFile.createNewFile()){
+                            System.err.println("1?????");
+                        }
+                    } else {
+                        System.err.println("2?????");
+                    }
+                }
+                statisticsWriter = new FileWriter(statisticsFile);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
         System.out.println("Init grid: " + (time2 - time1) + " ms");
     }
 
@@ -209,7 +232,6 @@ public class GameOfLifeController {
         Platform.runLater(() -> onPropagationLabel.setText("off"));
     }
 
-    //TODO: arrêter quand bouge plus
     public void propagate(){
         List<ICell> activeCells = new ArrayList<>(this.getActiveCells());
 
@@ -249,20 +271,14 @@ public class GameOfLifeController {
 
         for(ICell cell : toAlive) cell.makeAlive();
         for(ICell cell : toDead) cell.makeDead();
-    }
 
-    @FXML
-    public void cleanActives(){
-        System.err.println("avant: " + this.activeCells.size());
-        Set<ICell> tmp = new HashSet<>();
-        for(ICell c : this.activeCells){
-            if(c.isAlive()) {
-                tmp.add(c);
-                tmp.addAll(c.getAroundCells());
-            }
+        try {
+            statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
+            statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
+            statisticsWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        activeCells = new HashSet<>(tmp);
-        System.err.println("apres: " + this.activeCells.size());
     }
 
     public Set<ICell> getActiveCells(){
@@ -346,6 +362,8 @@ public class GameOfLifeController {
     @FXML
     public void saveState(){
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
         File selectedFile = fileChooser.showSaveDialog(null);
         try {
             FileOutputStream fileOut = new FileOutputStream(selectedFile);
@@ -434,6 +452,20 @@ public class GameOfLifeController {
     }
 
     @FXML
+    public void cleanActives(){
+        System.err.println("avant: " + this.activeCells.size());
+        Set<ICell> tmp = new HashSet<>();
+        for(ICell c : this.activeCells){
+            if(c.isAlive()) {
+                tmp.add(c);
+                tmp.addAll(c.getAroundCells());
+            }
+        }
+        activeCells = new HashSet<>(tmp);
+        System.err.println("apres: " + this.activeCells.size());
+    }
+
+    @FXML
     public void resetGrid(){
         onPropagation.set(false);
         propagationNumber = 0;
@@ -457,7 +489,34 @@ public class GameOfLifeController {
     }
 
     @FXML
-    public void showOption(){
+    public void showStats(){
+        if(this.statisticsStage != null) return;
+
+        try {
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            double width = primaryScreenBounds.getWidth();
+            double height = primaryScreenBounds.getHeight() - 25;
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/statistics_view.fxml"));
+            AnchorPane root = fxmlLoader.load();
+            root.setPrefSize(width, height);
+
+            this.statisticsStage = new Stage();
+            this.statisticsStage.setTitle("Statistiques");
+            this.statisticsStage.setResizable(false);
+            //this.statisticsStage.setAlwaysOnTop(true);
+            this.statisticsStage.setScene(new Scene(root));
+            this.statisticsStage.setOnCloseRequest((event -> this.statisticsStage = null));
+
+            this.stopPropagation();
+
+            StatisticsController controller = fxmlLoader.getController();
+            controller.init();
+
+            this.statisticsStage.show();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     //TODO: optimiser
