@@ -7,16 +7,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+
 public class Properties {
-    private double cellWidth = 10;
-    private double cellHeight = 10;
-    private String cellAliveColor = "black";
-    private String cellDeadColor = "white";
+    private double cellWidth;
+    private double cellHeight;
+    private String cellAliveColor;
+    private String cellDeadColor;
 
     private String shapeString;
 
-    private int gridNbColumns = 200;
-    private int gridNbRows = 200;
+    private int gridNbColumns;
+    private int gridNbRows;
 
     private final AtomicLong refreshTimeMs;
     private int nbSimultaneousThreads;
@@ -24,12 +25,25 @@ public class Properties {
     private final Set<Integer> comeAliveSet;
     private final Set<Integer> stayAliveSet;
 
+
     public Properties(){
-        refreshTimeMs = new AtomicLong(100);
-        nbSimultaneousThreads = 2;
-        comeAliveSet = new HashSet<>(Collections.singletonList(3));
-        stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
+        this.cellWidth = 10;
+        this.cellHeight = 10;
+        this.cellAliveColor = "black";
+        this.cellDeadColor = "white";
+
+        this.shapeString = "rectangle";
+
+        this.gridNbColumns = 200;
+        this.gridNbRows = 200;
+
+        this.refreshTimeMs = new AtomicLong(100);
+        this.nbSimultaneousThreads = 2;
+
+        this.comeAliveSet = new HashSet<>(Collections.singletonList(3));
+        this.stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
     }
+
 
     public double getCellWidth() {
         return cellWidth;
@@ -126,4 +140,6 @@ public class Properties {
     public void removeStayAliveRule(int stayAliveNumber){
         this.stayAliveSet.remove(stayAliveNumber);
     }
+
+    
 }

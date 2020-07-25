@@ -28,7 +28,7 @@
     <Separator prefWidth="200.0"/>
 
     <HBox style="-fx-padding: 10 10 10 10;">
-        <Label prefHeight="17.0" prefWidth="105.0" text="Se met a vivre"/>
+        <Label prefHeight="17.0" prefWidth="105.0" text="Prend vie"/>
         <CheckBox fx:id="comeAlive0Checkbox" disable="true" mnemonicParsing="false" prefHeight="18.0"
                   prefWidth="35.0"/>
         <CheckBox fx:id="comeAlive1Checkbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="35.0"/>

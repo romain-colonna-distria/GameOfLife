@@ -9,17 +9,14 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 
-
 public class SettingsController {
     private GameOfLifeController parent;
     private Properties properties;
 
     @FXML
     private ColorPicker aliveColorPicker;
-
     @FXML
     private ColorPicker deadColorPicker;
-
     @FXML
     private CheckBox comeAlive0Checkbox;
     @FXML
@@ -38,7 +35,6 @@ public class SettingsController {
     private CheckBox comeAlive7Checkbox;
     @FXML
     private CheckBox comeAlive8Checkbox;
-
     @FXML
     private CheckBox stayAlive0Checkbox;
     @FXML
@@ -57,9 +53,6 @@ public class SettingsController {
     private CheckBox stayAlive7Checkbox;
     @FXML
     private CheckBox stayAlive8Checkbox;
-
-//    @FXML
-//    private Button saveRulesButton;
 
 
 
@@ -101,6 +94,7 @@ public class SettingsController {
         if(this.properties.getStayAliveSet().contains(8)) stayAlive8Checkbox.setSelected(true);
     }
 
+
     @FXML
     public void saveRules(){
         if(comeAlive0Checkbox.isSelected()) this.properties.addComeAliveRule(0);
@@ -140,8 +134,5 @@ public class SettingsController {
         else this.properties.removeStayAliveRule(7);
         if(stayAlive8Checkbox.isSelected()) this.properties.addStayAliveRule(8);
         else this.properties.removeStayAliveRule(8);
-
-//        Stage stage = (Stage) saveRulesButton.getScene().getWindow();
-//        stage.close();
     }
 }

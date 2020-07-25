@@ -5,7 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Grid extends GridPane {
@@ -19,7 +21,6 @@ public class Grid extends GridPane {
         this.nbColumns = nbColumns;
         this.nbRows = nbRows;
     }
-
 
 
     public List<ICell> getCells() {
@@ -38,24 +39,29 @@ public class Grid extends GridPane {
         return (ICell) this.getChildren().get(i * nbColumns + j);
     }
 
-    public void addCell(ICell cell){
-        //TODO: trouver meilleur moyen que cast
-        this.add((Node) cell, cell.getPositionX(), cell.getPositionY());
-    }
-}
+    public Set<ICell> getAroundCells(ICell cell){
+        int x = cell.getPositionX();
+        int y = cell.getPositionY();
 
-/*
-    public ICell getCellAtCoordinates(double x, double y){
-        double cellWidth = this.getCells().get(0).getShapeWidth();
-        double cellHeight = this.getCells().get(0).getShapeHeight();
+        Set<ICell> result = new HashSet<>();
+        try {
+            result.add(this.getCellAtIndex(x-1, y-1));
+            result.add(this.getCellAtIndex(x-1, y));
+            result.add(this.getCellAtIndex(x-1, y+1));
+            result.add(this.getCellAtIndex(x, y-1));
+            result.add(this.getCellAtIndex(x, y+1));
+            result.add(this.getCellAtIndex(x+1, y-1));
+            result.add(this.getCellAtIndex(x+1, y));
+            result.add(this.getCellAtIndex(x+1, y+1));
 
-        int i = (int)(x / cellWidth);
-        int j = (int)(y / cellHeight);
-        try{
-            return this.getCellAtIndex(i, j);
-        } catch (ArrayIndexOutOfBoundsException e){
-            e.printStackTrace();
+            return result;
+        } catch (IndexOutOfBoundsException e){
             return null;
         }
     }
- */
+
+    public void addCell(ICell cell){ //TODO: trouver meilleur moyen que cast
+        if(!(cell instanceof  Node)) return;
+        this.add((Node) cell, cell.getPositionX(), cell.getPositionY());
+    }
+}

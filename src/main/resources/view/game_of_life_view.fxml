@@ -25,7 +25,6 @@
                 <SeparatorMenuItem />
                 <MenuItem mnemonicParsing="false" onAction="#showStats" text="Statistiques..." />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer" />
                 <MenuItem mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser" />
             </Menu>
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">

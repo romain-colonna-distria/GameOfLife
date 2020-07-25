@@ -1,5 +1,6 @@
 package fr.rom.gameoflife.controller;
 
+
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class InitController {
     private Stage stage;
 
@@ -21,21 +23,36 @@ public class InitController {
     private TextField nbRowsTextField;
     @FXML
     private TextField nbColomnsTextField;
-
     @FXML
-    private ChoiceBox shapeMenuButton;
-
+    private ChoiceBox<String> shapeMenuButton;
     @FXML
     private TextField cellHeightTextField;
     @FXML
     private TextField cellWidthTextField;
-
     @FXML
     private TextField nbThreads;
+
+
 
     public void init(Stage stage){
         this.stage = stage;
     }
+
+    private boolean checkValidity(){
+        try {
+            if(!shapeMenuButton.getValue().equals("rectangle") && !shapeMenuButton.getValue().equals("ovale")) return false;
+            Integer.parseInt(nbRowsTextField.getText());
+            Integer.parseInt(nbColomnsTextField.getText());
+            Double.parseDouble(cellHeightTextField.getText());
+            Double.parseDouble(cellWidthTextField.getText());
+            Integer.parseInt(nbThreads.getText());
+
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
     @FXML
     public void run(){
@@ -43,11 +60,10 @@ public class InitController {
             Properties properties = new Properties();
             properties.setGridNbRows(Integer.parseInt(nbRowsTextField.getText()));
             properties.setGridNbColumns(Integer.parseInt(nbColomnsTextField.getText()));
-            properties.setShapeString(shapeMenuButton.getValue().toString());
+            properties.setShapeString(shapeMenuButton.getValue());
             properties.setCellWidth(Double.parseDouble(cellWidthTextField.getText()));
             properties.setCellHeight(Double.parseDouble(cellHeightTextField.getText()));
             properties.setNbSimultaneousThreads(Integer.parseInt(nbThreads.getText()));
-
 
             try {
                 Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -66,31 +82,10 @@ public class InitController {
                 controller.init(stage, properties);
 
                 stage.show();
-
                 this.stage.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-        }
-    }
-
-    private boolean checkValidity(){
-        try {
-            Integer.parseInt(nbRowsTextField.getText());
-            Integer.parseInt(nbColomnsTextField.getText());
-
-            if(!shapeMenuButton.getValue().toString().equals("rectangle") && !shapeMenuButton.getValue().toString().equals("ovale")) return false;
-
-            Double.parseDouble(cellHeightTextField.getText());
-            Double.parseDouble(cellWidthTextField.getText());
-
-            Integer.parseInt(nbThreads.getText());
-
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 }

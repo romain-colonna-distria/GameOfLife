@@ -1,5 +1,6 @@
 package fr.rom.gameoflife.controller;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,39 +17,33 @@ import javafx.stage.Screen;
 
 import java.io.*;
 
+
 public class StatisticsController {
     @FXML
     private AnchorPane rootPane;
 
-    private final EventHandler<ActionEvent> exportStatsHandler =  new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
-            fileChooser.getExtensionFilters().add(extFilter);
+    private final EventHandler<ActionEvent> exportStatsHandler = event -> {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"));
 
-            File original = new File("stats.txt");
-            File copied = fileChooser.showSaveDialog(null);
-            if(copied == null) return;
-            try (
-                    InputStream in = new BufferedInputStream(
-                            new FileInputStream(original));
-                    OutputStream out = new BufferedOutputStream(
-                            new FileOutputStream(copied))) {
+        File copied = fileChooser.showSaveDialog(null);
+        if(copied == null) return;
+        File original = new File("stats.txt");
+        try {
+            InputStream in = new BufferedInputStream(new FileInputStream(original));
+            OutputStream out = new BufferedOutputStream(new FileOutputStream(copied));
 
-                String columnNames = "generationNb;populationNb\n";
-                out.write(columnNames.getBytes());
+            out.write("generationNb;populationNb\n".getBytes());
+            out.flush();
+
+            byte[] buffer = new byte[1024];
+            int lengthRead;
+            while ((lengthRead = in.read(buffer)) > 0) {
+                out.write(buffer, 0, lengthRead);
                 out.flush();
-
-                byte[] buffer = new byte[1024];
-                int lengthRead;
-                while ((lengthRead = in.read(buffer)) > 0) {
-                    out.write(buffer, 0, lengthRead);
-                    out.flush();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     };
 
@@ -59,7 +54,7 @@ public class StatisticsController {
         xAxis.setLabel("Génération");
         yAxis.setLabel("Population");
 
-        final LineChart<Number,Number> evolutionLineChart = new LineChart<Number,Number>(xAxis,yAxis);
+        final LineChart<Number,Number> evolutionLineChart = new LineChart<>(xAxis, yAxis);
         evolutionLineChart.setLegendVisible(false);
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -69,7 +64,7 @@ public class StatisticsController {
         evolutionLineChart.setPrefHeight(height - 150);
         evolutionLineChart.setTitle("Évolution de la population");
 
-        XYChart.Series series = new XYChart.Series();
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
 
         int popMin = -1;
         int popMax = -1;
@@ -84,7 +79,7 @@ public class StatisticsController {
             while ((line = statisticsReader.readLine()) != null) {
                 String[] parsedLine = line.split(";");
                 if(parsedLine.length != 2) return;
-                series.getData().add(new XYChart.Data(Integer.parseInt(parsedLine[0]), Integer.parseInt(parsedLine[1])));
+                series.getData().add(new XYChart.Data<>(Integer.parseInt(parsedLine[0]), Integer.parseInt(parsedLine[1])));
 
                 if(popMin == -1) popMin = Integer.parseInt(parsedLine[1]);
                 if(popMax == -1) popMax = Integer.parseInt(parsedLine[1]);
@@ -106,21 +101,17 @@ public class StatisticsController {
         Button exportChartButton = new Button("Exporter les données sous forme de fichier CSV");
         exportChartButton.setLayoutX(width - 370);
         exportChartButton.setLayoutY(height - 140);
-        exportChartButton.setOnAction(exportStatsHandler);
+        exportChartButton.setOnAction(this.exportStatsHandler);
 
         GridPane pane = new GridPane();
         pane.setLayoutX(30);
         pane.setLayoutY(height - 150);
 
-        Label popMinLabel = new Label("Population minimum : ");
-        Label popMaxLabel = new Label("Population maximum : ");
-        Label popAvgLabel = new Label("Population moyenne : ");
-
-        pane.add(popMinLabel, 0, 0);
+        pane.add(new Label("Population minimum : "), 0, 0);
         pane.add(new Label(String.valueOf(popMin)), 1, 0);
-        pane.add(popMaxLabel, 0, 1);
+        pane.add(new Label("Population maximum : "), 0, 1);
         pane.add(new Label(String.valueOf(popMax)), 1, 1);
-        pane.add(popAvgLabel, 0, 2);
+        pane.add(new Label("Population moyenne : "), 0, 2);
         pane.add(new Label(String.valueOf(popAvg)), 1, 2);
 
         rootPane.getChildren().add(evolutionLineChart);
