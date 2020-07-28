@@ -8,10 +8,11 @@ import fr.rom.gameoflife.objects.ICell;
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -38,16 +39,14 @@ public class GameOfLifeController {
     private ExecutorService pool;
 
     private Grid grid;
-    private Properties properties;
+    private boolean dragModeActive;
 
     private Set<ICell> activeCells;
     private ICell lastClickedCell;
-    private double xClick, yClick;
 
-    private int propagationNumber = 0;
+    private int propagationNumber;
     private AtomicBoolean onPropagation;
 
-    private File statisticsFile;
     private FileWriter statisticsWriter;
 
     @FXML
@@ -65,83 +64,41 @@ public class GameOfLifeController {
     @FXML
     private Label speedLabel;
 
-    /**
-     * Event handler détectant une pression de la sourie sur la grille. Permet
-     * d'enregistrer les coordonnées de la pression pour permetre un bon déplacement de la grille.
-     */
-    private final EventHandler<MouseEvent> onMousePressed =  event -> {
-        this.xClick = event.getX();
-        this.yClick = event.getY();
-    };
-
-    //TODO: mieux gérer le déplacement
-    /**
-     * Event handler détectant le déplacement de la sourie (sourie cliquée) sur la grille.
-     * Permet de déplacer la grille.
-     */
-    private final EventHandler<MouseEvent> onMouseDragForMovePlan =  event -> {
-        if(event.getSource() instanceof Grid){
-            ((Grid) event.getSource()).setTranslateX(event.getX() - this.xClick + ((Grid) event.getSource()).getTranslateX());
-            ((Grid) event.getSource()).setTranslateY(event.getY() - this.yClick + ((Grid) event.getSource()).getTranslateY());
-            this.xClick = event.getX();
-            this.yClick = event.getY();
-        }
-    };
-
-    /**
-     * Event handler détectant la pression d'une touche du clavier. Permet
-     * d'effectier une propagation (espace) ou de lancer la propagatio autamotique (entré).
-     */
-    private final EventHandler<KeyEvent> onKeyPressed = event -> {
-        if(event.getCode().equals(KeyCode.ENTER)) {
-            if (isOnPropagation()) stopPropagation();
-            else startPropagation();
-        } else if(event.getCode().equals(KeyCode.SPACE)){
-            propagate();
-        }
-    };
-
-    /**
-     * Event handler détectant le déplacement de la sourie (sourie cliquée) sur la grille.
-     * Permet de modifier l'etat des celules survolées par la sourie.
-     */
-    private final EventHandler<MouseEvent> onMouseDragForReverse = event -> {
-        if(!(event.getPickResult().getIntersectedNode() instanceof ICell)) return;
-        ICell cell = (ICell) event.getPickResult().getIntersectedNode();
-
-        if(cell.equals(lastClickedCell)) return;
-        lastClickedCell = cell;
-
-        cell.reverseState();
-        addNewActiveCell(cell);
-    };
-
-    /**
-     * Event handler détectant une pression de la sourie sur la grille. Permet
-     * de modifer l'etat d'une cellule
-     */
-    private final EventHandler<MouseEvent> onClickCell = event -> {
-        if(!(event.getTarget() instanceof ICell)) return;
-        ICell cell = (ICell) event.getTarget();
-
-        cell.reverseState();
-        addNewActiveCell(cell);
-    };
 
 
-
-    public void init(Stage stage, Properties properties) {
-        this.properties = properties;
+    public void init() {
         this.onPropagation = new AtomicBoolean(false);
-        this.pool = Executors.newFixedThreadPool(properties.getNbSimultaneousThreads());
+        this.pool = Executors.newFixedThreadPool(Properties.getInstance().getNbSimultaneousThreads());
         this.activeCells = new HashSet<>();
+        this.propagationNumber = 0;
+        this.dragModeActive = false;
 
-        initGrid(properties.getGridNbColumns(), properties.getGridNbRows());
+        initGrid();
 
-        stage.getScene().setOnKeyPressed(this.onKeyPressed);
-        stage.setOnCloseRequest((event -> doOnClose()));
+        this.grid.getScene().getWindow().getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+                if (isOnPropagation()) stopPropagation();
+                else startPropagation();
+            } else if(keyEvent.getCode().equals(KeyCode.SPACE)){
+                propagate();
+            }
+        });
+        this.grid.getScene().getWindow().setOnCloseRequest((event -> doOnClose()));
 
-        statisticsFile = new File("stats.txt");
+        this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue()))
+        );
+
+        this.speedSlider.valueProperty().addListener((bservable, oldValue, newValue) -> {
+            speedLabel.textProperty().setValue(String.valueOf((int)speedSlider.getValue()));
+            Properties.getInstance().setRefreshTimeMs((long) speedSlider.getValue());
+        });
+
+        createStatsFile();
+    }
+
+    private void createStatsFile(){
+        File statisticsFile = new File("stats.txt");
         try {
             if(!statisticsFile.createNewFile()){
                 if(statisticsFile.delete()) {
@@ -210,13 +167,13 @@ public class GameOfLifeController {
             }
 
             if(cell.isAlive()){
-                if(!this.properties.getStayAliveSet().contains(nbAliveAroundCells)){
+                if(!Properties.getInstance().getStayAliveSet().contains(nbAliveAroundCells)){
                     toDead.add(cell);
                     addNewActiveCell(cell);
                     gameUpdated = true;
                 }
             } else {
-                if(this.properties.getComeAliveSet().contains(nbAliveAroundCells)){
+                if(Properties.getInstance().getComeAliveSet().contains(nbAliveAroundCells)){
                     toAlive.add(cell);
                     addNewActiveCell(cell);
                     gameUpdated = true;
@@ -248,6 +205,7 @@ public class GameOfLifeController {
         for(ICell cell : this.activeCells){
             if(cell.isAlive()) {
                 tmp.add(cell);
+                if(cell.getAroundCells() == null) continue;
                 tmp.addAll(cell.getAroundCells());
             }
         }
@@ -264,29 +222,68 @@ public class GameOfLifeController {
         activeCells.addAll(around);
     }
 
-    private void initGrid(int nbCols, int nbRws){
-        this.grid = new Grid(nbCols, nbRws);
-        this.gameAnchorPane.getChildren().add(this.grid);
+    private void initGrid(){
+        this.grid = new Grid(Properties.getInstance().getGridNbColumns(), Properties.getInstance().getGridNbRows());
+        this.gameAnchorPane.getChildren().add(makeGridWithEventFilters(this.grid));
 
-        this.grid.setOnMousePressed(onMousePressed);
-        this.grid.setOnMouseDragged(onMouseDragForReverse);
-        this.grid.setOnMouseClicked(onClickCell);
-
-        initCells(nbCols, nbRws);
+        initCells();
     }
 
-    private void initCells(int nbCols, int nbRws){
+    private Node makeGridWithEventFilters(final Grid grid) {
+        final DragContext dragContext = new DragContext();
+        final Group wrapGroup = new Group(grid);
+
+        wrapGroup.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+            if (dragModeActive) {
+                // remember initial mouse cursor coordinates
+                // and node position
+                dragContext.mouseAnchorX = mouseEvent.getX();
+                dragContext.mouseAnchorY = mouseEvent.getY();
+                dragContext.initialTranslateX = grid.getTranslateX();
+                dragContext.initialTranslateY = grid.getTranslateY();
+            } else {
+                if(!(mouseEvent.getTarget() instanceof ICell)) return;
+                ICell cell = (ICell) mouseEvent.getTarget();
+
+                cell.reverseState();
+                addNewActiveCell(cell);
+            }
+        });
+
+        wrapGroup.addEventFilter(MouseEvent.MOUSE_DRAGGED, mouseEvent -> {
+            if (dragModeActive) {
+                // shift node from its initial position by delta
+                // calculated from mouse cursor movement
+                grid.setTranslateX(dragContext.initialTranslateX + mouseEvent.getX() - dragContext.mouseAnchorX);
+                grid.setTranslateY(dragContext.initialTranslateY + mouseEvent.getY() - dragContext.mouseAnchorY);
+            } else {
+                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof ICell)) return;
+                ICell cell = (ICell) mouseEvent.getPickResult().getIntersectedNode();
+
+                if(cell.equals(lastClickedCell)) return;
+                lastClickedCell = cell;
+
+                cell.reverseState();
+                addNewActiveCell(cell);
+            }
+        });
+
+        return wrapGroup;
+    }
+
+    private void initCells(){
         ICell cell;
-        for(int i = 0; i < nbCols; ++i){
-            for(int j = 0; j < nbRws; ++j) {
-                if(this.properties.getShapeString().equals("rectangle"))
-                    cell = new CellRectangle(this.properties.getCellWidth(), this.properties.getCellHeight(), i, j);
-                else if(this.properties.getShapeString().equals("ovale"))
-                    cell = new CellEllipse(this.properties.getCellWidth(), this.properties.getCellHeight(), i, j);
+        Properties p = Properties.getInstance();
+        for(int i = 0; i < p.getGridNbColumns(); ++i){
+            for(int j = 0; j < p.getGridNbRows(); ++j) {
+                if(p.getShapeString().equals("rectangle"))
+                    cell = new CellRectangle(p.getCellWidth(), p.getCellHeight(), i, j);
+                else if(p.getShapeString().equals("ovale"))
+                    cell = new CellEllipse(p.getCellWidth(), p.getCellHeight(), i, j);
                 else return;
 
-                cell.setAliveColor(this.properties.getCellAliveColor());
-                cell.setDeadColor(this.properties.getCellDeadColor());
+                cell.setAliveColor(p.getCellAliveColor());
+                cell.setDeadColor(p.getCellDeadColor());
                 cell.makeDead();
                 grid.addCell(cell);
             }
@@ -298,14 +295,14 @@ public class GameOfLifeController {
     }
 
     public void updateAliveColorCell(String newColor){
-        this.properties.setCellAliveColor(newColor);
+        Properties.getInstance().setCellAliveColor(newColor);
         for(ICell c : grid.getCells()){
             c.setAliveColor(newColor);
         }
     }
 
     public void updateDeadColorCell(String newColor){
-        this.properties.setCellDeadColor(newColor);
+        Properties.getInstance().setCellDeadColor(newColor);
         for(ICell c : grid.getCells()){
             c.setDeadColor(newColor);
         }
@@ -394,7 +391,7 @@ public class GameOfLifeController {
             this.settingsStage.setOnCloseRequest((event -> this.settingsStage = null));
 
             SettingsController controller = fxmlLoader.getController();
-            controller.init(this, this.properties);
+            controller.init(this);
 
             this.settingsStage.show();
         } catch (IOException e){
@@ -417,6 +414,8 @@ public class GameOfLifeController {
         for(ICell cell : getActiveCells()) cell.makeDead();
         this.activeCells = new HashSet<>();
 
+        createStatsFile();
+
         Platform.runLater(() -> {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
             onPropagationLabel.setText("off");
@@ -425,12 +424,12 @@ public class GameOfLifeController {
 
     @FXML
     public void setModeToMove(){
-        this.grid.setOnMouseDragged(this.onMouseDragForMovePlan);
+        dragModeActive = true;
     }
 
     @FXML
     public void setModeToReverse(){
-        this.grid.setOnMouseDragged(this.onMouseDragForReverse);
+        dragModeActive = false;
     }
 
     @FXML
@@ -449,6 +448,8 @@ public class GameOfLifeController {
             this.statisticsStage = new Stage();
             this.statisticsStage.setTitle("Statistiques");
             this.statisticsStage.setResizable(false);
+            this.statisticsStage.initModality(Modality.WINDOW_MODAL);
+            this.statisticsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
             this.statisticsStage.setScene(new Scene(root));
             this.statisticsStage.setOnCloseRequest((event -> this.statisticsStage = null));
 
@@ -467,9 +468,9 @@ public class GameOfLifeController {
     @FXML
     public void makeZoom(){
         List<ICell> cells = grid.getCells();
-        double newCellsWidth = this.properties.getCellWidth() * (zoomSlider.getValue() / 100);
-        double newCellsHeight = this.properties.getCellHeight() * (zoomSlider.getValue() / 100);
-        int nbThread = this.properties.getNbSimultaneousThreads();
+        double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
+        double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
+        int nbThread = Properties.getInstance().getNbSimultaneousThreads();
         int from = 0;
 
         for(int i = 0; i < nbThread; ++i) {
@@ -477,18 +478,6 @@ public class GameOfLifeController {
             pool.submit(new Zoom_Handler(cells.subList(from, from + cells.size() / nbThread), newCellsWidth, newCellsHeight));
             from += cells.size() / nbThread;
         }
-    }
-
-    @FXML
-    public void updateZoomLabel(){
-        Platform.runLater(() -> zoomLabel.setText(String.valueOf(zoomSlider.getValue())));
-    }
-
-    @FXML
-    public void changeSpeed(){
-        this.properties.setRefreshTimeMs((long) speedSlider.getValue());
-
-        Platform.runLater(() -> speedLabel.setText(String.valueOf(this.properties.getRefreshTimeMs())));
     }
 
 
@@ -500,7 +489,7 @@ public class GameOfLifeController {
                 Platform.runLater(GameOfLifeController.this::propagate);
 
                 try {
-                    Thread.sleep(properties.getRefreshTimeMs());
+                    Thread.sleep(Properties.getInstance().getRefreshTimeMs());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -531,5 +520,12 @@ public class GameOfLifeController {
                 }
             });
         }
+    }
+
+    private static final class DragContext {
+        public double mouseAnchorX;
+        public double mouseAnchorY;
+        public double initialTranslateX;
+        public double initialTranslateY;
     }
 }

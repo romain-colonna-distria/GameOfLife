@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 
 public class SettingsController {
     private GameOfLifeController parent;
-    private Properties properties;
 
     @FXML
     private ColorPicker aliveColorPicker;
@@ -56,83 +55,84 @@ public class SettingsController {
 
 
 
-    public void init(GameOfLifeController parent, Properties properties){
+    public void init(GameOfLifeController parent){
         this.parent = parent;
-        this.properties = properties;
 
         initColorPickers();
         initCheckboxes();
     }
 
     private void initColorPickers(){
-        aliveColorPicker.setValue(Color.valueOf(this.properties.getCellAliveColor()));
+        aliveColorPicker.setValue(Color.valueOf(Properties.getInstance().getCellAliveColor()));
         aliveColorPicker.setOnAction((event) -> parent.updateAliveColorCell(aliveColorPicker.getValue().toString()));
 
-        deadColorPicker.setValue(Color.valueOf(this.properties.getCellDeadColor()));
+        deadColorPicker.setValue(Color.valueOf(Properties.getInstance().getCellDeadColor()));
         deadColorPicker.setOnAction((event) -> parent.updateDeadColorCell(deadColorPicker.getValue().toString()));
     }
 
     private void initCheckboxes(){
-        if(this.properties.getComeAliveSet().contains(0)) comeAlive0Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(1)) comeAlive1Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(2)) comeAlive2Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(3)) comeAlive3Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(4)) comeAlive4Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(5)) comeAlive5Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(6)) comeAlive6Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(7)) comeAlive7Checkbox.setSelected(true);
-        if(this.properties.getComeAliveSet().contains(8)) comeAlive8Checkbox.setSelected(true);
+        Properties p = Properties.getInstance();
+        if(p.getComeAliveSet().contains(0)) comeAlive0Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(1)) comeAlive1Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(2)) comeAlive2Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(3)) comeAlive3Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(4)) comeAlive4Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(5)) comeAlive5Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(6)) comeAlive6Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(7)) comeAlive7Checkbox.setSelected(true);
+        if(p.getComeAliveSet().contains(8)) comeAlive8Checkbox.setSelected(true);
 
-        if(this.properties.getStayAliveSet().contains(0)) stayAlive0Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(1)) stayAlive1Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(2)) stayAlive2Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(3)) stayAlive3Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(4)) stayAlive4Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(5)) stayAlive5Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(6)) stayAlive6Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(7)) stayAlive7Checkbox.setSelected(true);
-        if(this.properties.getStayAliveSet().contains(8)) stayAlive8Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(0)) stayAlive0Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(1)) stayAlive1Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(2)) stayAlive2Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(3)) stayAlive3Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(4)) stayAlive4Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(5)) stayAlive5Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(6)) stayAlive6Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(7)) stayAlive7Checkbox.setSelected(true);
+        if(p.getStayAliveSet().contains(8)) stayAlive8Checkbox.setSelected(true);
     }
 
 
     @FXML
     public void saveRules(){
-        if(comeAlive0Checkbox.isSelected()) this.properties.addComeAliveRule(0);
-        else this.properties.removeComeAliveRule(0);
-        if(comeAlive1Checkbox.isSelected()) this.properties.addComeAliveRule(1);
-        else this.properties.removeComeAliveRule(1);
-        if(comeAlive2Checkbox.isSelected()) this.properties.addComeAliveRule(2);
-        else this.properties.removeComeAliveRule(2);
-        if(comeAlive3Checkbox.isSelected()) this.properties.addComeAliveRule(3);
-        else this.properties.removeComeAliveRule(3);
-        if(comeAlive4Checkbox.isSelected()) this.properties.addComeAliveRule(4);
-        else this.properties.removeComeAliveRule(4);
-        if(comeAlive5Checkbox.isSelected()) this.properties.addComeAliveRule(5);
-        else this.properties.removeComeAliveRule(5);
-        if(comeAlive6Checkbox.isSelected()) this.properties.addComeAliveRule(6);
-        else this.properties.removeComeAliveRule(6);
-        if(comeAlive7Checkbox.isSelected()) this.properties.addComeAliveRule(7);
-        else this.properties.removeComeAliveRule(7);
-        if(comeAlive8Checkbox.isSelected()) this.properties.addComeAliveRule(8);
-        else this.properties.removeComeAliveRule(8);
+        Properties p = Properties.getInstance();
+        if(comeAlive0Checkbox.isSelected()) p.addComeAliveRule(0);
+        else p.removeComeAliveRule(0);
+        if(comeAlive1Checkbox.isSelected()) p.addComeAliveRule(1);
+        else p.removeComeAliveRule(1);
+        if(comeAlive2Checkbox.isSelected()) p.addComeAliveRule(2);
+        else p.removeComeAliveRule(2);
+        if(comeAlive3Checkbox.isSelected()) p.addComeAliveRule(3);
+        else p.removeComeAliveRule(3);
+        if(comeAlive4Checkbox.isSelected()) p.addComeAliveRule(4);
+        else p.removeComeAliveRule(4);
+        if(comeAlive5Checkbox.isSelected()) p.addComeAliveRule(5);
+        else p.removeComeAliveRule(5);
+        if(comeAlive6Checkbox.isSelected()) p.addComeAliveRule(6);
+        else p.removeComeAliveRule(6);
+        if(comeAlive7Checkbox.isSelected()) p.addComeAliveRule(7);
+        else p.removeComeAliveRule(7);
+        if(comeAlive8Checkbox.isSelected()) p.addComeAliveRule(8);
+        else p.removeComeAliveRule(8);
 
-        if(stayAlive0Checkbox.isSelected()) this.properties.addStayAliveRule(0);
-        else this.properties.removeStayAliveRule(0);
-        if(stayAlive1Checkbox.isSelected()) this.properties.addStayAliveRule(1);
-        else this.properties.removeStayAliveRule(1);
-        if(stayAlive2Checkbox.isSelected()) this.properties.addStayAliveRule(2);
-        else this.properties.removeStayAliveRule(2);
-        if(stayAlive3Checkbox.isSelected()) this.properties.addStayAliveRule(3);
-        else this.properties.removeStayAliveRule(3);
-        if(stayAlive4Checkbox.isSelected()) this.properties.addStayAliveRule(4);
-        else this.properties.removeStayAliveRule(4);
-        if(stayAlive5Checkbox.isSelected()) this.properties.addStayAliveRule(5);
-        else this.properties.removeStayAliveRule(5);
-        if(stayAlive6Checkbox.isSelected()) this.properties.addStayAliveRule(6);
-        else this.properties.removeStayAliveRule(6);
-        if(stayAlive7Checkbox.isSelected()) this.properties.addStayAliveRule(7);
-        else this.properties.removeStayAliveRule(7);
-        if(stayAlive8Checkbox.isSelected()) this.properties.addStayAliveRule(8);
-        else this.properties.removeStayAliveRule(8);
+        if(stayAlive0Checkbox.isSelected()) p.addStayAliveRule(0);
+        else p.removeStayAliveRule(0);
+        if(stayAlive1Checkbox.isSelected()) p.addStayAliveRule(1);
+        else p.removeStayAliveRule(1);
+        if(stayAlive2Checkbox.isSelected()) p.addStayAliveRule(2);
+        else p.removeStayAliveRule(2);
+        if(stayAlive3Checkbox.isSelected()) p.addStayAliveRule(3);
+        else p.removeStayAliveRule(3);
+        if(stayAlive4Checkbox.isSelected()) p.addStayAliveRule(4);
+        else p.removeStayAliveRule(4);
+        if(stayAlive5Checkbox.isSelected()) p.addStayAliveRule(5);
+        else p.removeStayAliveRule(5);
+        if(stayAlive6Checkbox.isSelected()) p.addStayAliveRule(6);
+        else p.removeStayAliveRule(6);
+        if(stayAlive7Checkbox.isSelected()) p.addStayAliveRule(7);
+        else p.removeStayAliveRule(7);
+        if(stayAlive8Checkbox.isSelected()) p.addStayAliveRule(8);
+        else p.removeStayAliveRule(8);
     }
 }

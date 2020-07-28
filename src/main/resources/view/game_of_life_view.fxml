@@ -41,12 +41,12 @@
             <Label fx:id="generationNumberLabel" minWidth="40" text="0" />
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <Label prefHeight="17.0" prefWidth="59.0" text="    zoom:" />
-            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseDragged="#updateZoomLabel" onMouseReleased="#makeZoom" value="100.0" />
-            <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="24.0" text="100" />
+            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseReleased="#makeZoom" value="100.0" />
+            <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="29.0" text="100" />
             <Label prefHeight="17.0" prefWidth="28.0" text="\%  " />
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <Label text="    rafraichissement:" />
-            <Slider fx:id="speedSlider" max="1000.0" min="10.0" onMouseDragged="#changeSpeed" value="200.0" />
+            <Slider fx:id="speedSlider" max="1000.0" min="10.0"  value="200.0" />
             <Label fx:id="speedLabel" minWidth="30" text="200" />
             <Label text="ms" />
         </HBox>

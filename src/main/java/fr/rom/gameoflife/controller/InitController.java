@@ -57,7 +57,7 @@ public class InitController {
     @FXML
     public void run(){
         if (checkValidity()){
-            Properties properties = new Properties();
+            Properties properties = Properties.getInstance();
             properties.setGridNbRows(Integer.parseInt(nbRowsTextField.getText()));
             properties.setGridNbColumns(Integer.parseInt(nbColomnsTextField.getText()));
             properties.setShapeString(shapeMenuButton.getValue());
@@ -79,7 +79,7 @@ public class InitController {
                 stage.setScene(new Scene(root));
 
                 GameOfLifeController controller = fxmlLoader.getController();
-                controller.init(stage, properties);
+                controller.init();
 
                 stage.show();
                 this.stage.close();

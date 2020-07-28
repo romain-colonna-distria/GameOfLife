@@ -8,7 +8,8 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 
-public class Properties {
+public final class Properties {
+    private static Properties instance;
     private double cellWidth;
     private double cellHeight;
     private String cellAliveColor;
@@ -26,7 +27,7 @@ public class Properties {
     private final Set<Integer> stayAliveSet;
 
 
-    public Properties(){
+    private Properties(){
         this.cellWidth = 10;
         this.cellHeight = 10;
         this.cellAliveColor = "black";
@@ -44,6 +45,10 @@ public class Properties {
         this.stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
     }
 
+    public synchronized static Properties getInstance() {
+        if(instance == null) instance = new Properties();
+        return instance;
+    }
 
     public double getCellWidth() {
         return cellWidth;
