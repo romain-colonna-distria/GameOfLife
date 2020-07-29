@@ -20,8 +20,8 @@
                 <MenuItem mnemonicParsing="false" onAction="#exit" text="Quitter" />
             </Menu>
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Édition">
-                <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Mode déplacement" />
-                <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Mode retournement" />
+                <CheckMenuItem fx:id="moveModeMenuItem" mnemonicParsing="false" text="Mode déplacement" />
+                <CheckMenuItem fx:id="reverseModeMenuItem" mnemonicParsing="false" text="Mode retournement" />
                 <SeparatorMenuItem />
                 <MenuItem mnemonicParsing="false" onAction="#showStats" text="Statistiques..." />
                 <SeparatorMenuItem />

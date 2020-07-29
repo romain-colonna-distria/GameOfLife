@@ -14,6 +14,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
@@ -51,6 +52,10 @@ public class GameOfLifeController {
 
     @FXML
     private AnchorPane gameAnchorPane;
+    @FXML
+    private CheckMenuItem moveModeMenuItem;
+    @FXML
+    private CheckMenuItem reverseModeMenuItem;
     @FXML
     private Label generationNumberLabel;
     @FXML
@@ -108,9 +113,27 @@ public class GameOfLifeController {
                 zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue()))
         );
 
-        this.speedSlider.valueProperty().addListener((bservable, oldValue, newValue) -> {
+        this.speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             speedLabel.textProperty().setValue(String.valueOf((int)speedSlider.getValue()));
             Properties.getInstance().setRefreshTimeMs((long) speedSlider.getValue());
+        });
+
+        this.reverseModeMenuItem.setSelected(true);
+        this.moveModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                this.dragModeActive = true;
+                this.reverseModeMenuItem.setSelected(false);
+            } else {
+                this.moveModeMenuItem.setSelected(!this.reverseModeMenuItem.isSelected());
+            }
+        });
+        this.reverseModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                this.dragModeActive = false;
+                this.moveModeMenuItem.setSelected(false);
+            } else {
+                this.reverseModeMenuItem.setSelected(!this.moveModeMenuItem.isSelected());
+            }
         });
 
         createStatsFile();
@@ -428,16 +451,6 @@ public class GameOfLifeController {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
             onPropagationLabel.setText("off");
         });
-    }
-
-    @FXML
-    public void setModeToMove(){
-        dragModeActive = true;
-    }
-
-    @FXML
-    public void setModeToReverse(){
-        dragModeActive = false;
     }
 
     @FXML
