@@ -16,10 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -53,9 +52,27 @@ public class GameOfLifeController {
     @FXML
     private AnchorPane gameAnchorPane;
     @FXML
+    private MenuItem saveMenuItem;
+    @FXML
+    private MenuItem loadMenuItem;
+    @FXML
+    private MenuItem settingsMenuItem;
+    @FXML
+    private MenuItem exitMenuButton;
+    @FXML
+    private MenuItem multiplePropagationMenuItem;
+    @FXML
+    private MenuItem singlePropagationMenuItem;
+    @FXML
     private CheckMenuItem moveModeMenuItem;
     @FXML
     private CheckMenuItem reverseModeMenuItem;
+    @FXML
+    private MenuItem statsMenuItem;
+    @FXML
+    private MenuItem resetMenuItem;
+    @FXML
+    private MenuItem aboutMenuItem;
     @FXML
     private Label generationNumberLabel;
     @FXML
@@ -82,14 +99,6 @@ public class GameOfLifeController {
 
         initGrid();
 
-        this.grid.getScene().getWindow().getScene().addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
-            if(keyEvent.getCode().equals(KeyCode.ENTER)) {
-                if (isOnPropagation()) stopPropagation();
-                else startPropagation();
-            } else if(keyEvent.getCode().equals(KeyCode.SPACE)){
-                propagate();
-            }
-        });
         this.grid.getScene().getWindow().setOnCloseRequest((event -> {
             doOnClose();
             try {
@@ -136,7 +145,25 @@ public class GameOfLifeController {
             }
         });
 
+        addShortcuts();
         createStatsFile();
+    }
+
+
+    private void addShortcuts(){
+        saveMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        loadMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
+        settingsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.E));
+        exitMenuButton.setAccelerator(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.CONTROL_DOWN));
+
+        multiplePropagationMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.ENTER));
+        singlePropagationMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.SPACE));
+        reverseModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.P));
+        moveModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.O));
+        statsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.ALT_DOWN));
+        resetMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.BACK_SPACE));
+
+        aboutMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.A));
     }
 
     private void createStatsFile(){
@@ -435,6 +462,23 @@ public class GameOfLifeController {
         doOnClose();
         Stage stage = (Stage) this.gameAnchorPane.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void clickMultiplePropagationMenuItem(){
+        if (isOnPropagation()){
+            stopPropagation();
+            multiplePropagationMenuItem.setText("Lancer propagation");
+        }
+        else {
+            startPropagation();
+            multiplePropagationMenuItem.setText("Arrêter propagation");
+        }
+    }
+
+    @FXML
+    public void clickSinglePropagationMenuItem(){
+        propagate();
     }
 
     @FXML
