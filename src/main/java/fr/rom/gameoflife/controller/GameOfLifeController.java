@@ -72,6 +72,8 @@ public class GameOfLifeController {
         this.activeCells = new HashSet<>();
         this.propagationNumber = 0;
         this.dragModeActive = false;
+        this.speedSlider.setValue(Properties.getInstance().getRefreshTimeMs());
+        this.speedLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
 
         initGrid();
 
@@ -199,6 +201,7 @@ public class GameOfLifeController {
             statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
             statisticsWriter.flush();
         } catch (IOException e) {
+            //peut être déclanché si on ferme le jeu pendant la propagation
             e.printStackTrace();
         }
 
