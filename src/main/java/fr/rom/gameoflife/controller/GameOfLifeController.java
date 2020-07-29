@@ -83,7 +83,24 @@ public class GameOfLifeController {
                 propagate();
             }
         });
-        this.grid.getScene().getWindow().setOnCloseRequest((event -> doOnClose()));
+        this.grid.getScene().getWindow().setOnCloseRequest((event -> {
+            doOnClose();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
+                AnchorPane root = fxmlLoader.load();
+
+                Stage stage = new Stage();
+                stage.setTitle("Jeu de la vie v2.0");
+                stage.setScene(new Scene(root));
+
+                InitController controller = fxmlLoader.getController();
+                controller.init(stage);
+
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
 
         this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) ->
                 zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue()))
@@ -118,18 +135,6 @@ public class GameOfLifeController {
             if (isOnPropagation()) stopPropagation();
             pool.shutdown();
             statisticsWriter.close();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
-            AnchorPane root = fxmlLoader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Jeu de la vie v2.0");
-            stage.setScene(new Scene(root));
-
-            InitController controller = fxmlLoader.getController();
-            controller.init(stage);
-
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
