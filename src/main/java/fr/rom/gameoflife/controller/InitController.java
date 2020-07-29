@@ -70,7 +70,7 @@ public class InitController {
                 double width = primaryScreenBounds.getWidth();
                 double height = primaryScreenBounds.getHeight() - 25;
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/game_of_life_view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/game_of_life_view.fxml"));
                 BorderPane root = fxmlLoader.load();
                 root.setPrefSize(width, height);
 

@@ -18,7 +18,7 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/init_view.fxml"));
         AnchorPane root = fxmlLoader.load();
 
         primaryStage.setTitle("Jeu de la vie v2.0");
