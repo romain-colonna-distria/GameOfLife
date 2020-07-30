@@ -31,6 +31,7 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.apache.log4j.Logger;
 
 
 public class GameOfLifeController {
@@ -48,6 +49,8 @@ public class GameOfLifeController {
     private AtomicBoolean onPropagation;
 
     private FileWriter statisticsWriter;
+
+    private final static Logger logger = Logger.getLogger(GameOfLifeController.class);
 
     @FXML
     private AnchorPane gameAnchorPane;
@@ -89,20 +92,35 @@ public class GameOfLifeController {
 
 
     public void init() {
-        this.onPropagation = new AtomicBoolean(false);
+        logger.info("Initialisation d'une nouvelle partie ("
+                + Properties.getInstance().getGridNbColumns() + " colonnes/"
+                + Properties.getInstance().getGridNbRows() + " lignes)...");
+        double start = System.currentTimeMillis();
+
         this.pool = Executors.newFixedThreadPool(Properties.getInstance().getNbSimultaneousThreads());
+        this.dragModeActive = false;
         this.activeCells = new HashSet<>();
         this.propagationNumber = 0;
-        this.dragModeActive = false;
+        this.onPropagation = new AtomicBoolean(false);
+
         this.speedSlider.setValue(Properties.getInstance().getRefreshTimeMs());
         this.speedLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
+        this.reverseModeMenuItem.setSelected(true);
 
         initGrid();
+        initListeners();
+        addShortcuts();
+        initStatsFileWritter();
 
+        double end =  System.currentTimeMillis();
+        logger.info("Partie initialisé (" + (end - start) + "ms)");
+    }
+
+    private void initListeners(){
         this.grid.getScene().getWindow().setOnCloseRequest((event -> {
             doOnClose();
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/init_view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/init_view.fxml"));
                 AnchorPane root = fxmlLoader.load();
 
                 Stage stage = new Stage();
@@ -113,21 +131,16 @@ public class GameOfLifeController {
                 controller.init(stage);
 
                 stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                logger.fatal(e.getMessage());
+                System.exit(1);
             }
         }));
-
-        this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) ->
-                zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue()))
-        );
-
+        this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue())));
         this.speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             speedLabel.textProperty().setValue(String.valueOf((int)speedSlider.getValue()));
             Properties.getInstance().setRefreshTimeMs((long) speedSlider.getValue());
         });
-
-        this.reverseModeMenuItem.setSelected(true);
         this.moveModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
                 this.dragModeActive = true;
@@ -144,11 +157,7 @@ public class GameOfLifeController {
                 this.reverseModeMenuItem.setSelected(!this.moveModeMenuItem.isSelected());
             }
         });
-
-        addShortcuts();
-        createStatsFile();
     }
-
 
     private void addShortcuts(){
         saveMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
@@ -166,29 +175,33 @@ public class GameOfLifeController {
         aboutMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.A));
     }
 
-    private void createStatsFile(){
+    private void initStatsFileWritter(){
         File statisticsFile = new File("stats.txt");
         try {
             if(!statisticsFile.createNewFile()){
                 if(statisticsFile.delete()) {
                     if(statisticsFile.createNewFile()) statisticsWriter = new FileWriter(statisticsFile);
+                    else logger.warn("Un problème est survenu lors de la création du fichir stats.txt");
+                } else {
+                    logger.warn("Un problème est survenu lors de la création du fichir stats.txt");
                 }
             }
         } catch (IOException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
     private void doOnClose(){
         if(settingsStage != null) settingsStage.close();
         if(statisticsStage != null) statisticsStage.close();
+        if(onPropagation.get()) stopPropagation();
 
+        logger.info("Fin de la partie");
         try {
-            if (isOnPropagation()) stopPropagation();
             pool.shutdown();
             statisticsWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -200,6 +213,7 @@ public class GameOfLifeController {
         propagation.start();
 
         Platform.runLater(() -> onPropagationLabel.setText("on"));
+        logger.info("Propagation ON");
     }
 
     public void stopPropagation(){
@@ -207,6 +221,7 @@ public class GameOfLifeController {
         onPropagation.set(false);
 
         Platform.runLater(() -> onPropagationLabel.setText("off"));
+        logger.info("Propagation OFF");
     }
 
     public void propagate(){
@@ -245,6 +260,7 @@ public class GameOfLifeController {
 
         for(ICell cell : toAlive) cell.makeAlive();
         for(ICell cell : toDead) cell.makeDead();
+        generationNumberLabel.setText(String.valueOf(++propagationNumber));
 
         try {
             statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
@@ -252,10 +268,8 @@ public class GameOfLifeController {
             statisticsWriter.flush();
         } catch (IOException e) {
             //peut être déclanché si on ferme le jeu pendant la propagation
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-
-        generationNumberLabel.setText(String.valueOf(++propagationNumber));
     }
 
     public Set<ICell> getActiveCells(){
@@ -366,10 +380,6 @@ public class GameOfLifeController {
         }
     }
 
-    public boolean isOnPropagation() {
-        return this.onPropagation.get();
-    }
-
 
     @FXML
     public void saveState(){
@@ -386,11 +396,11 @@ public class GameOfLifeController {
             for (ICell cell : getActiveCells()) {
                 objectOut.writeObject(cell);
             }
-            System.out.println("Le jeu a bien été sauvegardé.");
+            logger.info("La partie a bien été sauvegardée");
             objectOut.close();
             fileOut.close();
         } catch (Exception ex) {
-            System.out.println("Le jeu n'a pas pu être sauvegardé.");
+            logger.error("La partie n'a pas pu être sauvegardé : " + ex.getMessage());
         }
     }
 
@@ -408,7 +418,7 @@ public class GameOfLifeController {
             fis = new FileInputStream(selectedFile);
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
-            System.err.println("La sauvegarde n'a pas pu être chargée. Elle contient des erreurs.");
+            logger.error("La sauvegarde n'a pas pu être chargée : " + e.getMessage());
             return;
         }
 
@@ -425,9 +435,9 @@ public class GameOfLifeController {
                 addNewActiveCell(cell);
             }
         } catch (EOFException e){
-            System.out.println("La partie a bien été chargée.");
+            logger.info("La partie a bien été chargée");
         } catch (IOException | ClassNotFoundException e){
-            e.printStackTrace();
+            logger.error("La sauvegarde contient une erreur : " + e.getMessage());
         }
     }
 
@@ -436,7 +446,7 @@ public class GameOfLifeController {
         if(this.settingsStage != null) return;
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/settings_view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/settings_view.fxml"));
             VBox root = fxmlLoader.load();
 
             this.settingsStage = new Stage();
@@ -453,7 +463,7 @@ public class GameOfLifeController {
 
             this.settingsStage.show();
         } catch (IOException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -462,11 +472,12 @@ public class GameOfLifeController {
         doOnClose();
         Stage stage = (Stage) this.gameAnchorPane.getScene().getWindow();
         stage.close();
+        logger.info("Fin de la session");
     }
 
     @FXML
     public void clickMultiplePropagationMenuItem(){
-        if (isOnPropagation()){
+        if (onPropagation.get()){
             stopPropagation();
             multiplePropagationMenuItem.setText("Lancer propagation");
         }
@@ -489,12 +500,13 @@ public class GameOfLifeController {
         for(ICell cell : getActiveCells()) cell.makeDead();
         this.activeCells = new HashSet<>();
 
-        createStatsFile();
+        initStatsFileWritter();
 
         Platform.runLater(() -> {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
             onPropagationLabel.setText("off");
         });
+        logger.info("Grille réinitialisée");
     }
 
     @FXML
@@ -506,7 +518,7 @@ public class GameOfLifeController {
             double width = primaryScreenBounds.getWidth();
             double height = primaryScreenBounds.getHeight() - 25;
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/statistics_view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/statistics_view.fxml"));
             AnchorPane root = fxmlLoader.load();
             root.setPrefSize(width, height);
 
@@ -525,13 +537,14 @@ public class GameOfLifeController {
 
             this.statisticsStage.show();
         } catch (IOException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
     //TODO: optimiser
     @FXML
     public void makeZoom(){
+        logger.info("Application du zoom...");
         List<ICell> cells = grid.getCells();
         double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
         double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
@@ -577,12 +590,16 @@ public class GameOfLifeController {
         @Override
         public void run() {
             Platform.runLater(() -> {
+                double start = System.currentTimeMillis();
                 if(this.cells.size() < 1) return;
 
                 for(ICell cell : cells){
                     cell.setShapeWidth(this.cellWidth);
                     cell.setShapeHeight(this.cellHeight);
                 }
+
+                double end = System.currentTimeMillis();
+                logger.info("Zoom appliqué par " + Thread.currentThread().getName() + " en " + (end - start) + "ms");
             });
         }
     }

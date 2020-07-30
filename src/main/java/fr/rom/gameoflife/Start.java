@@ -6,11 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
 
 public class Start extends Application {
+
+    private final static Logger logger = Logger.getLogger(Start.class);
 
     public static void main(String[] args) {
         launch(args);
@@ -29,5 +32,6 @@ public class Start extends Application {
         controller.init(primaryStage);
 
         primaryStage.show();
+        logger.info("Début d'une nouvelle session");
     }
 }

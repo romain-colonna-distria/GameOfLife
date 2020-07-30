@@ -79,14 +79,6 @@ public class CellRectangle extends Rectangle implements ICell, Serializable {
         this.aroundCells = aroundCells;
     }
 
-    public double getShapeWidth(){
-        return this.getWidth();
-    }
-
-    public double getShapeHeight(){
-        return this.getHeight();
-    }
-
     public void setShapeWidth(double width){
         this.setWidth(width);
     }

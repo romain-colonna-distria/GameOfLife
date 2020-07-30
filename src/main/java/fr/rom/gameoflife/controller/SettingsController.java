@@ -7,10 +7,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
+import org.apache.log4j.Logger;
 
 
 public class SettingsController {
     private GameOfLifeController parent;
+
+    private final static Logger logger = Logger.getLogger(InitController.class);
+
 
     @FXML
     private ColorPicker aliveColorPicker;
@@ -134,5 +138,7 @@ public class SettingsController {
         else p.removeStayAliveRule(7);
         if(stayAlive8Checkbox.isSelected()) p.addStayAliveRule(8);
         else p.removeStayAliveRule(8);
+
+        logger.info("Règles mises à jour : prend vie " + p.getStayAliveSet() + ", reste en vie " + p.getComeAliveSet());
     }
 }

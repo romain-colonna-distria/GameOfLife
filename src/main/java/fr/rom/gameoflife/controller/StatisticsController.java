@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 
@@ -25,6 +26,8 @@ public class StatisticsController {
     private int popMin = -1;
     private int popMax = -1;
     private double popAvg = 0;
+
+    private final static Logger logger = Logger.getLogger(InitController.class);
 
     @FXML
     private AnchorPane rootPane;
@@ -49,8 +52,9 @@ public class StatisticsController {
                 out.write(buffer, 0, lengthRead);
                 out.flush();
             }
+            logger.info("Statistiques sauvegardé dans le fichier " + copied.getPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     };
 
@@ -105,7 +109,7 @@ public class StatisticsController {
 
             this.popAvg /= nbLine;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         evolutionLineChart.getData().add(series);

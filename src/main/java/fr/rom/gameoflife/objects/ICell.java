@@ -18,9 +18,6 @@ public interface ICell { //TODO: faire etendre shape ou node et construire la fo
     Set<ICell> getAroundCells();
     void setAroundCells(Set<ICell> aroundCells);
 
-    double getShapeWidth();
-    double getShapeHeight();
-
     void setShapeWidth(double width);
     void setShapeHeight(double height);
 }

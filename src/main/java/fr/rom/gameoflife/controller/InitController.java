@@ -12,12 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.apache.log4j.Logger;
 
 
 public class InitController {
     private Stage stage;
+
+    private final static Logger logger = Logger.getLogger(InitController.class);
 
     @FXML
     private TextField nbRowsTextField;
@@ -36,6 +37,7 @@ public class InitController {
 
     public void init(Stage stage){
         this.stage = stage;
+        this.nbRowsTextField.getScene().getWindow().setOnCloseRequest((event -> logger.info("Fin de la session")));
     }
 
     private boolean checkValidity(){
@@ -56,36 +58,36 @@ public class InitController {
 
     @FXML
     public void run(){
-        if (checkValidity()){
-            Properties properties = Properties.getInstance();
-            properties.setGridNbRows(Integer.parseInt(nbRowsTextField.getText()));
-            properties.setGridNbColumns(Integer.parseInt(nbColomnsTextField.getText()));
-            properties.setShapeString(shapeMenuButton.getValue());
-            properties.setCellWidth(Double.parseDouble(cellWidthTextField.getText()));
-            properties.setCellHeight(Double.parseDouble(cellHeightTextField.getText()));
-            properties.setNbSimultaneousThreads(Integer.parseInt(nbThreads.getText()));
+        if (!checkValidity()) return;
 
-            try {
-                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-                double width = primaryScreenBounds.getWidth();
-                double height = primaryScreenBounds.getHeight() - 25;
+        Properties properties = Properties.getInstance();
+        properties.setGridNbRows(Integer.parseInt(nbRowsTextField.getText()));
+        properties.setGridNbColumns(Integer.parseInt(nbColomnsTextField.getText()));
+        properties.setShapeString(shapeMenuButton.getValue());
+        properties.setCellWidth(Double.parseDouble(cellWidthTextField.getText()));
+        properties.setCellHeight(Double.parseDouble(cellHeightTextField.getText()));
+        properties.setNbSimultaneousThreads(Integer.parseInt(nbThreads.getText()));
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/game_of_life_view.fxml"));
-                BorderPane root = fxmlLoader.load();
-                root.setPrefSize(width, height);
+        try {
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            double width = primaryScreenBounds.getWidth();
+            double height = primaryScreenBounds.getHeight() - 25;
 
-                Stage stage = new Stage();
-                stage.setTitle("Jeu de la vie v2.0");
-                stage.setScene(new Scene(root));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/game_of_life_view.fxml"));
+            BorderPane root = fxmlLoader.load();
+            root.setPrefSize(width, height);
 
-                GameOfLifeController controller = fxmlLoader.getController();
-                controller.init();
+            Stage stage = new Stage();
+            stage.setTitle("Jeu de la vie v2.0");
+            stage.setScene(new Scene(root));
 
-                stage.show();
-                this.stage.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            GameOfLifeController controller = fxmlLoader.getController();
+            controller.init();
+
+            stage.show();
+            this.stage.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
     }
 }

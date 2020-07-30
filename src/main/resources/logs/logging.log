@@ -1,0 +1,47 @@
+2020-07-30 15:11:50 [INFO ] Start:35 - Début d'une nouvelle session.
+2020-07-30 15:12:14 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie...
+2020-07-30 15:12:15 [INFO ] GameOfLifeController:114 - Partie initialisé (1267.0ms).
+2020-07-30 15:14:04 [INFO ] Start:35 - Début d'une nouvelle session.
+2020-07-30 15:14:06 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie(200 colonnes/200 lignes)...
+2020-07-30 15:14:07 [INFO ] GameOfLifeController:116 - Partie initialisé (925.0ms).
+2020-07-30 15:14:33 [INFO ] Start:35 - Début d'une nouvelle session.
+2020-07-30 15:14:39 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-07-30 15:14:40 [INFO ] GameOfLifeController:116 - Partie initialisé (1012.0ms).
+2020-07-30 15:14:54 [INFO ] InitController:144 - Règles mises à jour : prend vie [2, 3], reste en vie [3, 4]
+2020-07-30 15:15:06 [INFO ] InitController:144 - Règles mises à jour : prend vie [2, 3], reste en vie [3, 4]
+2020-07-30 15:15:12 [INFO ] GameOfLifeController:218 - Propagation ON.
+2020-07-30 15:15:12 [INFO ] GameOfLifeController:226 - Propagation OFF.
+2020-07-30 15:15:13 [INFO ] GameOfLifeController:218 - Propagation ON.
+2020-07-30 15:15:32 [INFO ] GameOfLifeController:226 - Propagation OFF.
+2020-07-30 15:15:55 [INFO ] GameOfLifeController:218 - Propagation ON.
+2020-07-30 15:15:58 [INFO ] GameOfLifeController:226 - Propagation OFF.
+2020-07-30 15:17:05 [INFO ] Start:35 - Début d'une nouvelle session.
+2020-07-30 15:17:19 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-07-30 15:17:20 [INFO ] GameOfLifeController:116 - Partie initialisé (956.0ms).
+2020-07-30 15:17:25 [INFO ] GameOfLifeController:218 - Propagation ON.
+2020-07-30 15:17:27 [INFO ] GameOfLifeController:226 - Propagation OFF.
+2020-07-30 15:17:35 [INFO ] InitController:55 - Statistiques sauvegardé dans le fichier /Users/romaincolonnadistria/Desktop/Untitled.csv
+2020-07-30 15:20:20 [INFO ] Start:35 - Début d'une nouvelle session
+2020-07-30 15:20:22 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-07-30 15:20:23 [INFO ] GameOfLifeController:116 - Partie initialisé (1050.0ms)
+2020-07-30 15:20:28 [INFO ] GameOfLifeController:218 - Propagation ON
+2020-07-30 15:20:33 [INFO ] InitController:142 - Règles mises à jour : prend vie [2, 3], reste en vie [3, 4]
+2020-07-30 15:20:38 [INFO ] GameOfLifeController:226 - Propagation OFF
+2020-07-30 15:20:46 [INFO ] InitController:55 - Statistiques sauvegardé dans le fichier /Users/romaincolonnadistria/Desktop/Untitled.csv
+2020-07-30 15:20:53 [INFO ] GameOfLifeController:201 - Fin de la partie
+2020-07-30 15:21:04 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (300 colonnes/300 lignes)...
+2020-07-30 15:21:06 [INFO ] GameOfLifeController:116 - Partie initialisé (1672.0ms)
+2020-07-30 15:21:14 [INFO ] GameOfLifeController:218 - Propagation ON
+2020-07-30 15:21:35 [INFO ] InitController:142 - Règles mises à jour : prend vie [2, 3], reste en vie [2, 3]
+2020-07-30 15:21:37 [INFO ] InitController:142 - Règles mises à jour : prend vie [2, 3], reste en vie [3]
+2020-07-30 15:24:27 [INFO ] Start:35 - Début d'une nouvelle session
+2020-07-30 15:24:30 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-07-30 15:24:31 [INFO ] GameOfLifeController:116 - Partie initialisé (1263.0ms)
+2020-07-30 15:24:37 [INFO ] GameOfLifeController:218 - Propagation ON
+2020-07-30 15:24:39 [INFO ] GameOfLifeController:549 - Application du zoom...
+2020-07-30 15:24:39 [INFO ] GameOfLifeController:604 - Zoom appliqué par JavaFX Application Thread en 45.0ms
+2020-07-30 22:08:15 [INFO ] Start:35 - Début d'une nouvelle session
+2020-07-30 22:08:24 [INFO ] GameOfLifeController:95 - Initialisation d'une nouvelle partie (300 colonnes/300 lignes)...
+2020-07-30 22:08:26 [INFO ] GameOfLifeController:116 - Partie initialisé (2139.0ms)
+2020-07-30 22:08:38 [INFO ] GameOfLifeController:549 - Application du zoom...
+2020-07-30 22:08:38 [INFO ] GameOfLifeController:604 - Zoom appliqué par JavaFX Application Thread en 82.0ms

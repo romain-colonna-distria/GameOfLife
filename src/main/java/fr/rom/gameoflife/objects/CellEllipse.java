@@ -78,14 +78,6 @@ public class CellEllipse extends Ellipse implements ICell, Serializable {
         this.aroundCells = aroundCells;
     }
 
-    public double getShapeWidth(){
-        return this.getRadiusX();
-    }
-
-    public double getShapeHeight(){
-        return this.getRadiusY();
-    }
-
     public void setShapeWidth(double width){
         this.setRadiusX(width);
     }
