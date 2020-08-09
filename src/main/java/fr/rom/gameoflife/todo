@@ -2,3 +2,9 @@
 - Améliorer l'interface (refonte de la barre d'outil du bas)
 - ajouter une option pour déterminer la durée d'un cycle
 - Ajouter un "market" de modèles
+- Ajouter messages d'erreurs dans formulaire de lancement
+
+
+//PLUS TARD
+- Améliorer la gestion des cellules (ne plus utiliser de gridpane mais plutot un canvas)
+- Ajouter un preloader au lancement de la partie et pour le zoom
