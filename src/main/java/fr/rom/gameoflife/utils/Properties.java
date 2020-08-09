@@ -21,7 +21,6 @@ public final class Properties {
     private int gridNbRows;
 
     private final AtomicLong refreshTimeMs;
-    private int nbSimultaneousThreads;
 
     private final Set<Integer> comeAliveSet;
     private final Set<Integer> stayAliveSet;
@@ -39,7 +38,6 @@ public final class Properties {
         this.gridNbRows = 200;
 
         this.refreshTimeMs = new AtomicLong(100);
-        this.nbSimultaneousThreads = 2;
 
         this.comeAliveSet = new HashSet<>(Collections.singletonList(3));
         this.stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
@@ -112,14 +110,6 @@ public final class Properties {
 
     public void setRefreshTimeMs(long refreshTimeMs) {
         this.refreshTimeMs.set(refreshTimeMs);
-    }
-
-    public int getNbSimultaneousThreads() {
-        return nbSimultaneousThreads;
-    }
-
-    public void setNbSimultaneousThreads(int nbSimultaneousThreads) {
-        this.nbSimultaneousThreads = nbSimultaneousThreads;
     }
 
     public Set<Integer> getComeAliveSet() {

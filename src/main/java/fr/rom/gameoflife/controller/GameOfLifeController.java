@@ -8,6 +8,7 @@ import fr.rom.gameoflife.objects.ICell;
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -97,7 +98,7 @@ public class GameOfLifeController {
                 + Properties.getInstance().getGridNbRows() + " lignes)...");
         double start = System.currentTimeMillis();
 
-        this.pool = Executors.newFixedThreadPool(Properties.getInstance().getNbSimultaneousThreads());
+        this.pool = Executors.newFixedThreadPool(2);
         this.dragModeActive = false;
         this.activeCells = new HashSet<>();
         this.propagationNumber = 0;
@@ -209,8 +210,7 @@ public class GameOfLifeController {
         if(onPropagation.get()) return;
         onPropagation.set(true);
 
-        Thread propagation = new Thread(new Propagation_Handler());
-        propagation.start();
+        pool.submit(new Propagation_Handler());
 
         Platform.runLater(() -> onPropagationLabel.setText("on"));
         logger.info("Propagation ON");
@@ -541,21 +541,13 @@ public class GameOfLifeController {
         }
     }
 
-    //TODO: optimiser
-    @FXML
+    @FXML //TODO: optimiser
     public void makeZoom(){
         logger.info("Application du zoom...");
         List<ICell> cells = grid.getCells();
         double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
         double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
-        int nbThread = Properties.getInstance().getNbSimultaneousThreads();
-        int from = 0;
-
-        for(int i = 0; i < nbThread; ++i) {
-            if(from > cells.size()) break;
-            pool.submit(new Zoom_Handler(cells.subList(from, from + cells.size() / nbThread), newCellsWidth, newCellsHeight));
-            from += cells.size() / nbThread;
-        }
+        pool.submit(new Zoom_Handler(cells, newCellsWidth, newCellsHeight));
     }
 
 

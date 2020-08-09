@@ -30,8 +30,6 @@ public class InitController {
     private TextField cellHeightTextField;
     @FXML
     private TextField cellWidthTextField;
-    @FXML
-    private TextField nbThreads;
 
 
 
@@ -47,7 +45,6 @@ public class InitController {
             Integer.parseInt(nbColomnsTextField.getText());
             Double.parseDouble(cellHeightTextField.getText());
             Double.parseDouble(cellWidthTextField.getText());
-            Integer.parseInt(nbThreads.getText());
 
             return true;
         } catch (NumberFormatException e) {
@@ -66,7 +63,6 @@ public class InitController {
         properties.setShapeString(shapeMenuButton.getValue());
         properties.setCellWidth(Double.parseDouble(cellWidthTextField.getText()));
         properties.setCellHeight(Double.parseDouble(cellHeightTextField.getText()));
-        properties.setNbSimultaneousThreads(Integer.parseInt(nbThreads.getText()));
 
         try {
             Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
