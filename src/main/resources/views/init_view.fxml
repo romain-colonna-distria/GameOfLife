@@ -54,6 +54,8 @@
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="rectangle" />
                     <String fx:value="ovale" />
+                    <String fx:value="triangle" />
+                    <String fx:value="nuage" />
                 </FXCollections>
             </items>
         </ChoiceBox>

@@ -1,6 +1,8 @@
 package fr.rom.gameoflife.objects;
 
 
+import fr.rom.gameoflife.objects.cells.AbstractCell;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -23,27 +25,27 @@ public class Grid extends GridPane {
     }
 
 
-    public List<ICell> getCells() {
-        List<ICell> cells = new ArrayList<>();
+    public List<AbstractCell> getCells() {
+        List<AbstractCell> cells = new ArrayList<>();
 
         for(Node n : this.getChildren())
-            cells.add((ICell) n);
+            cells.add((AbstractCell) ((Group)n).getChildren().get(0));
 
         return cells;
     }
 
-    public ICell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
+    public AbstractCell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
         if(i < 0 || i > this.nbColumns - 1 ) throw new IndexOutOfBoundsException();
         if(j < 0 || j > this.nbRows - 1 ) throw new IndexOutOfBoundsException();
 
-        return (ICell) this.getChildren().get(i * nbColumns + j);
+        return (AbstractCell) ((Group) this.getChildren().get(i * nbColumns + j)).getChildren().get(0);
     }
 
-    public Set<ICell> getAroundCells(ICell cell){
+    public Set<AbstractCell> getAroundCells(AbstractCell cell){
         int x = cell.getPositionX();
         int y = cell.getPositionY();
 
-        Set<ICell> result = new HashSet<>();
+        Set<AbstractCell> result = new HashSet<>();
         try {
             result.add(this.getCellAtIndex(x-1, y-1));
             result.add(this.getCellAtIndex(x-1, y));
@@ -60,8 +62,8 @@ public class Grid extends GridPane {
         }
     }
 
-    public void addCell(ICell cell){ //TODO: trouver meilleur moyen que cast
-        if(!(cell instanceof  Node)) return;
-        this.add((Node) cell, cell.getPositionX(), cell.getPositionY());
+    public void addCell(AbstractCell cell){
+        //Le group sert lors du changement de la taille du svg
+        this.add(new Group(cell), cell.getPositionX(), cell.getPositionY());
     }
 }

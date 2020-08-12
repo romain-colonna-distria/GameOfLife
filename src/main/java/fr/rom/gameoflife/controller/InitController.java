@@ -40,7 +40,6 @@ public class InitController {
 
     private boolean checkValidity(){
         try {
-            if(!shapeMenuButton.getValue().equals("rectangle") && !shapeMenuButton.getValue().equals("ovale")) return false;
             Integer.parseInt(nbRowsTextField.getText());
             Integer.parseInt(nbColomnsTextField.getText());
             Double.parseDouble(cellHeightTextField.getText());
