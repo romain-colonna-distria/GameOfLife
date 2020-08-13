@@ -356,6 +356,7 @@ public class GameOfLifeController {
                         cell = new CloudCell(p.getCellWidth(), p.getCellHeight(), i, j);
                         break;
                     default:
+                        logger.warn("Forme de cellule non reconnu : " + p.getShapeString());
                         return;
                 }
 
