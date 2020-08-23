@@ -29,13 +29,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
 
-        <Label text="Nombre de ligne :">
+        <Label text="Nombre de colonnes :">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
 
-        <Label text="Nombre de colonnes :" GridPane.rowIndex="1">
+        <Label text="Nombre de ligne :" GridPane.rowIndex="1">
             <font>
                 <Font size="16.0" />
             </font>
@@ -47,8 +47,8 @@
             </font>
         </Label>
 
-        <TextField fx:id="nbRowsTextField" text="200" GridPane.columnIndex="1" />
-        <TextField fx:id="nbColomnsTextField" text="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="nbColomnsTextField" text="200" GridPane.columnIndex="1" />
+        <TextField fx:id="nbRowsTextField" text="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <ChoiceBox fx:id="shapeMenuButton" prefHeight="27.0" prefWidth="231.0" value="rectangle" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <items>
                 <FXCollections fx:factory="observableArrayList">
