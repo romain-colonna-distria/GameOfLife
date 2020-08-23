@@ -635,3 +635,525 @@ amélioration de2020-07-30 22:14:35 [INFO ] Start:35 - Début d'une nouvelle ses
 2020-08-12 23:50:22 [INFO ] GameOfLifeController:218 - Propagation OFF
 2020-08-12 23:50:26 [INFO ] GameOfLifeController:194 - Fin de la partie
 2020-08-12 23:50:27 [INFO ] InitController:38 - Fin de la session
+2020-08-13 01:00:05 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 01:14:41 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-13 01:14:43 [INFO ] GameOfLifeController:111 - Partie initialisé (2914.0ms)
+2020-08-13 01:14:47 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 01:14:51 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-13 01:14:53 [INFO ] GameOfLifeController:111 - Partie initialisé (2003.0ms)
+2020-08-13 01:14:56 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 01:15:02 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-13 01:15:03 [INFO ] GameOfLifeController:111 - Partie initialisé (1614.0ms)
+2020-08-13 01:15:09 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 01:15:10 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 01:15:13 [INFO ] GameOfLifeController:552 - Application du zoom...
+2020-08-13 01:15:13 [INFO ] GameOfLifeController:600 - Zoom appliqué par JavaFX Application Thread en 58.0ms
+2020-08-13 01:15:17 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 01:15:18 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 01:48:51 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 01:48:52 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 01:48:54 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 01:48:55 [INFO ] InitController:38 - Fin de la session
+2020-08-13 06:29:06 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 06:29:15 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 06:29:17 [INFO ] GameOfLifeController:111 - Partie initialisé (1319.0ms)
+2020-08-13 06:29:21 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:21 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:22 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:22 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:30 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:30 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:31 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:31 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:32 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:32 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:32 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:32 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:33 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:33 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:35 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:35 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:36 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:36 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:36 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:36 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:40 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:40 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:41 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:29:41 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:29:42 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 06:29:45 [INFO ] InitController:38 - Fin de la session
+2020-08-13 06:30:05 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 06:30:08 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 06:30:09 [INFO ] GameOfLifeController:111 - Partie initialisé (836.0ms)
+2020-08-13 06:30:13 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:30:13 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 06:30:19 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 06:30:19 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 18:26:29 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 18:26:29 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 18:26:33 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 18:29:17 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 18:29:23 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 18:29:25 [INFO ] GameOfLifeController:111 - Partie initialisé (1380.0ms)
+2020-08-13 18:29:32 [INFO ] GameOfLifeController:554 - Application du zoom...
+2020-08-13 18:29:32 [INFO ] GameOfLifeController:602 - Zoom appliqué par JavaFX Application Thread en 38.0ms
+2020-08-13 18:29:43 [INFO ] GameOfLifeController:554 - Application du zoom...
+2020-08-13 18:29:43 [INFO ] GameOfLifeController:602 - Zoom appliqué par JavaFX Application Thread en 15.0ms
+2020-08-13 18:29:55 [INFO ] GameOfLifeController:517 - Grille réinitialisée
+2020-08-13 18:30:19 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 18:30:20 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 18:30:20 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 18:30:20 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 18:32:43 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 18:33:11 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 18:33:13 [INFO ] GameOfLifeController:111 - Partie initialisé (1500.0ms)
+2020-08-13 18:33:20 [INFO ] GameOfLifeController:557 - Application du zoom...
+2020-08-13 18:33:20 [INFO ] GameOfLifeController:605 - Zoom appliqué par JavaFX Application Thread en 35.0ms
+2020-08-13 18:36:36 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 18:36:42 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (20 colonnes/10 lignes)...
+2020-08-13 18:36:42 [INFO ] GameOfLifeController:111 - Partie initialisé (62.0ms)
+2020-08-13 19:56:59 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 19:57:28 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 19:57:36 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/20 lignes)...
+2020-08-13 19:57:36 [INFO ] GameOfLifeController:111 - Partie initialisé (147.0ms)
+2020-08-13 20:06:34 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 20:06:40 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 20:06:41 [ERROR] InitController:85 - javafx.scene.Group cannot be cast to fr.rom.gameoflife.objects.cells.AbstractCell
+2020-08-13 20:07:49 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 20:07:54 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 20:12:58 [INFO ] GameOfLifeController:111 - Partie initialisé (304065.0ms)
+2020-08-13 20:13:16 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 20:13:19 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 20:13:42 [INFO ] GameOfLifeController:556 - Application du zoom...
+2020-08-13 20:27:22 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 20:27:26 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 20:27:26 [INFO ] GameOfLifeController:111 - Partie initialisé (862.0ms)
+2020-08-13 20:27:30 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 20:27:31 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 20:27:59 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 20:28:15 [INFO ] InitController:38 - Fin de la session
+2020-08-13 20:28:34 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-13 20:28:46 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/100 lignes)...
+2020-08-13 20:28:47 [INFO ] GameOfLifeController:111 - Partie initialisé (1313.0ms)
+2020-08-13 20:29:02 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-13 20:29:05 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-13 20:33:00 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:01 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:05 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:06 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:11 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:12 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:33:21 [INFO ] GameOfLifeController:519 - Grille réinitialisée
+2020-08-13 20:55:42 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-13 21:03:16 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-17 06:13:23 [INFO ] InitController:38 - Fin de la session
+2020-08-22 01:20:44 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-22 01:20:46 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-22 01:20:48 [INFO ] GameOfLifeController:111 - Partie initialisé (1692.0ms)
+2020-08-22 01:21:28 [INFO ] GameOfLifeController:555 - Application du zoom...
+2020-08-22 01:21:28 [INFO ] GameOfLifeController:603 - Zoom appliqué par JavaFX Application Thread en 42.0ms
+2020-08-22 01:21:48 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-22 01:21:51 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-22 01:21:53 [INFO ] GameOfLifeController:111 - Partie initialisé (1595.0ms)
+2020-08-22 01:22:24 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-22 01:22:31 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-22 01:22:33 [INFO ] GameOfLifeController:111 - Partie initialisé (1593.0ms)
+2020-08-22 01:22:47 [INFO ] GameOfLifeController:555 - Application du zoom...
+2020-08-22 01:22:47 [INFO ] GameOfLifeController:603 - Zoom appliqué par JavaFX Application Thread en 48.0ms
+2020-08-22 01:22:55 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-22 01:23:01 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/180 lignes)...
+2020-08-22 01:23:03 [INFO ] GameOfLifeController:111 - Partie initialisé (1645.0ms)
+2020-08-22 01:24:35 [INFO ] GameOfLifeController:555 - Application du zoom...
+2020-08-22 01:24:35 [INFO ] GameOfLifeController:603 - Zoom appliqué par JavaFX Application Thread en 31.0ms
+2020-08-22 01:25:56 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-22 01:27:18 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-22 01:27:23 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/190 lignes)...
+2020-08-22 01:27:26 [INFO ] GameOfLifeController:111 - Partie initialisé (3341.0ms)
+2020-08-23 10:01:42 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:01:46 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:01:46 [INFO ] GameOfLifeController:111 - Partie initialisé (26.0ms)
+2020-08-23 10:03:47 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:03:54 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:03:54 [INFO ] GameOfLifeController:111 - Partie initialisé (13.0ms)
+2020-08-23 10:04:26 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:04:35 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:04:35 [INFO ] GameOfLifeController:111 - Partie initialisé (10.0ms)
+2020-08-23 10:06:33 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:07:23 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:07:23 [INFO ] GameOfLifeController:111 - Partie initialisé (12.0ms)
+2020-08-23 10:14:31 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:14:34 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:14:34 [INFO ] GameOfLifeController:111 - Partie initialisé (12.0ms)
+2020-08-23 10:16:20 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:16:46 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:16:51 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:16:51 [INFO ] GameOfLifeController:111 - Partie initialisé (29.0ms)
+2020-08-23 10:18:44 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:18:49 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:18:49 [INFO ] GameOfLifeController:111 - Partie initialisé (20.0ms)
+2020-08-23 10:22:45 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:22:49 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:22:49 [INFO ] GameOfLifeController:111 - Partie initialisé (35.0ms)
+2020-08-23 10:36:43 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:36:48 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:36:48 [INFO ] GameOfLifeController:111 - Partie initialisé (21.0ms)
+2020-08-23 10:37:27 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:37:31 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (200 colonnes/200 lignes)...
+2020-08-23 10:37:51 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:37:55 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:37:55 [INFO ] GameOfLifeController:111 - Partie initialisé (35.0ms)
+2020-08-23 10:41:58 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:42:03 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:42:03 [INFO ] GameOfLifeController:111 - Partie initialisé (26.0ms)
+2020-08-23 10:44:42 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:44:45 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:44:45 [INFO ] GameOfLifeController:111 - Partie initialisé (33.0ms)
+2020-08-23 10:46:08 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:46:13 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:46:13 [INFO ] GameOfLifeController:111 - Partie initialisé (34.0ms)
+2020-08-23 10:47:35 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:47:39 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:47:39 [INFO ] GameOfLifeController:111 - Partie initialisé (37.0ms)
+2020-08-23 10:48:06 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 10:48:15 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 10:48:15 [INFO ] GameOfLifeController:111 - Partie initialisé (624.0ms)
+2020-08-23 10:48:20 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:48:30 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:48:30 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 10:48:32 [INFO ] InitController:38 - Fin de la session
+2020-08-23 10:51:57 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:53:16 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (3 colonnes/5 lignes)...
+2020-08-23 10:53:16 [INFO ] GameOfLifeController:111 - Partie initialisé (15.0ms)
+2020-08-23 10:53:20 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:21 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:21 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:22 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:22 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 10:53:41 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:53:45 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 10:53:45 [INFO ] GameOfLifeController:111 - Partie initialisé (195.0ms)
+2020-08-23 10:53:49 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:54 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:55 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:55 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:56 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:56 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:56 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:56 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:57 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:53:58 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:54:00 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:54:00 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:54:02 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:54:05 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:54:07 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 10:54:17 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (50 colonnes/30 lignes)...
+2020-08-23 10:54:17 [INFO ] GameOfLifeController:111 - Partie initialisé (59.0ms)
+2020-08-23 10:54:21 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 10:54:27 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 10:59:51 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 10:59:55 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 10:59:56 [INFO ] GameOfLifeController:111 - Partie initialisé (206.0ms)
+2020-08-23 10:59:58 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:00:01 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:00:04 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:00:17 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:00:30 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:00:52 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:00:53 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:01:01 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:01:03 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 11:01:07 [INFO ] InitController:38 - Fin de la session
+2020-08-23 11:01:46 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:01:50 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:01:50 [INFO ] GameOfLifeController:111 - Partie initialisé (189.0ms)
+2020-08-23 11:01:53 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:02:00 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:02:01 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:02:52 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:02:52 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 11:02:53 [INFO ] InitController:38 - Fin de la session
+2020-08-23 11:03:06 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:03:11 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:03:11 [INFO ] GameOfLifeController:111 - Partie initialisé (197.0ms)
+2020-08-23 11:03:17 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:04:33 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:04:38 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:04:38 [INFO ] GameOfLifeController:111 - Partie initialisé (167.0ms)
+2020-08-23 11:07:34 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:07:39 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:07:39 [INFO ] GameOfLifeController:111 - Partie initialisé (202.0ms)
+2020-08-23 11:07:48 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:08:19 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:09:37 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 11:09:41 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (50 colonnes/30 lignes)...
+2020-08-23 11:09:41 [INFO ] GameOfLifeController:111 - Partie initialisé (69.0ms)
+2020-08-23 11:09:44 [INFO ] GameOfLifeController:210 - Propagation ON
+2020-08-23 11:09:54 [INFO ] GameOfLifeController:218 - Propagation OFF
+2020-08-23 11:09:54 [INFO ] GameOfLifeController:194 - Fin de la partie
+2020-08-23 11:09:59 [INFO ] InitController:38 - Fin de la session
+2020-08-23 11:13:22 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:13:25 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,0) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,1) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,2) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,3) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,4) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,5) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,6) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,7) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,8) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,9) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,10) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,11) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,12) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,13) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,14) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,15) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,16) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,17) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,18) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,19) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,20) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,21) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,22) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,23) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,24) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,25) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,26) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,27) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,28) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,29) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,30) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,31) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,32) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,33) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,34) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,35) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,36) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,37) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,38) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,39) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,40) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,41) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,42) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,43) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,44) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,45) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,46) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,47) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,48) inexistante.
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:13:26 [INFO ] GameOfLifeController:111 - Partie initialisé (286.0ms)
+2020-08-23 11:13:28 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:14:51 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:14:56 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,0) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,1) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,2) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,3) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,4) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,5) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,6) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,7) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,8) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,9) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,10) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,11) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,12) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,13) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,14) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,15) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,16) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,17) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,18) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,19) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,20) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,21) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,22) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,23) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,24) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,25) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,26) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,27) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,28) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,29) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,30) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,31) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,32) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,33) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,34) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,35) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,36) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,37) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,38) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,39) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,40) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,41) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,42) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,43) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,44) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,45) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,46) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,47) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,48) inexistante.
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [ERROR] GameOfLifeController:73 - Mauvais index : null
+2020-08-23 11:14:56 [INFO ] GameOfLifeController:111 - Partie initialisé (228.0ms)
+2020-08-23 11:14:58 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:15:47 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:15:52 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:15:52 [INFO ] GameOfLifeController:111 - Partie initialisé (187.0ms)
+2020-08-23 11:16:32 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:16:39 [INFO ] GameOfLifeController:90 - Initialisation d'une nouvelle partie (30 colonnes/50 lignes)...
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,0) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,2) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,3) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,4) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,5) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,6) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,7) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,8) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,9) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,10) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,11) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,12) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,13) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,14) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,15) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,16) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,17) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,18) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,19) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,20) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,21) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,22) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,23) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,24) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,25) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,26) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,27) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,28) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,29) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,30) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,31) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,32) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,33) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,34) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,35) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,36) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,37) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,38) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,39) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,40) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,41) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,42) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,43) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,44) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,45) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,46) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,47) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,48) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (0,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (1,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (2,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (3,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (4,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (5,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (6,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (7,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (8,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (9,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (10,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (11,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (12,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (13,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (14,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (15,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (16,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (17,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (18,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (19,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (20,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (21,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (22,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (23,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (24,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (25,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (26,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (27,-1) inexistante.
+2020-08-23 11:16:39 [ERROR] GameOfLifeController:73 - Mauvais index : case (28,-1) inexistante.
+2020-08-23 11:16:39 [INFO ] GameOfLifeController:111 - Partie initialisé (245.0ms)
+2020-08-23 11:16:41 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
+2020-08-23 11:17:05 [INFO ] Start:35 - Début d'une nouvelle session
+2020-08-23 11:17:08 [INFO ] InitController:38 - Fin de la session

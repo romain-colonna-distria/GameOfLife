@@ -5,6 +5,7 @@ import fr.rom.gameoflife.objects.cells.AbstractCell;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import java.util.Set;
 
 
 public class Grid extends GridPane {
+    private final static Logger logger = Logger.getLogger(Grid.class);
+
     private final int nbColumns;
     private final int nbRows;
 
@@ -35,10 +38,10 @@ public class Grid extends GridPane {
     }
 
     public AbstractCell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
-        if(i < 0 || i > this.nbColumns - 1 ) throw new IndexOutOfBoundsException();
-        if(j < 0 || j > this.nbRows - 1 ) throw new IndexOutOfBoundsException();
+        if(i < 0 || i > this.nbColumns - 1 ) throw new IndexOutOfBoundsException("case (" + i + "," + j + ") inexistante.");
+        if(j < 0 || j > this.nbRows - 1 ) throw new IndexOutOfBoundsException("case (" + i + "," + j + ") inexistante.");
 
-        return (AbstractCell) ((Group) this.getChildren().get(i * nbColumns + j)).getChildren().get(0);
+        return (AbstractCell) ((Group) this.getChildren().get(i * nbRows + j)).getChildren().get(0);
     }
 
     public Set<AbstractCell> getAroundCells(AbstractCell cell){
@@ -47,18 +50,27 @@ public class Grid extends GridPane {
 
         Set<AbstractCell> result = new HashSet<>();
         try {
-            result.add(this.getCellAtIndex(x-1, y-1));
-            result.add(this.getCellAtIndex(x-1, y));
-            result.add(this.getCellAtIndex(x-1, y+1));
-            result.add(this.getCellAtIndex(x, y-1));
-            result.add(this.getCellAtIndex(x, y+1));
-            result.add(this.getCellAtIndex(x+1, y-1));
-            result.add(this.getCellAtIndex(x+1, y));
-            result.add(this.getCellAtIndex(x+1, y+1));
+            if(x-1 > 0 && y-1 > 0)
+                result.add(this.getCellAtIndex(x-1, y-1));
+            if(x-1 > 0 && y+1 < this.nbRows - 1)
+                result.add(this.getCellAtIndex(x-1, y+1));
+            if(x-1 > 0)
+                result.add(this.getCellAtIndex(x-1, y));
+            if(x+1 < this.nbColumns - 1 && y-1 > 0)
+                result.add(this.getCellAtIndex(x+1, y-1));
+            if(x+1 < this.nbColumns - 1 && y+1 < this.nbRows)
+                result.add(this.getCellAtIndex(x+1, y+1));
+            if(x+1 < this.nbColumns)
+                result.add(this.getCellAtIndex(x+1, y));
+            if(y-1 > 0)
+                result.add(this.getCellAtIndex(x, y-1));
+            if(y+1 < this.nbRows)
+                result.add(this.getCellAtIndex(x, y+1));
 
             return result;
         } catch (IndexOutOfBoundsException e){
-            return null;
+            logger.error("Mauvais index : " + e.getMessage());
+            return result;
         }
     }
 
