@@ -235,13 +235,13 @@ public class GameOfLifeController {
             if(cell.isAlive()){
                 if(!Properties.getInstance().getStayAliveSet().contains(nbAliveAroundCells)){
                     toDead.add(cell);
-                    addNewActiveCell(cell);
+                    addActiveCell(cell);
                     gameUpdated = true;
                 }
             } else {
                 if(Properties.getInstance().getComeAliveSet().contains(nbAliveAroundCells)){
                     toAlive.add(cell);
-                    addNewActiveCell(cell);
+                    addActiveCell(cell);
                     gameUpdated = true;
                 }
             }
@@ -280,7 +280,7 @@ public class GameOfLifeController {
         return activeCells;
     }
 
-    private void addNewActiveCell(AbstractCell cell){
+    private void addActiveCell(AbstractCell cell){
         activeCells.add(cell);
 
         Set<AbstractCell> around = this.grid.getAroundCells(cell);
@@ -312,7 +312,7 @@ public class GameOfLifeController {
                 AbstractCell cell = (AbstractCell) mouseEvent.getTarget();
 
                 cell.reverseState();
-                addNewActiveCell(cell);
+                addActiveCell(cell);
             }
         });
 
@@ -330,7 +330,7 @@ public class GameOfLifeController {
                 lastClickedCell = cell;
 
                 cell.reverseState();
-                addNewActiveCell(cell);
+                addActiveCell(cell);
             }
         });
 
@@ -438,7 +438,7 @@ public class GameOfLifeController {
                 if(tmp.isAlive()) cell.makeAlive();
                 else cell.makeDead();
 
-                addNewActiveCell(cell);
+                addActiveCell(cell);
             }
         } catch (EOFException e){
             logger.info("La partie a bien été chargée");
