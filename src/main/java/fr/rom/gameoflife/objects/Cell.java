@@ -1,4 +1,4 @@
-package fr.rom.gameoflife.objects.cells;
+package fr.rom.gameoflife.objects;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
@@ -10,7 +10,7 @@ import java.util.Set;
  * Class abstraite représentant une cellule.
  * Lien utile pour créer des SvgPath : https://yqnn.github.io/svg-path-editor/
  */
-public abstract class AbstractCell extends SVGPath {
+public class Cell extends SVGPath {
     private static final long serialVersionUID = 42L;
 
     private int positionX;
@@ -20,9 +20,9 @@ public abstract class AbstractCell extends SVGPath {
     private String aliveColor = "black";
     private String deadColor = "white";
 
-    private transient Set<AbstractCell> aroundCells;
+    private transient Set<Cell> aroundCells;
 
-    public AbstractCell(String path, double width, double height, int positionX, int positionY){
+    public Cell(String path, double width, double height, int positionX, int positionY){
         super();
         this.setContent(path);
 
@@ -62,7 +62,7 @@ public abstract class AbstractCell extends SVGPath {
         return positionY;
     }
 
-    public Set<AbstractCell> getAroundCells() {
+    public Set<Cell> getAroundCells() {
         return aroundCells;
     }
 
@@ -76,7 +76,7 @@ public abstract class AbstractCell extends SVGPath {
         if(!isAlive) this.setFill(Color.valueOf(deadColor));
     }
 
-    public void setAroundCells(Set<AbstractCell> aroundCells) {
+    public void setAroundCells(Set<Cell> aroundCells) {
         this.aroundCells = aroundCells;
     }
 
@@ -98,7 +98,7 @@ public abstract class AbstractCell extends SVGPath {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractCell cell = (AbstractCell) o;
+        Cell cell = (Cell) o;
         return positionX == cell.getPositionX() && positionY == cell.getPositionY();
     }
 
