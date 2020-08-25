@@ -2,7 +2,7 @@ package fr.rom.gameoflife.controller;
 
 
 import fr.rom.gameoflife.objects.Grid;
-import fr.rom.gameoflife.objects.cells.*;
+import fr.rom.gameoflife.objects.Cell;
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.application.Platform;
@@ -37,8 +37,8 @@ public class GameOfLifeController {
     private Grid grid;
     private boolean dragModeActive;
 
-    private Set<AbstractCell> activeCells;
-    private AbstractCell lastClickedCell;
+    private Set<Cell> activeCells;
+    private Cell lastClickedCell;
 
     private int propagationNumber;
     private AtomicBoolean onPropagation;
@@ -219,16 +219,16 @@ public class GameOfLifeController {
     }
 
     public void propagate(){
-        List<AbstractCell> activeCells = new ArrayList<>(this.getActiveCells());
-        Set<AbstractCell> toAlive = new HashSet<>();
-        Set<AbstractCell> toDead = new HashSet<>();
+        List<Cell> activeCells = new ArrayList<>(this.getActiveCells());
+        Set<Cell> toAlive = new HashSet<>();
+        Set<Cell> toDead = new HashSet<>();
         boolean gameUpdated = false;
-        for(AbstractCell cell : activeCells){
+        for(Cell cell : activeCells){
             int nbAliveAroundCells = 0;
-            Set<AbstractCell> aroundCells = cell.getAroundCells();
+            Set<Cell> aroundCells = cell.getAroundCells();
             if(aroundCells == null) continue;
 
-            for(AbstractCell c : cell.getAroundCells()) {
+            for(Cell c : cell.getAroundCells()) {
                 if (c.isAlive()) ++nbAliveAroundCells;
             }
 
@@ -252,8 +252,8 @@ public class GameOfLifeController {
             return;
         }
 
-        for(AbstractCell cell : toAlive) cell.makeAlive();
-        for(AbstractCell cell : toDead) cell.makeDead();
+        for(Cell cell : toAlive) cell.makeAlive();
+        for(Cell cell : toDead) cell.makeDead();
         generationNumberLabel.setText(String.valueOf(++propagationNumber));
 
         try {
@@ -266,9 +266,9 @@ public class GameOfLifeController {
         }
     }
 
-    public Set<AbstractCell> getActiveCells(){
-        Set<AbstractCell> tmp = new HashSet<>();
-        for(AbstractCell cell : this.activeCells){
+    public Set<Cell> getActiveCells(){
+        Set<Cell> tmp = new HashSet<>();
+        for(Cell cell : this.activeCells){
             if(cell.isAlive()) {
                 tmp.add(cell);
                 if(cell.getAroundCells() == null) continue;
@@ -280,10 +280,10 @@ public class GameOfLifeController {
         return activeCells;
     }
 
-    private void addActiveCell(AbstractCell cell){
+    private void addActiveCell(Cell cell){
         activeCells.add(cell);
 
-        Set<AbstractCell> around = this.grid.getAroundCells(cell);
+        Set<Cell> around = this.grid.getAroundCells(cell);
         if(around == null) return;
         activeCells.addAll(around);
     }
@@ -308,8 +308,8 @@ public class GameOfLifeController {
                 dragContext.initialTranslateX = grid.getTranslateX();
                 dragContext.initialTranslateY = grid.getTranslateY();
             } else {
-                if(!(mouseEvent.getTarget() instanceof AbstractCell)) return;
-                AbstractCell cell = (AbstractCell) mouseEvent.getTarget();
+                if(!(mouseEvent.getTarget() instanceof Cell)) return;
+                Cell cell = (Cell) mouseEvent.getTarget();
 
                 cell.reverseState();
                 addActiveCell(cell);
@@ -323,8 +323,8 @@ public class GameOfLifeController {
                 grid.setTranslateX(dragContext.initialTranslateX + mouseEvent.getX() - dragContext.mouseAnchorX);
                 grid.setTranslateY(dragContext.initialTranslateY + mouseEvent.getY() - dragContext.mouseAnchorY);
             } else {
-                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof AbstractCell)) return;
-                AbstractCell cell = (AbstractCell) mouseEvent.getPickResult().getIntersectedNode();
+                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell)) return;
+                Cell cell = (Cell) mouseEvent.getPickResult().getIntersectedNode();
 
                 if(cell.equals(lastClickedCell)) return;
                 lastClickedCell = cell;
@@ -338,50 +338,35 @@ public class GameOfLifeController {
     }
 
     private void initCells(){
-        AbstractCell cell;
+        Cell cell;
         Properties p = Properties.getInstance();
         for(int i = 0; i < p.getGridNbColumns(); ++i){
             for(int j = 0; j < p.getGridNbRows(); ++j) {
-                switch (p.getShapeString()) {
-                    case "rectangle":
-                        cell = new RectangleCell(p.getCellWidth(), p.getCellHeight(), i, j);
-                        break;
-                    case "ovale":
-                        cell = new EllipseCell(p.getCellWidth(), p.getCellHeight(), i, j);
-                        break;
-                    case "triangle":
-                        cell = new TriangleCell(p.getCellWidth(), p.getCellHeight(), i, j);
-                        break;
-                    case "nuage":
-                        cell = new CloudCell(p.getCellWidth(), p.getCellHeight(), i, j);
-                        break;
-                    default:
-                        logger.warn("Forme de cellule non reconnu : " + p.getShapeString());
-                        return;
-                }
-
+                //TODO: vérifier que le SVGPath est valide
+                cell = new Cell(p.getShapeString(), p.getCellWidth(), p.getCellHeight(), i, j);
                 cell.setAliveColor(p.getCellAliveColor());
                 cell.setDeadColor(p.getCellDeadColor());
                 cell.makeDead();
+
                 grid.addCell(cell);
             }
         }
 
-        for(AbstractCell c : grid.getCells()){
+        for(Cell c : grid.getCells()){
             c.setAroundCells(this.grid.getAroundCells(c));
         }
     }
 
     public void updateAliveColorCell(String newColor){
         Properties.getInstance().setCellAliveColor(newColor);
-        for(AbstractCell c : grid.getCells()){
+        for(Cell c : grid.getCells()){
             c.setAliveColor(newColor);
         }
     }
 
     public void updateDeadColorCell(String newColor){
         Properties.getInstance().setCellDeadColor(newColor);
-        for(AbstractCell c : grid.getCells()){
+        for(Cell c : grid.getCells()){
             c.setDeadColor(newColor);
         }
     }
@@ -399,7 +384,7 @@ public class GameOfLifeController {
             FileOutputStream fileOut = new FileOutputStream(selectedFile);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
-            for (AbstractCell cell : getActiveCells()) {
+            for (Cell cell : getActiveCells()) {
                 objectOut.writeObject(cell);
             }
             logger.info("La partie a bien été sauvegardée");
@@ -428,10 +413,10 @@ public class GameOfLifeController {
             return;
         }
 
-        AbstractCell tmp;
-        AbstractCell cell;
+        Cell tmp;
+        Cell cell;
         try {
-            while ((tmp = (AbstractCell) ois.readObject()) != null){
+            while ((tmp = (Cell) ois.readObject()) != null){
                 cell = grid.getCellAtIndex(tmp.getPositionX(), tmp.getPositionY());
                 if(cell == null) continue; //si la taille de la grille a changée par exemple
 
@@ -503,7 +488,7 @@ public class GameOfLifeController {
         if(onPropagation.get()) stopPropagation();
         propagationNumber = 0;
 
-        for(AbstractCell cell : getActiveCells()) cell.makeDead();
+        for(Cell cell : getActiveCells()) cell.makeDead();
         this.activeCells = new HashSet<>();
 
         initStatsFileWritter();
@@ -550,7 +535,7 @@ public class GameOfLifeController {
     @FXML //TODO: optimiser
     public void makeZoom(){
         logger.info("Application du zoom...");
-        List<AbstractCell> cells = grid.getCells();
+        List<Cell> cells = grid.getCells();
         double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
         double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
         pool.submit(new Zoom_Handler(cells, newCellsWidth, newCellsHeight));
@@ -574,12 +559,12 @@ public class GameOfLifeController {
     }
 
     private static class Zoom_Handler implements Runnable {
-        private final List<AbstractCell> cells;
+        private final List<Cell> cells;
         private final double cellWidth;
         private final double cellHeight;
 
 
-        public Zoom_Handler(List<AbstractCell> cells, double cellWidth, double cellHeight){
+        public Zoom_Handler(List<Cell> cells, double cellWidth, double cellHeight){
             this.cells = cells;
             this.cellWidth = cellWidth;
             this.cellHeight = cellHeight;
@@ -591,7 +576,7 @@ public class GameOfLifeController {
                 double start = System.currentTimeMillis();
                 if(this.cells.size() < 1) return;
 
-                for(AbstractCell cell : cells){
+                for(Cell cell : cells){
                     cell.setShapeWidth(this.cellWidth);
                     cell.setShapeHeight(this.cellHeight);
                 }
