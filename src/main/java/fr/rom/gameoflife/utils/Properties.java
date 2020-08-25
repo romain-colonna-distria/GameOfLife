@@ -7,28 +7,45 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Properties {
-    private double cellWidth = 10;
-    private double cellHeight = 10;
-    private String cellAliveColor = "black";
-    private String cellDeadColor = "white";
+
+public final class Properties {
+    private static Properties instance;
+    private double cellWidth;
+    private double cellHeight;
+    private String cellAliveColor;
+    private String cellDeadColor;
 
     private String shapeString;
 
-    private int gridNbColumns = 200;
-    private int gridNbRows = 200;
+    private int gridNbColumns;
+    private int gridNbRows;
 
     private final AtomicLong refreshTimeMs;
-    private int nbSimultaneousThreads;
 
     private final Set<Integer> comeAliveSet;
     private final Set<Integer> stayAliveSet;
 
-    public Properties(){
-        refreshTimeMs = new AtomicLong(100);
-        nbSimultaneousThreads = 2;
-        comeAliveSet = new HashSet<>(Collections.singletonList(3));
-        stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
+
+    private Properties(){
+        this.cellWidth = 10;
+        this.cellHeight = 10;
+        this.cellAliveColor = "black";
+        this.cellDeadColor = "white";
+
+        this.shapeString = "rectangle";
+
+        this.gridNbColumns = 200;
+        this.gridNbRows = 200;
+
+        this.refreshTimeMs = new AtomicLong(100);
+
+        this.comeAliveSet = new HashSet<>(Collections.singletonList(3));
+        this.stayAliveSet = new HashSet<>(Arrays.asList(2, 3));
+    }
+
+    public synchronized static Properties getInstance() {
+        if(instance == null) instance = new Properties();
+        return instance;
     }
 
     public double getCellWidth() {
@@ -95,14 +112,6 @@ public class Properties {
         this.refreshTimeMs.set(refreshTimeMs);
     }
 
-    public int getNbSimultaneousThreads() {
-        return nbSimultaneousThreads;
-    }
-
-    public void setNbSimultaneousThreads(int nbSimultaneousThreads) {
-        this.nbSimultaneousThreads = nbSimultaneousThreads;
-    }
-
     public Set<Integer> getComeAliveSet() {
         return comeAliveSet;
     }
@@ -126,4 +135,6 @@ public class Properties {
     public void removeStayAliveRule(int stayAliveNumber){
         this.stayAliveSet.remove(stayAliveNumber);
     }
+
+    
 }

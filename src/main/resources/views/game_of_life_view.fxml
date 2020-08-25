@@ -3,8 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!--<?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>-->
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.gameoflife.controller.GameOfLifeController">
     <center>
         <AnchorPane fx:id="gameAnchorPane" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
@@ -12,23 +10,25 @@
     <top>
         <MenuBar prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="TOP_LEFT">
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Fichier">
-                <MenuItem mnemonicParsing="false" onAction="#saveState" text="Sauvegarder" />
-                <MenuItem mnemonicParsing="false" onAction="#loadSave" text="Charger" />
+                <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveState" text="Sauvegarder" />
+                <MenuItem fx:id="loadMenuItem" mnemonicParsing="false" onAction="#loadSave" text="Charger" />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#showSettings" text="Paramètres" />
+                <MenuItem fx:id="settingsMenuItem" mnemonicParsing="false" onAction="#showSettings" text="Paramètres" />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Quitter" />
+                <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" onAction="#exit" text="Quitter" />
             </Menu>
             <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Édition">
-                <MenuItem mnemonicParsing="false" onAction="#setModeToMove" text="Mode déplacement" />
-                <MenuItem mnemonicParsing="false" onAction="#setModeToReverse" text="Mode retournement" />
+                <MenuItem fx:id="multiplePropagationMenuItem" mnemonicParsing="false" onAction="#clickMultiplePropagationMenuItem" text="Lancer propagation" />
+                <MenuItem fx:id="singlePropagationMenuItem" mnemonicParsing="false" onAction="#clickSinglePropagationMenuItem" text="Effectuer une propagation" />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#showStats" text="Statistiques..." />
+                <CheckMenuItem fx:id="moveModeMenuItem" mnemonicParsing="false" text="Mode déplacement" />
+                <CheckMenuItem fx:id="reverseModeMenuItem" mnemonicParsing="false" text="Mode retournement" />
                 <SeparatorMenuItem />
-                <MenuItem mnemonicParsing="false" onAction="#cleanActives" text="Nettoyer" />
-                <MenuItem mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser" />
+                <MenuItem fx:id="statsMenuItem" mnemonicParsing="false" onAction="#showStats" text="Statistiques..." />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="resetMenuItem" mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser" />
             </Menu>
-            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">
+            <Menu fx:id="aboutMenuItem" mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">
                 <MenuItem mnemonicParsing="false" text="À propos" />
             </Menu>
         </MenuBar>
@@ -42,12 +42,12 @@
             <Label fx:id="generationNumberLabel" minWidth="40" text="0" />
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <Label prefHeight="17.0" prefWidth="59.0" text="    zoom:" />
-            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseDragged="#updateZoomLabel" onMouseReleased="#makeZoom" value="100.0" />
-            <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="24.0" text="100" />
+            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseReleased="#makeZoom" value="100.0" />
+            <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="29.0" text="100" />
             <Label prefHeight="17.0" prefWidth="28.0" text="\%  " />
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <Label text="    rafraichissement:" />
-            <Slider fx:id="speedSlider" max="1000.0" min="10.0" onMouseDragged="#changeSpeed" value="200.0" />
+            <Slider fx:id="speedSlider" max="1000.0" min="10.0"  value="200.0" />
             <Label fx:id="speedLabel" minWidth="30" text="200" />
             <Label text="ms" />
         </HBox>

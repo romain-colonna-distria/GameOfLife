@@ -1,6 +1,10 @@
-- Ajouter un système de langues
-- Ajouter un système de log
-- Améliorer l'interface (ajout de checkbox pour choisir le mode, ajouter des racourcis, refonte de la barre d'outil du bas)
-- Ajouter une interface regroupant des statistique sur la partie en cours (évolution de la population dans le temps (graphique) etc)
- - ajouter une option pour déterminer la durée du cycle a partir d'une sauvegarde
+- Ajouter un système de langage
+- Améliorer l'interface (refonte de la barre d'outil du bas)
+- ajouter une option pour déterminer la durée d'un cycle
 - Ajouter un "market" de modèles
+- Ajouter messages d'erreurs dans formulaire de lancement
+
+
+//PLUS TARD
+- Améliorer la gestion des cellules (ne plus utiliser de gridpane mais plutot un canvas)
+- Ajouter un preloader au lancement de la partie et pour le zoom

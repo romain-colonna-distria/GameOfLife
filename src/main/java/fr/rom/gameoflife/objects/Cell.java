@@ -1,37 +1,39 @@
 package fr.rom.gameoflife.objects;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.SVGPath;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CellEllipse extends Ellipse implements ICell, Serializable {
+/**
+ * Class abstraite représentant une cellule.
+ * Lien utile pour créer des SvgPath : https://yqnn.github.io/svg-path-editor/
+ */
+public class Cell extends SVGPath {
     private static final long serialVersionUID = 42L;
 
-    private final int positionX;
-    private final int positionY;
+    private int positionX;
+    private int positionY;
     private boolean isAlive = false;
 
     private String aliveColor = "black";
     private String deadColor = "white";
 
-    private transient Set<ICell> aroundCells;
+    private transient Set<Cell> aroundCells;
 
-
-
-    public CellEllipse(double width, double height, int positionX, int positionY){
-        super(width, height);
+    public Cell(String path, double width, double height, int positionX, int positionY){
+        super();
+        this.setContent(path);
 
         this.positionX = positionX;
         this.positionY = positionY;
         this.aroundCells = new HashSet<>();
 
+        this.setShapeWidth(width);
+        this.setShapeHeight(height);
         this.makeDead();
     }
-
-
 
     public void makeAlive(){
         this.isAlive = true;
@@ -44,14 +46,13 @@ public class CellEllipse extends Ellipse implements ICell, Serializable {
     }
 
     public void reverseState(){
-        if(this.isAlive){
-            this.makeDead();
-        } else {
-            this.makeAlive();
-        }
+        if(this.isAlive) this.makeDead();
+        else this.makeAlive();
     }
 
-
+    public boolean isAlive() {
+        return isAlive;
+    }
 
     public int getPositionX() {
         return positionX;
@@ -61,54 +62,44 @@ public class CellEllipse extends Ellipse implements ICell, Serializable {
         return positionY;
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    public Set<Cell> getAroundCells() {
+        return aroundCells;
     }
 
     public void setAliveColor(String aliveColor) {
         this.aliveColor = aliveColor;
-        if(isAlive)
-            this.setFill(Color.valueOf(aliveColor));
+        if(isAlive) this.setFill(Color.valueOf(aliveColor));
     }
 
     public void setDeadColor(String deadColor) {
         this.deadColor = deadColor;
-        if(!isAlive)
-            this.setFill(Color.valueOf(deadColor));
+        if(!isAlive) this.setFill(Color.valueOf(deadColor));
     }
 
-    public Set<ICell> getAroundCells() {
-        return aroundCells;
-    }
-
-    public void setAroundCells(Set<ICell> aroundCells) {
+    public void setAroundCells(Set<Cell> aroundCells) {
         this.aroundCells = aroundCells;
     }
 
+    public void setShapeWidth(double width){
+        double originalWidth = this.prefWidth(-1);
+        double scaleX = width / originalWidth;
 
+        this.setScaleX(scaleX);
+    }
+
+    public void setShapeHeight(double height){
+        double originalHeight = this.prefHeight(-1);
+        double scaleY = height / originalHeight;
+
+        this.setScaleY(scaleY);
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CellEllipse cellEllipse = (CellEllipse) o;
-        return positionX == cellEllipse.positionX &&
-                positionY == cellEllipse.positionY;
-    }
-
-
-    public double getShapeWidth(){
-        return this.getRadiusX();
-    }
-    public double getShapeHeight(){
-        return this.getRadiusY();
-    }
-
-    public void setShapeWidth(double width){
-        this.setRadiusX(width);
-    }
-    public void setShapeHeight(double height){
-        this.setRadiusY(height);
+        Cell cell = (Cell) o;
+        return positionX == cell.getPositionX() && positionY == cell.getPositionY();
     }
 
     @Override
@@ -117,7 +108,6 @@ public class CellEllipse extends Ellipse implements ICell, Serializable {
                 "positionX:" + positionX +
                 ", positionY:" + positionY +
                 ", isAlive:" + isAlive +
-                //", nbAround:" + aroundCells.size() +
                 '}';
     }
 }
