@@ -4,9 +4,11 @@ package fr.rom.gameoflife.controller;
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
 
@@ -57,6 +59,8 @@ public class SettingsController {
     @FXML
     private CheckBox stayAlive8Checkbox;
 
+    @FXML
+    private Button okButton;
 
 
     public void init(GameOfLifeController parent){
@@ -140,5 +144,10 @@ public class SettingsController {
         else p.removeStayAliveRule(8);
 
         logger.info("Règles mises à jour : prend vie " + p.getStayAliveSet() + ", reste en vie " + p.getComeAliveSet());
+    }
+
+    @FXML
+    public void closeSettings(){
+        ((Stage) okButton.getScene().getWindow()).close();
     }
 }

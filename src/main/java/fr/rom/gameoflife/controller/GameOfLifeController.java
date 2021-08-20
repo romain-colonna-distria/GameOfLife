@@ -176,9 +176,9 @@ public class GameOfLifeController {
             if(!statisticsFile.createNewFile()){
                 if(statisticsFile.delete()) {
                     if(statisticsFile.createNewFile()) statisticsWriter = new FileWriter(statisticsFile);
-                    else logger.warn("Un problème est survenu lors de la création du fichir stats.txt");
+                    else logger.warn("Un problème est survenu lors de la création du fichier stats.txt");
                 } else {
-                    logger.warn("Un problème est survenu lors de la création du fichir stats.txt");
+                    logger.warn("Un problème est survenu lors de la création du fichier stats.txt");
                 }
             }
         } catch (IOException e){
@@ -434,8 +434,6 @@ public class GameOfLifeController {
 
     @FXML
     public void showSettings(){
-        if(this.settingsStage != null) return;
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/settings_view.fxml"));
             VBox root = fxmlLoader.load();

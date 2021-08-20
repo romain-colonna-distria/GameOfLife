@@ -8,8 +8,8 @@
         <AnchorPane fx:id="gameAnchorPane" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
     </center>
     <top>
-        <MenuBar prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="TOP_LEFT">
-            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Fichier">
+        <MenuBar prefHeight="30.0" prefWidth="858.0" BorderPane.alignment="TOP_LEFT">
+            <Menu mnemonicParsing="false" style="-fx-font-size: 13;" text="Fichier">
                 <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveState" text="Sauvegarder" />
                 <MenuItem fx:id="loadMenuItem" mnemonicParsing="false" onAction="#loadSave" text="Charger" />
                 <SeparatorMenuItem />
@@ -17,7 +17,7 @@
                 <SeparatorMenuItem />
                 <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" onAction="#exit" text="Quitter" />
             </Menu>
-            <Menu mnemonicParsing="false" style="-fx-font-size: 12" text="Édition">
+            <Menu mnemonicParsing="false" style="-fx-font-size: 13;" text="Édition">
                 <MenuItem fx:id="multiplePropagationMenuItem" mnemonicParsing="false" onAction="#clickMultiplePropagationMenuItem" text="Lancer propagation" />
                 <MenuItem fx:id="singlePropagationMenuItem" mnemonicParsing="false" onAction="#clickSinglePropagationMenuItem" text="Effectuer une propagation" />
                 <SeparatorMenuItem />
@@ -28,28 +28,30 @@
                 <SeparatorMenuItem />
                 <MenuItem fx:id="resetMenuItem" mnemonicParsing="false" onAction="#resetGrid" text="Réinitialiser" />
             </Menu>
-            <Menu fx:id="aboutMenuItem" mnemonicParsing="false" style="-fx-font-size: 12" text="Aide">
+            <Menu fx:id="aboutMenuItem" mnemonicParsing="false" style="-fx-font-size: 13;" text="Aide">
                 <MenuItem mnemonicParsing="false" text="À propos" />
             </Menu>
         </MenuBar>
     </top>
     <bottom>
-        <HBox prefHeight="19.0" style="-fx-background-color: #eeeeee; -fx-padding: 0px 0px 0px 15px;" BorderPane.alignment="CENTER">
-            <Label text="propagation: " />
-            <Label fx:id="onPropagationLabel" minWidth="23.0" prefHeight="17.0" prefWidth="34.0" text="off" />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <Label prefHeight="17.0" prefWidth="89.0" text="    generation: " />
-            <Label fx:id="generationNumberLabel" minWidth="40" text="0" />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <Label prefHeight="17.0" prefWidth="59.0" text="    zoom:" />
-            <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseReleased="#makeZoom" value="100.0" />
-            <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="29.0" text="100" />
-            <Label prefHeight="17.0" prefWidth="28.0" text="\%  " />
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <Label text="    rafraichissement:" />
-            <Slider fx:id="speedSlider" max="1000.0" min="10.0"  value="200.0" />
-            <Label fx:id="speedLabel" minWidth="30" text="200" />
-            <Label text="ms" />
+        <HBox prefHeight="30.0" prefWidth="858.0" style="-fx-background-color: #eeeeee; -fx-padding: 0px 0px 0px 15px;" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="825.0">
+                <Label text="propagation: "/>
+                <Label fx:id="onPropagationLabel" minWidth="23.0" prefHeight="17.0" prefWidth="34.0" text="off"/>
+                <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                <Label prefHeight="17.0" prefWidth="89.0" text="    generation: "/>
+                <Label fx:id="generationNumberLabel" minWidth="40" text="0"/>
+                <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                <Label prefHeight="17.0" prefWidth="59.0" text="    zoom:"/>
+                <Slider fx:id="zoomSlider" max="200.0" min="10.0" onMouseReleased="#makeZoom" value="100.0"/>
+                <Label fx:id="zoomLabel" prefHeight="17.0" prefWidth="29.0" text="100"/>
+                <Label prefHeight="17.0" prefWidth="28.0" text="\%  "/>
+                <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                <Label text="    rafraichissement:"/>
+                <Slider fx:id="speedSlider" max="1000.0" min="10.0" value="200.0"/>
+                <Label fx:id="speedLabel" minWidth="30" text="200"/>
+                <Label text="ms"/>
+            </HBox>
         </HBox>
     </bottom>
 
