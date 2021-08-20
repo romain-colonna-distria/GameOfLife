@@ -434,15 +434,15 @@ public class GameOfLifeController {
 
     @FXML
     public void showSettings(){
+        if (this.settingsStage != null && this.settingsStage.isShowing()) return;
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/settings_view.fxml"));
             VBox root = fxmlLoader.load();
 
             this.settingsStage = new Stage();
             this.settingsStage.setTitle("Paramètres");
-            this.settingsStage.setAlwaysOnTop(true);
             this.settingsStage.setResizable(false);
-            this.settingsStage.initModality(Modality.WINDOW_MODAL);
             this.settingsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
             this.settingsStage.setScene(new Scene(root));
             this.settingsStage.setOnCloseRequest((event -> this.settingsStage = null));
