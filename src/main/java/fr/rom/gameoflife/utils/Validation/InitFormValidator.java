@@ -80,7 +80,7 @@ public class InitFormValidator {
         ArrayList<String> errors = new ArrayList<>();
 
         if(svgPath.length() < 1) errors.add("Ne peux pas être vide");
-        if(!svgPath.matches("[MmZzLlHhVvCcSsQqTtAa0-9-,.\\s]")) errors.add("Contient un caractère invalide.");
+        if(!svgPath.matches("[MmZzLlHhVvCcSsQqTtAa0-9-,.\\s]*")) errors.add("Contient un caractère invalide.");
         if(svgPath.matches("[0-9-,.]")) errors.add("Début invalides");
         if(svgPath.matches("[-,.]*")) errors.add("Fin invalide.");
 
