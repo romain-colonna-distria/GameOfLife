@@ -1,25 +1,29 @@
 package fr.rom.gameoflife.controller;
 
 
-import fr.rom.gameoflife.objects.Cell;
 import fr.rom.gameoflife.utils.Properties;
 
+import fr.rom.gameoflife.utils.Validation.InitFormValidator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
+import java.util.ArrayList;
 
 
 public class InitController {
     private Stage stage;
 
     private final static Logger logger = Logger.getLogger(InitController.class);
+
+    private InitFormValidator validator;
 
     @FXML
     private TextField nbRowsTextField;
@@ -34,30 +38,71 @@ public class InitController {
     @FXML
     private TextField cellWidthTextField;
 
+    @FXML
+    private Label nbColumnsErrorLabel;
+    @FXML
+    private Label nbRowsErrorLabel;
+    @FXML
+    private Label cellsHeightErrorLabel;
+    @FXML
+    private Label cellsWidthErrorLabel;
+    @FXML
+    private Label svgPathErrorLabel;
+
 
 
     public void init(Stage stage){
         this.stage = stage;
+        this.validator = new InitFormValidator();
         this.nbRowsTextField.getScene().getWindow().setOnCloseRequest((event -> logger.info("Fin de la session")));
     }
 
     private boolean checkValidity(){
-        try {
-            Integer.parseInt(nbRowsTextField.getText());
-            Integer.parseInt(nbColomnsTextField.getText());
-            Double.parseDouble(cellHeightTextField.getText());
-            Double.parseDouble(cellWidthTextField.getText());
+        boolean isValid = true;
+        ArrayList<String> errors;
 
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+        if((errors = validator.validateNbRows(nbRowsTextField.getText())).size() > 0){
+            nbRowsErrorLabel.textProperty().setValue(errors.get(0));
+            isValid = false;
         }
+        if((errors = validator.validateNbColumns(nbColomnsTextField.getText())).size() > 0){
+            nbColumnsErrorLabel.textProperty().setValue(errors.get(0));
+            isValid = false;
+        }
+        if((errors = validator.validateCellsHeight(cellHeightTextField.getText())).size() > 0){
+            cellsHeightErrorLabel.textProperty().setValue(errors.get(0));
+            isValid = false;
+        }
+        if((errors = validator.validateCellsWidth(cellWidthTextField.getText())).size() > 0){
+            cellsWidthErrorLabel.textProperty().setValue(errors.get(0));
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void cleanErrorsMessages(){
+        nbRowsErrorLabel.textProperty().setValue("");
+        nbColumnsErrorLabel.textProperty().setValue("");
+        cellsHeightErrorLabel.textProperty().setValue("");
+        cellsWidthErrorLabel.textProperty().setValue("");
+        svgPathErrorLabel.textProperty().setValue("");
     }
 
     @FXML
     public void runPersonalShape(){
         Properties properties = Properties.getInstance();
-        if(svgPathTextField.getText().equals("")) return;
+        cleanErrorsMessages();
+
+        ArrayList<String> errors;
+        if((errors = validator.validateSVGPath(svgPathTextField.getText())).size() > 0) {
+            checkValidity();
+            svgPathErrorLabel.textProperty().setValue(errors.get(0));
+            return;
+        }
+
+        if(!checkValidity()) return;
+
         properties.setShapeString(svgPathTextField.getText());
 
         run();
@@ -66,6 +111,10 @@ public class InitController {
     @FXML
     public void runDefineShape(){
         Properties properties = Properties.getInstance();
+        cleanErrorsMessages();
+
+        if (!checkValidity()) return;
+
         switch (shapeMenuButton.getValue()) {
             case "rectangle":
                 properties.setShapeString("M 0 0 L 10 0 L 10 10 L 0 10 Z");
@@ -91,8 +140,6 @@ public class InitController {
     }
 
     public void run(){
-        if (!checkValidity()) return;
-
         Properties properties = Properties.getInstance();
         properties.setGridNbRows(Integer.parseInt(nbRowsTextField.getText()));
         properties.setGridNbColumns(Integer.parseInt(nbColomnsTextField.getText()));
