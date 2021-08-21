@@ -1,10 +1,10 @@
-- Ajouter un système de langage
-- Améliorer l'interface (refonte de la barre d'outil du bas)
-- ajouter une option pour déterminer la durée d'un cycle
+- Ajouter messages d'erreurs dans formulaire de lancemen
+- Ajouter un système de langue
+- Améliorer l'interface : - refonte de la barre d'outil du bas
+
 - Ajouter un "market" de modèles
-- Ajouter messages d'erreurs dans formulaire de lancement
-
-
-//PLUS TARD
+- Permettre de selectionner une zone et de copier colle les cellules
 - Améliorer la gestion des cellules (ne plus utiliser de gridpane mais plutot un canvas)
 - Ajouter un preloader au lancement de la partie et pour le zoom
+- Améliorer les stats : - rajouter de nouvelles données (ajouter une option pour détecter un oscilateur et déterminer sa fréquence)
+                        - améliorer l'interface
