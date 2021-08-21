@@ -1,4 +1,3 @@
-- Ajouter messages d'erreurs dans formulaire de lancemen
 - Ajouter un système de langue
 - Améliorer l'interface : - refonte de la barre d'outil du bas
 
@@ -8,3 +7,4 @@
 - Ajouter un preloader au lancement de la partie et pour le zoom
 - Améliorer les stats : - rajouter de nouvelles données (ajouter une option pour détecter un oscilateur et déterminer sa fréquence)
                         - améliorer l'interface
+- Ajouter un fichier de paramettre avec plus de possibilités (le nombre de threads maximum, exemple minecraft en choisssissant la memoire allouée...)
