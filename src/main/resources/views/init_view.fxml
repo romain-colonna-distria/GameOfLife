@@ -1,134 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="344.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.gameoflife.controller.InitController">
-    <Label layoutX="182.0" layoutY="11.0" text="Jeu de la vie">
+<AnchorPane prefHeight="344.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.rom.gameoflife.controller.InitController">
+    <Label fx:id="titleLabel" layoutX="182.0" layoutY="11.0">
         <font>
-            <Font size="36.0"/>
+            <Font size="36.0" />
         </font>
     </Label>
 
-    <Label layoutX="368.0" layoutY="41.0" text="v2.0"/>
+    <Label fx:id="versionLabel" layoutX="368.0" layoutY="41.0" />
 
-    <Separator layoutX="31.0" layoutY="66.0" prefHeight="4.0" prefWidth="41.0"/>
-    <Label layoutX="74.0" layoutY="61.0" text="Grille" textFill="#000000ab">
+    <ChoiceBox fx:id="languageChoiceBox" layoutX="488.0" layoutY="4.0" prefHeight="27.0" prefWidth="41.0" />
+
+    <Separator layoutX="31.0" layoutY="67.0" prefHeight="4.0" prefWidth="41.0" />
+    <Label fx:id="gridLabel" layoutX="74.0" layoutY="61.0" textFill="#000000ab">
         <font>
-            <Font size="11.0"/>
+            <Font size="11.0" />
         </font>
     </Label>
-    <Separator layoutX="104.0" layoutY="67.0" prefHeight="4.0" prefWidth="402.0"/>
+    <Separator layoutX="104.0" layoutY="67.0" prefHeight="4.0" prefWidth="402.0" />
 
-    <Label layoutX="37.0" layoutY="84.0" text="Taille de la grille :">
+    <Label fx:id="gridSizeLabel" layoutX="37.0" layoutY="84.0">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="nbColomnsTextField" layoutX="168.0" layoutY="80.0" prefHeight="27.0" prefWidth="144.0"
-               promptText="nombre de colonnes" text="100"/>
-    <Label fx:id="nbColumnsErrorLabel" layoutX="170.0" layoutY="107.0" prefHeight="15.0" prefWidth="140.0"
-           textFill="#dd3619">
+    <TextField fx:id="nbColomnsTextField" layoutX="168.0" layoutY="80.0" prefHeight="27.0" prefWidth="144.0" />
+    <Label fx:id="nbColumnsErrorLabel" layoutX="170.0" layoutY="107.0" prefHeight="15.0" prefWidth="140.0" textFill="#dd3619">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 
     <Label layoutX="328.0" layoutY="84.0" prefHeight="18.0" prefWidth="6.0" text="X">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="nbRowsTextField" layoutX="352.0" layoutY="80.0" prefHeight="27.0" prefWidth="144.0"
-               promptText="nombre de lignes" text="100"/>
-    <Label fx:id="nbRowsErrorLabel" layoutX="354.0" layoutY="106.0" prefHeight="15.0" prefWidth="140.0"
-           textFill="#dd3619">
+    <TextField fx:id="nbRowsTextField" layoutX="352.0" layoutY="80.0" prefHeight="27.0" prefWidth="144.0" />
+    <Label fx:id="nbRowsErrorLabel" layoutX="354.0" layoutY="106.0" prefHeight="15.0" prefWidth="140.0" textFill="#dd3619">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 
-    <Separator layoutX="31.0" layoutY="128.0" prefHeight="4.0" prefWidth="41.0"/>
-    <Label layoutX="74.0" layoutY="121.0" text="Cellules" textFill="#000000ab">
+    <Separator layoutX="31.0" layoutY="128.0" prefHeight="4.0" prefWidth="41.0" />
+    <Label fx:id="cellsLabel" layoutX="74.0" layoutY="121.0" textFill="#000000ab">
         <font>
-            <Font size="11.0"/>
+            <Font size="11.0" />
         </font>
     </Label>
-    <Separator layoutX="118.0" layoutY="127.0" prefHeight="4.0" prefWidth="388.0"/>
+    <Separator layoutX="118.0" layoutY="127.0" prefHeight="4.0" prefWidth="388.0" />
 
-    <Label layoutX="38.0" layoutY="146.0" prefHeight="18.0" prefWidth="129.0" text="Taille des cellules :">
+    <Label fx:id="cellsSizeLabel" layoutX="38.0" layoutY="146.0" prefHeight="18.0" prefWidth="129.0">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="cellHeightTextField" layoutX="168.0" layoutY="141.0" prefHeight="27.0" prefWidth="144.0"
-               promptText="hauteur (pixels)" text="10"/>
-    <Label fx:id="cellsHeightErrorLabel" layoutX="169.0" layoutY="168.0" prefHeight="15.0" prefWidth="140.0"
-           textFill="#dd3619">
+    <TextField fx:id="cellHeightTextField" layoutX="168.0" layoutY="141.0" prefHeight="27.0" prefWidth="144.0" />
+    <Label fx:id="cellsHeightErrorLabel" layoutX="169.0" layoutY="168.0" prefHeight="15.0" prefWidth="140.0" textFill="#dd3619">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 
     <Label layoutX="328.0" layoutY="146.0" prefHeight="18.0" prefWidth="10.0" text="X">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Label>
-    <TextField fx:id="cellWidthTextField" layoutX="352.0" layoutY="141.0" prefHeight="27.0" prefWidth="144.0"
-               promptText="largeur (pixels)" text="10"/>
-    <Label fx:id="cellsWidthErrorLabel" layoutX="354.0" layoutY="168.0" prefHeight="15.0" prefWidth="140.0"
-           textFill="#dd3619">
+    <TextField fx:id="cellWidthTextField" layoutX="352.0" layoutY="141.0" prefHeight="27.0" prefWidth="144.0" />
+    <Label fx:id="cellsWidthErrorLabel" layoutX="354.0" layoutY="168.0" prefHeight="15.0" prefWidth="140.0" textFill="#dd3619">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 
 
-    <VBox alignment="CENTER_LEFT" layoutX="38.0" layoutY="193.0" prefHeight="75.0" prefWidth="189.0">
-        <Label prefHeight="48.0" prefWidth="213.0" text="Choisissez parmi les formes de cellule prédéfinie :"
-               wrapText="true">
+    <VBox alignment="CENTER_LEFT" layoutX="38.0" layoutY="193.0" prefHeight="107.0" prefWidth="189.0">
+        <Label fx:id="defineShapeLabel" prefHeight="48.0" prefWidth="213.0" wrapText="true">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="shapeMenuButton" prefHeight="27.0" prefWidth="100.0" value="rectangle">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="rectangle"/>
-                    <String fx:value="ovale"/>
-                    <String fx:value="triangle"/>
-                    <String fx:value="nuage"/>
-                    <String fx:value="etoile"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
+        <ChoiceBox fx:id="shapeMenuChoiceBox" prefHeight="27.0" prefWidth="100.0" />
     </VBox>
-    <VBox alignment="CENTER_LEFT" layoutX="310.0" layoutY="194.0" prefHeight="88.0" prefWidth="189.0">
-        <Label prefHeight="61.0" prefWidth="164.0"
-               text="Définissez votre propre forme de cellule à l'aide d'une chaine SVGPath :" wrapText="true">
+    <Button fx:id="runDefineButton" layoutX="168.0" layoutY="302.0" mnemonicParsing="false" onAction="#runDefineShape" />
+
+    <Separator layoutX="267.0" layoutY="185.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
+    <Label fx:id="orLabel" layoutX="259.0" layoutY="235.0" textFill="#000000ab" />
+    <Separator layoutX="267.0" layoutY="251.0" orientation="VERTICAL" prefHeight="68.0" prefWidth="6.0" />
+
+    <VBox alignment="CENTER_LEFT" layoutX="313.0" layoutY="194.0" prefHeight="88.0" prefWidth="189.0">
+        <Label fx:id="personnalShapeLabel" prefHeight="61.0" prefWidth="164.0" wrapText="true">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="svgPathTextField" prefHeight="28.0" prefWidth="50.0"/>
+        <TextField fx:id="svgPathTextField" prefHeight="28.0" prefWidth="50.0" />
     </VBox>
-    <Label fx:id="svgPathErrorLabel" layoutX="312.0" layoutY="283.0" prefHeight="15.0" prefWidth="185.0"
-           textFill="#dd3619">
+    <Label fx:id="svgPathErrorLabel" layoutX="312.0" layoutY="283.0" prefHeight="15.0" prefWidth="185.0" textFill="#dd3619">
         <font>
-            <Font size="10.0"/>
+            <Font size="10.0" />
         </font>
     </Label>
 
-    <Button layoutX="168.0" layoutY="302.0" mnemonicParsing="false" onAction="#runDefineShape" text="Lancer"/>
-
-    <Separator layoutX="267.0" layoutY="185.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0"/>
-    <Label layoutX="258.0" layoutY="236.0" text="OU" textFill="#000000ab"/>
-    <Separator layoutX="267.0" layoutY="251.0" orientation="VERTICAL" prefHeight="68.0" prefWidth="6.0"/>
-
-    <Button layoutX="435.0" layoutY="302.0" mnemonicParsing="false" onAction="#runPersonalShape" text="Lancer"/>
+    <Button fx:id="runPersonalButton" layoutX="435.0" layoutY="302.0" mnemonicParsing="false" onAction="#runPersonalShape" />
 </AnchorPane>

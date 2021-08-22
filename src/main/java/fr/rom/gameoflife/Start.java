@@ -1,6 +1,7 @@
 package fr.rom.gameoflife;
 
 import fr.rom.gameoflife.controller.InitController;
+import fr.rom.gameoflife.utils.Language;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class Start extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/init_view.fxml"));
         AnchorPane root = fxmlLoader.load();
 
-        primaryStage.setTitle("Jeu de la vie v2.0");
+        primaryStage.titleProperty().bind(Language.createStringBinding("window.title"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
 
@@ -32,6 +33,6 @@ public class Start extends Application {
         controller.init(primaryStage);
 
         primaryStage.show();
-        logger.info("Début d'une nouvelle session");
+        logger.info(Language.get("log.newSession"));
     }
 }
