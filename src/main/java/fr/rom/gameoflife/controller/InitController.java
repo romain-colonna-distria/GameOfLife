@@ -19,6 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -84,7 +86,11 @@ public class InitController {
 
     public void init(Stage stage){
         this.stage = stage;
-        this.titleLabel.getScene().getWindow().setOnCloseRequest((event -> logger.info(Language.get("log.endSession"))));
+        this.titleLabel.getScene().getWindow().setOnCloseRequest((event -> {
+            logger.info(Language.get("log.endSession"));
+            File statisticsFile = new File("stats.txt");
+            statisticsFile.delete();
+        }));
 
         initShapesChoiceBoxItems();
         initLanguageChoiceBoxItems();
