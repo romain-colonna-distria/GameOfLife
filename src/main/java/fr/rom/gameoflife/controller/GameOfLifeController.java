@@ -3,6 +3,7 @@ package fr.rom.gameoflife.controller;
 
 import fr.rom.gameoflife.objects.Grid;
 import fr.rom.gameoflife.objects.Cell;
+import fr.rom.gameoflife.utils.Language;
 import fr.rom.gameoflife.utils.Properties;
 
 import javafx.application.Platform;
@@ -49,6 +50,9 @@ public class GameOfLifeController {
 
     @FXML
     private AnchorPane gameAnchorPane;
+
+    @FXML
+    private Menu fileMenu;
     @FXML
     private MenuItem saveMenuItem;
     @FXML
@@ -57,39 +61,59 @@ public class GameOfLifeController {
     private MenuItem settingsMenuItem;
     @FXML
     private MenuItem exitMenuButton;
+
+    @FXML
+    private Menu editMenu;
     @FXML
     private MenuItem multiplePropagationMenuItem;
     @FXML
     private MenuItem singlePropagationMenuItem;
     @FXML
-    private CheckMenuItem moveModeMenuItem;
+    private CheckMenuItem shiftModeMenuItem;
     @FXML
     private CheckMenuItem reverseModeMenuItem;
     @FXML
     private MenuItem statsMenuItem;
     @FXML
     private MenuItem resetMenuItem;
+
+    @FXML
+    private Menu helpMenu;
     @FXML
     private MenuItem aboutMenuItem;
+
     @FXML
-    private Label generationNumberLabel;
+    private Label propagationLabel;
     @FXML
     private Label onPropagationLabel;
+
     @FXML
-    private Slider zoomSlider;
+    private Label generationLabel;
+    @FXML
+    private Label generationNumberLabel;
+
     @FXML
     private Label zoomLabel;
     @FXML
-    private Slider speedSlider;
+    private Slider zoomSlider;
     @FXML
-    private Label speedLabel;
+    private Label zoomPercentLabel;
+
+    @FXML
+    private Label refreshLabel;
+    @FXML
+    private Slider refreshSlider;
+    @FXML
+    private Label refreshValueLabel;
 
 
 
     public void init() {
-        logger.info("Initialisation d'une nouvelle partie ("
-                + Properties.getInstance().getGridNbColumns() + " colonnes/"
-                + Properties.getInstance().getGridNbRows() + " lignes)...");
+        logger.info(Language.get("log.initNewGame") + " ("
+                + Properties.getInstance().getGridNbColumns()
+                + Language.get("log.colomns") +"/"
+                + Properties.getInstance().getGridNbRows()
+                + Language.get("log.rows") + " )...");
         double start = System.currentTimeMillis();
 
         this.pool = Executors.newFixedThreadPool(2);
@@ -98,17 +122,18 @@ public class GameOfLifeController {
         this.propagationNumber = 0;
         this.onPropagation = new AtomicBoolean(false);
 
-        this.speedSlider.setValue(Properties.getInstance().getRefreshTimeMs());
-        this.speedLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
+        this.refreshSlider.setValue(Properties.getInstance().getRefreshTimeMs());
+        this.refreshValueLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
         this.reverseModeMenuItem.setSelected(true);
 
         initGrid();
         initListeners();
         addShortcuts();
         initStatsFileWritter();
+        initTextWithLocaleLanguage();
 
         double end =  System.currentTimeMillis();
-        logger.info("Partie initialisé (" + (end - start) + "ms)");
+        logger.info(Language.get("log.gameInitialized") + " (" + (end - start) + "ms)");
     }
 
     private void initListeners(){
@@ -119,7 +144,7 @@ public class GameOfLifeController {
                 AnchorPane root = fxmlLoader.load();
 
                 Stage stage = new Stage();
-                stage.setTitle("Jeu de la vie v2.0");
+                stage.titleProperty().bind(Language.createStringBinding("window.init.title"));
                 stage.setScene(new Scene(root));
 
                 InitController controller = fxmlLoader.getController();
@@ -131,25 +156,25 @@ public class GameOfLifeController {
                 System.exit(1);
             }
         }));
-        this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> zoomLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue())));
-        this.speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            speedLabel.textProperty().setValue(String.valueOf((int)speedSlider.getValue()));
-            Properties.getInstance().setRefreshTimeMs((long) speedSlider.getValue());
+        this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> zoomPercentLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue())));
+        this.refreshSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            refreshValueLabel.textProperty().setValue(String.valueOf((int) refreshSlider.getValue()));
+            Properties.getInstance().setRefreshTimeMs((long) refreshSlider.getValue());
         });
-        this.moveModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
+        this.shiftModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
                 this.dragModeActive = true;
                 this.reverseModeMenuItem.setSelected(false);
             } else {
-                this.moveModeMenuItem.setSelected(!this.reverseModeMenuItem.isSelected());
+                this.shiftModeMenuItem.setSelected(!this.reverseModeMenuItem.isSelected());
             }
         });
         this.reverseModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
                 this.dragModeActive = false;
-                this.moveModeMenuItem.setSelected(false);
+                this.shiftModeMenuItem.setSelected(false);
             } else {
-                this.reverseModeMenuItem.setSelected(!this.moveModeMenuItem.isSelected());
+                this.reverseModeMenuItem.setSelected(!this.shiftModeMenuItem.isSelected());
             }
         });
     }
@@ -163,7 +188,7 @@ public class GameOfLifeController {
         multiplePropagationMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.ENTER));
         singlePropagationMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.SPACE));
         reverseModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.P));
-        moveModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.O));
+        shiftModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.O));
         statsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.ALT_DOWN));
         resetMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.BACK_SPACE));
 
@@ -176,9 +201,9 @@ public class GameOfLifeController {
             if(!statisticsFile.createNewFile()){
                 if(statisticsFile.delete()) {
                     if(statisticsFile.createNewFile()) statisticsWriter = new FileWriter(statisticsFile);
-                    else logger.warn("Un problème est survenu lors de la création du fichier stats.txt");
+                    else logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
                 } else {
-                    logger.warn("Un problème est survenu lors de la création du fichier stats.txt");
+                    logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
                 }
             }
         } catch (IOException e){
@@ -186,17 +211,44 @@ public class GameOfLifeController {
         }
     }
 
+    private void initTextWithLocaleLanguage(){
+        fileMenu.textProperty().bind(Language.createStringBinding("label.file"));
+        saveMenuItem.textProperty().bind(Language.createStringBinding("label.save"));
+        loadMenuItem.textProperty().bind(Language.createStringBinding("label.load"));
+        settingsMenuItem.textProperty().bind(Language.createStringBinding("window.settings.title"));
+        exitMenuButton.textProperty().bind(Language.createStringBinding("label.exit"));
+
+        editMenu.textProperty().bind(Language.createStringBinding("label.edit"));
+        multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.startPropagation"));
+        singlePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.performPropagation"));
+        shiftModeMenuItem.textProperty().bind(Language.createStringBinding("label.shiftMode"));
+        reverseModeMenuItem.textProperty().bind(Language.createStringBinding("label.reverseMode"));
+        statsMenuItem.textProperty().bind(Language.createStringBinding("window.stats.title"));
+        resetMenuItem.textProperty().bind(Language.createStringBinding("label.reset"));
+
+        helpMenu.textProperty().bind(Language.createStringBinding("label.help"));
+        aboutMenuItem.textProperty().bind(Language.createStringBinding("label.about"));
+
+        propagationLabel.textProperty().bind(Language.createStringBinding("label.propagation"));
+        onPropagationLabel.textProperty().bind(Language.createStringBinding("off"));
+        generationLabel.textProperty().bind(Language.createStringBinding("label.generation"));
+        zoomLabel.textProperty().bind(Language.createStringBinding("label.zoom"));
+        refreshLabel.textProperty().bind(Language.createStringBinding("label.refresh"));
+    }
+
     private void doOnClose(){
         if(settingsStage != null) settingsStage.close();
         if(statisticsStage != null) statisticsStage.close();
         if(onPropagation.get()) stopPropagation();
 
-        logger.info("Fin de la partie");
+        logger.info(Language.get("log.gameOver"));
         try {
             pool.shutdown();
             statisticsWriter.close();
         } catch (IOException e) {
             logger.error(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("???????????1");
         }
     }
 
@@ -206,16 +258,16 @@ public class GameOfLifeController {
 
         pool.submit(new Propagation_Handler());
 
-        Platform.runLater(() -> onPropagationLabel.setText("on"));
-        logger.info("Propagation ON");
+        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Language.createStringBinding("on")));
+        logger.info(Language.get("label.propagation") + " " + Language.get("on"));
     }
 
     public void stopPropagation(){
         if(!onPropagation.get()) return;
         onPropagation.set(false);
 
-        Platform.runLater(() -> onPropagationLabel.setText("off"));
-        logger.info("Propagation OFF");
+        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Language.createStringBinding("off")));
+        logger.info(Language.get("label.propagation") + " " + Language.get("off"));
     }
 
     public void propagate(){
@@ -263,6 +315,8 @@ public class GameOfLifeController {
         } catch (IOException e) {
             //peut être déclanché si on ferme le jeu pendant la propagation
             logger.error(e.getMessage());
+        } catch (NullPointerException e){
+            System.out.println("???????????2");
         }
     }
 
@@ -340,9 +394,9 @@ public class GameOfLifeController {
     private void initCells(){
         Cell cell;
         Properties p = Properties.getInstance();
+        //TODO: vérifier que le SVGPath est valide
         for(int i = 0; i < p.getGridNbColumns(); ++i){
             for(int j = 0; j < p.getGridNbRows(); ++j) {
-                //TODO: vérifier que le SVGPath est valide
                 cell = new Cell(p.getShapeString(), p.getCellWidth(), p.getCellHeight(), i, j);
                 cell.setAliveColor(p.getCellAliveColor());
                 cell.setDeadColor(p.getCellDeadColor());
@@ -387,11 +441,11 @@ public class GameOfLifeController {
             for (Cell cell : getActiveCells()) {
                 objectOut.writeObject(cell);
             }
-            logger.info("La partie a bien été sauvegardée");
+            logger.info(Language.get("log.gameSavedSuccess"));
             objectOut.close();
             fileOut.close();
         } catch (Exception ex) {
-            logger.error("La partie n'a pas pu être sauvegardé : " + ex.getMessage());
+            logger.error(Language.get("log.gameNotSaved") + " : " + ex.getMessage());
         }
     }
 
@@ -409,7 +463,8 @@ public class GameOfLifeController {
             fis = new FileInputStream(selectedFile);
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
-            logger.error("La sauvegarde n'a pas pu être chargée : " + e.getMessage());
+
+            logger.error(Language.get("log.gameNotLoaded") + " : " + e.getMessage());
             return;
         }
 
@@ -426,9 +481,9 @@ public class GameOfLifeController {
                 addActiveCell(cell);
             }
         } catch (EOFException e){
-            logger.info("La partie a bien été chargée");
+            logger.info(Language.get("log.gameSuccessLoaded"));
         } catch (IOException | ClassNotFoundException e){
-            logger.error("La sauvegarde contient une erreur : " + e.getMessage());
+            logger.error(Language.get("log.gameSaveContainError") + " : " + e.getMessage());
         }
     }
 
@@ -441,7 +496,7 @@ public class GameOfLifeController {
             VBox root = fxmlLoader.load();
 
             this.settingsStage = new Stage();
-            this.settingsStage.setTitle("Paramètres");
+            this.settingsStage.titleProperty().bind(Language.createStringBinding("window.settings.title"));
             this.settingsStage.setResizable(false);
             this.settingsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
             this.settingsStage.setScene(new Scene(root));
@@ -461,18 +516,18 @@ public class GameOfLifeController {
         doOnClose();
         Stage stage = (Stage) this.gameAnchorPane.getScene().getWindow();
         stage.close();
-        logger.info("Fin de la session");
+        logger.info(Language.get("log.endSession"));
     }
 
     @FXML
     public void clickMultiplePropagationMenuItem(){
         if (onPropagation.get()){
             stopPropagation();
-            multiplePropagationMenuItem.setText("Lancer propagation");
+            multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.startPropagation"));
         }
         else {
             startPropagation();
-            multiplePropagationMenuItem.setText("Arrêter propagation");
+            multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.stopPropagation"));
         }
     }
 
@@ -493,9 +548,9 @@ public class GameOfLifeController {
 
         Platform.runLater(() -> {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
-            onPropagationLabel.setText("off");
+            onPropagationLabel.textProperty().bind(Language.createStringBinding("off"));
         });
-        logger.info("Grille réinitialisée");
+        logger.info(Language.get("log.resetedGrid"));
     }
 
     @FXML
@@ -512,7 +567,7 @@ public class GameOfLifeController {
             root.setPrefSize(width, height);
 
             this.statisticsStage = new Stage();
-            this.statisticsStage.setTitle("Statistiques");
+            this.statisticsStage.titleProperty().bind(Language.createStringBinding("window.stats.title"));
             this.statisticsStage.setResizable(false);
             this.statisticsStage.initModality(Modality.WINDOW_MODAL);
             this.statisticsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
@@ -532,7 +587,7 @@ public class GameOfLifeController {
 
     @FXML //TODO: optimiser
     public void makeZoom(){
-        logger.info("Application du zoom...");
+        logger.info(Language.get("log.zoomProcessing"));
         List<Cell> cells = grid.getCells();
         double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
         double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
@@ -580,7 +635,7 @@ public class GameOfLifeController {
                 }
 
                 double end = System.currentTimeMillis();
-                logger.info("Zoom appliqué par " + Thread.currentThread().getName() + " en " + (end - start) + "ms");
+                logger.info(Language.get("log.zoomApplied") + " : " + Thread.currentThread().getName() + ", " + (end - start) + "ms");
             });
         }
     }
