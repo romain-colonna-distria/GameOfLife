@@ -25,7 +25,7 @@ public class Start extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/init_view.fxml"));
         AnchorPane root = fxmlLoader.load();
 
-        primaryStage.titleProperty().bind(Language.createStringBinding("window.title"));
+        primaryStage.titleProperty().bind(Language.createStringBinding("window.init.title"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
 

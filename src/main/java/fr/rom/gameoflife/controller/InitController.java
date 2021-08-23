@@ -123,7 +123,7 @@ public class InitController {
     }
 
     private void initTextWithLocaleLanguage(){
-        this.titleLabel.textProperty().bind(Language.createStringBinding("label.title"));
+        this.titleLabel.textProperty().bind(Language.createStringBinding("game.name"));
         this.versionLabel.textProperty().bind(Language.createStringBinding("label.version"));
 
         this.gridLabel.textProperty().bind(Language.createStringBinding("label.grid"));
@@ -236,7 +236,7 @@ public class InitController {
             root.setPrefSize(width, height);
 
             Stage stage = new Stage();
-            stage.titleProperty().bind(Language.createStringBinding("window.title"));
+            stage.titleProperty().bind(Language.createStringBinding("window.game.title"));
             stage.setScene(new Scene(root));
 
             GameOfLifeController controller = fxmlLoader.getController();

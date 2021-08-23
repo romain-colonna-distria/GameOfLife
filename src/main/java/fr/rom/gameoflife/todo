@@ -1,4 +1,5 @@
-- Améliorer l'interface : - refonte de la barre d'outil du bas
+- Améliorer l'interface : - rendre l'appli responsive
+- Commenter tout le code (javadoc)
 
 - Ajouter un "market" de modèles
 - Permettre de selectionner une zone et de copier colle les cellules
