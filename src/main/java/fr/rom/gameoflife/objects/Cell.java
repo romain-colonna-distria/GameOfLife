@@ -17,8 +17,8 @@ public class Cell extends SVGPath {
     private int positionY;
     private boolean isAlive = false;
 
-    private String aliveColor = "black";
-    private String deadColor = "white";
+    private String aliveColor = "#000000";
+    private String deadColor = "#FFFFFF";
 
     private transient Set<Cell> aroundCells;
 
@@ -37,12 +37,12 @@ public class Cell extends SVGPath {
 
     public void makeAlive(){
         this.isAlive = true;
-        this.setFill(Color.valueOf(aliveColor));
+        this.setFill(Color.web(aliveColor));
     }
 
     public void makeDead(){
         this.isAlive = false;
-        this.setFill(Color.valueOf(deadColor));
+        this.setFill(Color.web(deadColor));
     }
 
     public void reverseState(){
@@ -66,14 +66,23 @@ public class Cell extends SVGPath {
         return aroundCells;
     }
 
+
+    public String getAliveColor(){
+        return this.aliveColor;
+    }
+
     public void setAliveColor(String aliveColor) {
         this.aliveColor = aliveColor;
-        if(isAlive) this.setFill(Color.valueOf(aliveColor));
+        if(isAlive) this.setFill(Color.web(aliveColor));
+    }
+
+    public String getDeadColor(){
+        return this.deadColor;
     }
 
     public void setDeadColor(String deadColor) {
         this.deadColor = deadColor;
-        if(!isAlive) this.setFill(Color.valueOf(deadColor));
+        if(!isAlive) this.setFill(Color.web(deadColor));
     }
 
     public void setAroundCells(Set<Cell> aroundCells) {

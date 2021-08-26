@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -36,14 +37,19 @@ public class GameOfLifeController {
     private ExecutorService pool;
 
     private Grid grid;
-    private boolean dragModeActive;
+    private GameMode mode;
 
     private Set<Cell> activeCells;
     private Cell lastClickedCell;
 
+    private SelectContext selectContext;
+    private ArrayList<Cell> selectedCells;
+    private ArrayList<Cell> copiedSelection;
+
     private int propagationNumber;
     private AtomicBoolean onPropagation;
 
+    private File statisticsFile;
     private FileWriter statisticsWriter;
 
     private final static Logger logger = Logger.getLogger(GameOfLifeController.class);
@@ -72,6 +78,12 @@ public class GameOfLifeController {
     private CheckMenuItem shiftModeMenuItem;
     @FXML
     private CheckMenuItem reverseModeMenuItem;
+    @FXML
+    private CheckMenuItem selectModeMenuItem;
+    @FXML
+    private MenuItem copySelectionMenuItem;
+    @FXML
+    private MenuItem pasteSelectionMenuItem;
     @FXML
     private MenuItem statsMenuItem;
     @FXML
@@ -117,7 +129,7 @@ public class GameOfLifeController {
         double start = System.currentTimeMillis();
 
         this.pool = Executors.newFixedThreadPool(2);
-        this.dragModeActive = false;
+        this.mode = GameMode.REVERSE_MODE;
         this.activeCells = new HashSet<>();
         this.propagationNumber = 0;
         this.onPropagation = new AtomicBoolean(false);
@@ -125,6 +137,9 @@ public class GameOfLifeController {
         this.refreshSlider.setValue(Properties.getInstance().getRefreshTimeMs());
         this.refreshValueLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
         this.reverseModeMenuItem.setSelected(true);
+
+        this.selectContext = new SelectContext();
+        this.selectedCells = new ArrayList<>();
 
         initGrid();
         initListeners();
@@ -163,18 +178,29 @@ public class GameOfLifeController {
         });
         this.shiftModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
-                this.dragModeActive = true;
+                this.mode = GameMode.SHIFT_MODE;
                 this.reverseModeMenuItem.setSelected(false);
+                this.selectModeMenuItem.setSelected(false);
             } else {
-                this.shiftModeMenuItem.setSelected(!this.reverseModeMenuItem.isSelected());
+                this.shiftModeMenuItem.setSelected(!this.reverseModeMenuItem.isSelected() && !this.selectModeMenuItem.isSelected());
             }
         });
         this.reverseModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue) {
-                this.dragModeActive = false;
+                this.mode = GameMode.REVERSE_MODE;
                 this.shiftModeMenuItem.setSelected(false);
+                this.selectModeMenuItem.setSelected(false);
             } else {
-                this.reverseModeMenuItem.setSelected(!this.shiftModeMenuItem.isSelected());
+                this.reverseModeMenuItem.setSelected(!this.shiftModeMenuItem.isSelected() && !this.selectModeMenuItem.isSelected());
+            }
+        });
+        this.selectModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue) {
+                this.mode = GameMode.SELECT_MODE;
+                this.shiftModeMenuItem.setSelected(false);
+                this.reverseModeMenuItem.setSelected(false);
+            } else {
+                this.selectModeMenuItem.setSelected(!this.shiftModeMenuItem.isSelected() && !this.reverseModeMenuItem.isSelected());
             }
         });
     }
@@ -189,6 +215,9 @@ public class GameOfLifeController {
         singlePropagationMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.SPACE));
         reverseModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.P));
         shiftModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.O));
+        selectModeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.S));
+        copySelectionMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+        pasteSelectionMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
         statsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.ALT_DOWN));
         resetMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.BACK_SPACE));
 
@@ -196,11 +225,15 @@ public class GameOfLifeController {
     }
 
     private void initStatsFileWritter(){
-        File statisticsFile = new File("stats.txt");
+        this.statisticsFile = new File("stats.txt");
         try {
-            if(!statisticsFile.createNewFile()){
-                if(statisticsFile.delete()) {
-                    if(statisticsFile.createNewFile()) statisticsWriter = new FileWriter(statisticsFile);
+            if(this.statisticsFile.createNewFile()){
+                this.statisticsWriter = new FileWriter(this.statisticsFile);
+            } else {
+                if(this.statisticsFile.delete()) {
+                    if(this.statisticsFile.createNewFile()) {
+                        this.statisticsWriter = new FileWriter(this.statisticsFile);
+                    }
                     else logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
                 } else {
                     logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
@@ -223,6 +256,9 @@ public class GameOfLifeController {
         singlePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.performPropagation"));
         shiftModeMenuItem.textProperty().bind(Language.createStringBinding("label.shiftMode"));
         reverseModeMenuItem.textProperty().bind(Language.createStringBinding("label.reverseMode"));
+        selectModeMenuItem.textProperty().bind(Language.createStringBinding("label.selectMode"));
+        copySelectionMenuItem.textProperty().bind(Language.createStringBinding("label.copySelection"));
+        pasteSelectionMenuItem.textProperty().bind(Language.createStringBinding("label.pasteSelection"));
         statsMenuItem.textProperty().bind(Language.createStringBinding("window.stats.title"));
         resetMenuItem.textProperty().bind(Language.createStringBinding("label.reset"));
 
@@ -308,6 +344,7 @@ public class GameOfLifeController {
         for(Cell cell : toDead) cell.makeDead();
         generationNumberLabel.setText(String.valueOf(++propagationNumber));
 
+        colorSelectedCells();
         try {
             statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
             statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
@@ -354,29 +391,39 @@ public class GameOfLifeController {
         final Group wrapGroup = new Group(grid);
 
         wrapGroup.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
-            if (dragModeActive) {
+            resetCellsColor(this.selectedCells);
+            this.selectedCells = new ArrayList<>();
+
+            if (this.mode.equals(GameMode.SHIFT_MODE)) {
                 // remember initial mouse cursor coordinates
                 // and node position
                 dragContext.mouseAnchorX = mouseEvent.getX();
                 dragContext.mouseAnchorY = mouseEvent.getY();
                 dragContext.initialTranslateX = grid.getTranslateX();
                 dragContext.initialTranslateY = grid.getTranslateY();
-            } else {
+            } else if (this.mode.equals(GameMode.REVERSE_MODE)){
                 if(!(mouseEvent.getTarget() instanceof Cell)) return;
                 Cell cell = (Cell) mouseEvent.getTarget();
 
                 cell.reverseState();
                 addActiveCell(cell);
+            } else if(this.mode.equals(GameMode.SELECT_MODE)) {
+                if(!(mouseEvent.getTarget() instanceof Cell)) return;
+
+                this.selectContext.xCellStart = ((Cell) mouseEvent.getTarget()).getPositionX();
+                this.selectContext.yCellStart = ((Cell) mouseEvent.getTarget()).getPositionY();
             }
+
+            this.copySelectionMenuItem.setDisable(true);
         });
 
         wrapGroup.addEventFilter(MouseEvent.MOUSE_DRAGGED, mouseEvent -> {
-            if (dragModeActive) {
+            if (this.mode.equals(GameMode.SHIFT_MODE)) {
                 // shift node from its initial position by delta
                 // calculated from mouse cursor movement
                 grid.setTranslateX(dragContext.initialTranslateX + mouseEvent.getX() - dragContext.mouseAnchorX);
                 grid.setTranslateY(dragContext.initialTranslateY + mouseEvent.getY() - dragContext.mouseAnchorY);
-            } else {
+            } else if(this.mode.equals(GameMode.REVERSE_MODE)) {
                 if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell)) return;
                 Cell cell = (Cell) mouseEvent.getPickResult().getIntersectedNode();
 
@@ -385,10 +432,58 @@ public class GameOfLifeController {
 
                 cell.reverseState();
                 addActiveCell(cell);
+            } else if(this.mode.equals(GameMode.SELECT_MODE)) {
+                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell)) return;
+                this.selectContext.xCellEnd = ((Cell) mouseEvent.getPickResult().getIntersectedNode()).getPositionX();
+                this.selectContext.yCellEnd = ((Cell) mouseEvent.getPickResult().getIntersectedNode()).getPositionY();
+
+                resetCellsColor(this.selectedCells);
+                this.selectedCells = new ArrayList<>();
+
+                int xMin = Math.min(selectContext.xCellStart, selectContext.xCellEnd);
+                int xMax = Math.max(selectContext.xCellStart, selectContext.xCellEnd);
+                int yMin = Math.min(selectContext.yCellStart, selectContext.yCellEnd);
+                int yMax = Math.max(selectContext.yCellStart, selectContext.yCellEnd);
+                for(int i = xMin; i <= xMax; ++i) {
+                    for(int j = yMin; j <= yMax; ++j) {
+                        Cell cell = this.grid.getCellAtIndex(i, j);
+                        if(cell == null) continue;
+                        this.selectedCells.add(cell);
+                    }
+                }
+
+                colorSelectedCells();
+                this.copySelectionMenuItem.setDisable(false);
             }
         });
 
         return wrapGroup;
+    }
+
+    private void colorSelectedCells(){
+        for(Cell c : selectedCells){
+            if(c.isAlive()) {
+                Color color = Color.web(c.getAliveColor());
+                Color newColor;
+
+                if(color.getBlue() + 0.3 > 1) newColor = Color.color(Math.max(color.getRed() - 0.3, 0.0),
+                        Math.max(color.getRed() - 0.3, 0.0),
+                        color.getBlue());
+                else newColor = Color.color(color.getRed(), color.getGreen(), color.getBlue() + 0.3);
+
+                c.setFill(newColor);
+            } else {
+                Color color = Color.web(c.getDeadColor());
+                Color newColor;
+
+                if(color.getBlue() + 0.3 > 1) newColor = Color.color(Math.max(color.getRed() - 0.3, 0.0),
+                        Math.max(color.getRed() - 0.3, 0.0),
+                        color.getBlue());
+                else newColor = Color.color(color.getRed(), color.getGreen(), color.getBlue() + 0.3);
+
+                c.setFill(newColor);
+            }
+        }
     }
 
     private void initCells(){
@@ -408,6 +503,13 @@ public class GameOfLifeController {
 
         for(Cell c : grid.getCells()){
             c.setAroundCells(this.grid.getAroundCells(c));
+        }
+    }
+
+    private void resetCellsColor(ArrayList<Cell> cells){
+        for(Cell c : cells) {
+            if(c.isAlive()) c.setFill(Color.web(c.getAliveColor()));
+            else c.setFill(Color.web(c.getDeadColor()));
         }
     }
 
@@ -542,9 +644,11 @@ public class GameOfLifeController {
         propagationNumber = 0;
 
         for(Cell cell : getActiveCells()) cell.makeDead();
-        this.activeCells = new HashSet<>();
 
         initStatsFileWritter();
+        resetCellsColor(this.selectedCells);
+        this.activeCells = new HashSet<>();
+        this.selectedCells = new ArrayList<>();
 
         Platform.runLater(() -> {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
@@ -552,6 +656,47 @@ public class GameOfLifeController {
         });
         logger.info(Language.get("log.resetedGrid"));
     }
+
+    @FXML
+    public void copySelection(){
+        this.copiedSelection = new ArrayList<>();
+        Properties p = Properties.getInstance();
+
+        for(Cell c : this.selectedCells){
+            Cell cell = new Cell(p.getShapeString(), p.getCellWidth(), p.getCellHeight(), c.getPositionX(), c.getPositionY());
+
+            if(c.isAlive()) cell.makeAlive();
+            else cell.makeDead();
+
+            this.copiedSelection.add(cell);
+        }
+
+        this.pasteSelectionMenuItem.setDisable(false);
+        logger.info("Parcelle copié!");
+    }
+
+    @FXML
+    public void pasteSelection(){
+        Cell cell;
+        int xDelta = this.copiedSelection.get(0).getPositionX() - this.selectContext.xCellStart;
+        int yDelta = this.copiedSelection.get(0).getPositionY() - this.selectContext.yCellStart;
+        for(Cell c : this.copiedSelection){
+            try {
+                cell = grid.getCellAtIndex(c.getPositionX() - xDelta, c.getPositionY() - yDelta);
+            } catch (IndexOutOfBoundsException e) {
+                continue;
+            }
+
+            if(c.isAlive()) cell.makeAlive();
+            else cell.makeDead();
+
+            this.activeCells.add(cell);
+        }
+
+        resetCellsColor(this.selectedCells);
+        this.selectedCells = new ArrayList<>();
+    }
+
 
     @FXML
     public void showStats(){
@@ -589,9 +734,9 @@ public class GameOfLifeController {
     public void makeZoom(){
         logger.info(Language.get("log.zoomProcessing"));
         List<Cell> cells = grid.getCells();
-        double newCellsWidth = Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100);
-        double newCellsHeight = Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100);
-        pool.submit(new Zoom_Handler(cells, newCellsWidth, newCellsHeight));
+        Properties.getInstance().setCellWidth(Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100));
+        Properties.getInstance().setCellHeight(Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100));
+        pool.submit(new Zoom_Handler(cells));
     }
 
 
@@ -613,14 +758,10 @@ public class GameOfLifeController {
 
     private static class Zoom_Handler implements Runnable {
         private final List<Cell> cells;
-        private final double cellWidth;
-        private final double cellHeight;
 
 
-        public Zoom_Handler(List<Cell> cells, double cellWidth, double cellHeight){
+        public Zoom_Handler(List<Cell> cells){
             this.cells = cells;
-            this.cellWidth = cellWidth;
-            this.cellHeight = cellHeight;
         }
 
         @Override
@@ -630,8 +771,8 @@ public class GameOfLifeController {
                 if(this.cells.size() < 1) return;
 
                 for(Cell cell : cells){
-                    cell.setShapeWidth(this.cellWidth);
-                    cell.setShapeHeight(this.cellHeight);
+                    cell.setShapeWidth(Properties.getInstance().getCellWidth());
+                    cell.setShapeHeight(Properties.getInstance().getCellHeight());
                 }
 
                 double end = System.currentTimeMillis();
@@ -645,5 +786,18 @@ public class GameOfLifeController {
         public double mouseAnchorY;
         public double initialTranslateX;
         public double initialTranslateY;
+    }
+
+    private static final class SelectContext {
+        public int xCellStart;
+        public int yCellStart;
+        public int xCellEnd;
+        public int yCellEnd;
+    }
+
+    private enum GameMode {
+        SHIFT_MODE,
+        REVERSE_MODE,
+        SELECT_MODE
     }
 }

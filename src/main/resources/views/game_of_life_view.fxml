@@ -23,6 +23,10 @@
                 <SeparatorMenuItem />
                 <CheckMenuItem fx:id="shiftModeMenuItem" mnemonicParsing="false" />
                 <CheckMenuItem fx:id="reverseModeMenuItem" mnemonicParsing="false" />
+                <CheckMenuItem fx:id="selectModeMenuItem" mnemonicParsing="false" />
+                <SeparatorMenuItem />
+                <MenuItem fx:id="copySelectionMenuItem" mnemonicParsing="false" onAction="#copySelection" disable="true"/>
+                <MenuItem fx:id="pasteSelectionMenuItem" mnemonicParsing="false" onAction="#pasteSelection" disable="true"/>
                 <SeparatorMenuItem />
                 <MenuItem fx:id="statsMenuItem" mnemonicParsing="false" onAction="#showStats" />
                 <SeparatorMenuItem />
