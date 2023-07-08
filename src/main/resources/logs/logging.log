@@ -1157,3 +1157,582 @@ amélioration de2020-07-30 22:14:35 [INFO ] Start:35 - Début d'une nouvelle ses
 2020-08-23 11:16:41 [ERROR] GameOfLifeController:73 - Mauvais index : case (-1,-1) inexistante.
 2020-08-23 11:17:05 [INFO ] Start:35 - Début d'une nouvelle session
 2020-08-23 11:17:08 [INFO ] InitController:38 - Fin de la session
+2023-07-08 02:48:43 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 02:49:08 [INFO ] GameOfLifeController:124 - Initialisation dune nouvelle partie (100colonnes/100lignes )...
+2023-07-08 02:49:08 [INFO ] GameOfLifeController:151 - Partie initialisée (304.0ms)
+2023-07-08 02:49:15 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:49:19 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:49:37 [INFO ] GameOfLifeController:657 - Grille réinitialisée
+2023-07-08 02:49:50 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:50:36 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:50:44 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:50:47 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:51:08 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:51:09 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:51:27 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:51:35 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:51:39 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:51:51 [INFO ] GameOfLifeController:735 - Application du zoom
+2023-07-08 02:51:51 [INFO ] GameOfLifeController:779 - Zoom appliqué : JavaFX Application Thread, 14.0ms
+2023-07-08 02:51:57 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:52:53 [INFO ] InitController:146 - Règles mises à jour : prend vie [2, 3], reste en vie [3, 4]
+2023-07-08 02:52:56 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:52:58 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:53:02 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:53:30 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:53:39 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:53:44 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:53:44 [INFO ] GameOfLifeController:280 - Fin de la partie
+2023-07-08 02:53:52 [INFO ] GameOfLifeController:124 - Initialisation dune nouvelle partie (100colonnes/100lignes )...
+2023-07-08 02:53:52 [INFO ] GameOfLifeController:151 - Partie initialisée (99.0ms)
+2023-07-08 02:54:00 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 02:54:51 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 02:54:52 [INFO ] GameOfLifeController:280 - Fin de la partie
+2023-07-08 02:54:58 [INFO ] InitController:90 - End of session
+2023-07-08 19:51:20 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 19:51:22 [INFO ] InitController:90 - Fin de la session
+2023-07-08 19:53:11 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 19:53:13 [INFO ] GameOfLifeController:124 - Initialisation dune nouvelle partie (100colonnes/100lignes )...
+2023-07-08 19:53:13 [INFO ] GameOfLifeController:151 - Partie initialisée (420.0ms)
+2023-07-08 19:53:16 [INFO ] GameOfLifeController:298 - Propagation ON
+2023-07-08 19:53:17 [INFO ] GameOfLifeController:306 - Propagation OFF
+2023-07-08 19:54:18 [INFO ] GameOfLifeController:280 - Fin de la partie
+2023-07-08 19:54:23 [INFO ] InitController:90 - Fin de la session
+2023-07-08 20:18:28 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 20:18:44 [INFO ] InitController:90 - Fin de la session
+2023-07-08 20:23:35 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 20:24:02 [INFO ] InitController:90 - Fin de la session
+2023-07-08 20:40:01 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 20:40:03 [INFO ] GameOfLifeController:123 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 20:40:03 [INFO ] GameOfLifeController:146 - Partie initialisée (463.0ms)
+2023-07-08 20:40:08 [INFO ] GameOfLifeController:293 - Propagation ON
+2023-07-08 20:40:08 [INFO ] GameOfLifeController:301 - Propagation OFF
+2023-07-08 20:40:09 [INFO ] GameOfLifeController:293 - Propagation ON
+2023-07-08 20:40:09 [INFO ] GameOfLifeController:301 - Propagation OFF
+2023-07-08 20:40:11 [INFO ] GameOfLifeController:275 - Fin de la partie
+2023-07-08 20:40:13 [INFO ] InitController:90 - Fin de la session
+2023-07-08 20:40:33 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 20:40:34 [INFO ] GameOfLifeController:123 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 20:40:34 [INFO ] GameOfLifeController:146 - Partie initialisée (427.0ms)
+2023-07-08 20:40:38 [INFO ] GameOfLifeController:293 - Propagation ON
+2023-07-08 20:40:39 [INFO ] GameOfLifeController:301 - Propagation OFF
+2023-07-08 20:40:44 [INFO ] GameOfLifeController:293 - Propagation ON
+2023-07-08 20:40:49 [INFO ] GameOfLifeController:301 - Propagation OFF
+2023-07-08 20:41:25 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 20:43:13 [INFO ] GameOfLifeController:123 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 20:43:14 [INFO ] GameOfLifeController:146 - Partie initialisée (428.0ms)
+2023-07-08 20:43:19 [INFO ] GameOfLifeController:293 - Propagation ON
+2023-07-08 20:43:20 [INFO ] GameOfLifeController:301 - Propagation OFF
+2023-07-08 20:43:20 [INFO ] GameOfLifeController:275 - Fin de la partie
+2023-07-08 20:43:22 [INFO ] InitController:90 - Fin de la session
+2023-07-08 23:37:12 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:37:13 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:38:13 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:38:14 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:38:14 [ERROR] InitController:249 - can't parse argument number: 
+2023-07-08 23:39:10 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:39:12 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:39:12 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:39:15 [INFO ] InitController:91 - Fin de la session
+2023-07-08 23:39:55 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:39:57 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:39:57 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:40:00 [INFO ] InitController:91 - Fin de la session
+2023-07-08 23:40:18 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:40:19 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:41:32 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:41:38 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:41:39 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:41:39 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:41:42 [INFO ] InitController:91 - Fin de la session
+2023-07-08 23:42:36 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:42:54 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:44:03 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:44:44 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:44:45 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:44:45 [ERROR] InitController:249 - can't parse argument number: 
+java.lang.IllegalArgumentException: can't parse argument number: 
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1453)
+	at java.base/java.text.MessageFormat.applyPattern(MessageFormat.java:491)
+	at java.base/java.text.MessageFormat.<init>(MessageFormat.java:370)
+	at java.base/java.text.MessageFormat.format(MessageFormat.java:859)
+	at fr.rom.gameoflife.utils.Language.get(Language.java:30)
+	at fr.rom.gameoflife.controller.GameOfLifeController.init(GameOfLifeController.java:150)
+	at fr.rom.gameoflife.controller.InitController.run(InitController.java:244)
+	at fr.rom.gameoflife.controller.InitController.runDefineShape(InitController.java:220)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:270)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1855)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1726)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8944)
+	at javafx.scene.control.Button.fire(Button.java:203)
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:207)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:232)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:189)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3980)
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1890)
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2704)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at com.sun.glass.ui.mac.MacView.notifyMouse(MacView.java:127)
+Caused by: java.lang.NumberFormatException: For input string: ""
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:675)
+	at java.base/java.lang.Integer.parseInt(Integer.java:781)
+	at java.base/java.text.MessageFormat.makeFormat(MessageFormat.java:1451)
+	... 59 more
+2023-07-08 23:44:48 [INFO ] InitController:91 - Fin de la session
+2023-07-08 23:45:14 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:45:20 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:45:20 [INFO ] GameOfLifeController:150 - Partie initialisée (310ms)
+2023-07-08 23:46:16 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:46:22 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:46:31 [INFO ] GameOfLifeController:150 - Partie initialisée (9 519ms)
+2023-07-08 23:46:48 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:46:49 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:46:49 [INFO ] GameOfLifeController:150 - Partie initialisée (320ms)
+2023-07-08 23:57:01 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-08 23:57:03 [INFO ] GameOfLifeController:127 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-08 23:57:03 [INFO ] GameOfLifeController:150 - Partie initialisée (355ms)
+2023-07-08 23:57:06 [INFO ] GameOfLifeController:689 - Application du zoom
+2023-07-08 23:57:06 [INFO ] GameOfLifeController:733 - Zoom appliqué : JavaFX Application Thread, 15.0ms
+2023-07-09 00:08:04 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:08:06 [INFO ] GameOfLifeController:128 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:08:06 [INFO ] GameOfLifeController:151 - Partie initialisée (330ms)
+2023-07-09 00:08:10 [INFO ] GameOfLifeController:294 - Propagation ON
+2023-07-09 00:08:33 [INFO ] GameOfLifeController:302 - Propagation OFF
+2023-07-09 00:08:33 [INFO ] GameOfLifeController:278 - Fin de la partie
+2023-07-09 00:08:35 [INFO ] InitController:91 - Fin de la session
+2023-07-09 00:09:16 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:09:20 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:09:21 [INFO ] GameOfLifeController:152 - Partie initialisée (331ms)
+2023-07-09 00:09:33 [INFO ] GameOfLifeController:295 - Propagation ON
+2023-07-09 00:09:48 [INFO ] GameOfLifeController:303 - Propagation OFF
+2023-07-09 00:09:48 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:09:51 [INFO ] InitController:91 - Fin de la session
+2023-07-09 00:16:26 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:16:29 [INFO ] InitController:92 - Fin de la session
+2023-07-09 00:31:57 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:31:59 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:31:59 [INFO ] GameOfLifeController:152 - Partie initialisée (337ms)
+2023-07-09 00:47:17 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:47:19 [INFO ] InitController:89 - Fin de la session
+2023-07-09 00:47:26 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:47:29 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:47:29 [INFO ] GameOfLifeController:152 - Partie initialisée (333ms)
+2023-07-09 00:47:33 [INFO ] SettingsController:168 - Règles mises a jour: prend vie [3], reste en ve [2, 3]
+2023-07-09 00:47:46 [INFO ] GameOfLifeController:295 - Propagation ON
+2023-07-09 00:47:48 [INFO ] GameOfLifeController:303 - Propagation OFF
+2023-07-09 00:47:51 [INFO ] GameOfLifeController:295 - Propagation ON
+2023-07-09 00:48:08 [INFO ] SettingsController:168 - Règles mises a jour: prend vie [3, 4, 5], reste en ve [2, 3]
+2023-07-09 00:48:19 [INFO ] GameOfLifeController:303 - Propagation OFF
+2023-07-09 00:48:19 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:48:20 [INFO ] InitController:89 - Fin de la session
+2023-07-09 00:49:11 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:49:13 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:49:14 [INFO ] GameOfLifeController:152 - Partie initialisée (348ms)
+2023-07-09 00:49:25 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:49:27 [INFO ] InitController:89 - Fin de la session
+2023-07-09 00:54:43 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:54:45 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:54:46 [INFO ] GameOfLifeController:152 - Partie initialisée (335ms)
+2023-07-09 00:55:15 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:55:31 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:55:31 [INFO ] GameOfLifeController:152 - Partie initialisée (203ms)
+2023-07-09 00:55:44 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:55:46 [INFO ] InitController:89 - Fin de la session
+2023-07-09 00:56:22 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:56:23 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:56:23 [INFO ] GameOfLifeController:152 - Partie initialisée (372ms)
+2023-07-09 00:56:56 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:56:57 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:56:58 [INFO ] GameOfLifeController:152 - Partie initialisée (347ms)
+2023-07-09 00:57:16 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:57:17 [INFO ] InitController:89 - Fin de la session
+2023-07-09 00:58:08 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 00:58:09 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 00:58:09 [INFO ] GameOfLifeController:152 - Partie initialisée (334ms)
+2023-07-09 00:58:17 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 00:58:20 [INFO ] InitController:89 - Fin de la session
+2023-07-09 01:02:27 [INFO ] Start:36 - Début dune nouvelle session
+2023-07-09 01:02:34 [INFO ] GameOfLifeController:129 - Initialisation dune nouvelle partie({0} colonnes/{1} lignes)...
+2023-07-09 01:02:34 [INFO ] GameOfLifeController:152 - Partie initialisée (314ms)
+2023-07-09 01:02:50 [INFO ] GameOfLifeController:295 - Propagation ON
+2023-07-09 01:02:53 [INFO ] SettingsController:166 - Règles mises a jour: prend vie [2, 3], reste en ve [2, 3]
+2023-07-09 01:02:55 [INFO ] SettingsController:166 - Règles mises a jour: prend vie [2, 3], reste en ve [2, 3]
+2023-07-09 01:02:57 [INFO ] SettingsController:166 - Règles mises a jour: prend vie [3], reste en ve [2, 3]
+2023-07-09 01:03:08 [INFO ] GameOfLifeController:303 - Propagation OFF
+2023-07-09 01:03:08 [INFO ] GameOfLifeController:279 - Fin de la partie
+2023-07-09 01:03:18 [INFO ] InitController:89 - Fin de la session

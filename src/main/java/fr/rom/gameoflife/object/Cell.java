@@ -1,20 +1,24 @@
-package fr.rom.gameoflife.objects;
+package fr.rom.gameoflife.object;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Class abstraite représentant une cellule.
- * Lien utile pour créer des SvgPath : https://yqnn.github.io/svg-path-editor/
+ * Vous pouvez visiter ce <a href="https://yqnn.github.io/svg-path-editor/">site</a> pour créer des SvgPath.
  */
-public class Cell extends SVGPath {
+public class Cell extends SVGPath implements Serializable {
+    @Serial
     private static final long serialVersionUID = 42L;
 
-    private int positionX;
-    private int positionY;
+    private final int positionX;
+    private final int positionY;
     private boolean isAlive = false;
 
     private String aliveColor = "#000000";
@@ -106,9 +110,13 @@ public class Cell extends SVGPath {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
+        if (!(o instanceof Cell cell)) return false;
         return positionX == cell.getPositionX() && positionY == cell.getPositionY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(positionX, positionY, isAlive, aliveColor, deadColor);
     }
 
     @Override

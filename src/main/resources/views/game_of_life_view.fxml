@@ -51,7 +51,7 @@
             <Separator layoutX="300.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="5.0" />
 
             <Label fx:id="zoomLabel" layoutX="314.0" layoutY="4.0" maxWidth="-Infinity" minWidth="60.0" prefWidth="65.0" />
-            <Slider fx:id="zoomSlider" layoutX="366.0" layoutY="5.0" max="200.0" min="10.0" onMouseReleased="#makeZoom" prefHeight="16.0" prefWidth="205.0" value="100.0" />
+            <Slider fx:id="zoomSlider" layoutX="366.0" layoutY="5.0" max="1000.0" min="1.0" onMouseReleased="#makeZoom" prefHeight="16.0" prefWidth="205.0" value="100.0" />
             <Label fx:id="zoomPercentLabel" layoutX="513.0" layoutY="4.0" maxWidth="40.0" minWidth="30.0" prefWidth="35.0" text="100" />
             <Label layoutX="542.0" layoutY="4.0" prefHeight="17.0" prefWidth="16.0" text="\%  " />
 

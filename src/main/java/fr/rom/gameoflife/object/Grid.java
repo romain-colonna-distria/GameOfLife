@@ -1,10 +1,11 @@
-package fr.rom.gameoflife.objects;
+package fr.rom.gameoflife.object;
 
 
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 
 public class Grid extends GridPane {
-    private final static Logger logger = Logger.getLogger(Grid.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Grid.class);
 
     private final int nbColumns;
     private final int nbRows;
@@ -37,9 +38,7 @@ public class Grid extends GridPane {
     }
 
     public Cell getCellAtIndex(int i, int j) throws IndexOutOfBoundsException {
-        if(i < 0 || i > this.nbColumns - 1 ) throw new IndexOutOfBoundsException("case (" + i + "," + j + ") inexistante.");
-        if(j < 0 || j > this.nbRows - 1 ) throw new IndexOutOfBoundsException("case (" + i + "," + j + ") inexistante.");
-
+        if((i < 0 || i > this.nbColumns - 1) || (j < 0 || j > this.nbRows - 1)) return null;
         return (Cell) ((Group) this.getChildren().get(i * nbRows + j)).getChildren().get(0);
     }
 
@@ -68,7 +67,7 @@ public class Grid extends GridPane {
 
             return result;
         } catch (IndexOutOfBoundsException e){
-            logger.error("Mauvais index : " + e.getMessage());
+            LOGGER.error(e.getMessage(), e);
             return result;
         }
     }

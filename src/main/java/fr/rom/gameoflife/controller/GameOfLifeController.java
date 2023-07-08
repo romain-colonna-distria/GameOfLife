@@ -1,10 +1,12 @@
 package fr.rom.gameoflife.controller;
 
 
-import fr.rom.gameoflife.objects.Grid;
-import fr.rom.gameoflife.objects.Cell;
-import fr.rom.gameoflife.utils.Language;
-import fr.rom.gameoflife.utils.Properties;
+import fr.rom.gameoflife.object.Grid;
+import fr.rom.gameoflife.object.Cell;
+import fr.rom.gameoflife.property.GameProps;
+import fr.rom.gameoflife.controller.uicontext.DragContext;
+import fr.rom.gameoflife.controller.uicontext.SelectionContext;
+import fr.rom.gameoflife.utils.Message;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -23,15 +25,21 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.apache.log4j.Logger;
 
 
 public class GameOfLifeController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameOfLifeController.class);
+
     private Stage settingsStage;
     private Stage statisticsStage;
     private ExecutorService pool;
@@ -42,17 +50,14 @@ public class GameOfLifeController {
     private Set<Cell> activeCells;
     private Cell lastClickedCell;
 
-    private SelectContext selectContext;
+    private SelectionContext selectContext;
     private ArrayList<Cell> selectedCells;
     private ArrayList<Cell> copiedSelection;
 
     private int propagationNumber;
     private AtomicBoolean onPropagation;
 
-    private File statisticsFile;
     private FileWriter statisticsWriter;
-
-    private final static Logger logger = Logger.getLogger(GameOfLifeController.class);
 
     @FXML
     private AnchorPane gameAnchorPane;
@@ -121,11 +126,7 @@ public class GameOfLifeController {
 
 
     public void init() {
-        logger.info(Language.get("log.initNewGame") + " ("
-                + Properties.getInstance().getGridNbColumns()
-                + Language.get("log.colomns") +"/"
-                + Properties.getInstance().getGridNbRows()
-                + Language.get("log.rows") + " )...");
+        LOGGER.info(Message.get("log.initGame", GameProps.get().getNbColumns(), GameProps.get().getNbRows()));
         double start = System.currentTimeMillis();
 
         this.pool = Executors.newFixedThreadPool(2);
@@ -134,21 +135,21 @@ public class GameOfLifeController {
         this.propagationNumber = 0;
         this.onPropagation = new AtomicBoolean(false);
 
-        this.refreshSlider.setValue(Properties.getInstance().getRefreshTimeMs());
-        this.refreshValueLabel.setText(String.valueOf(Properties.getInstance().getRefreshTimeMs()));
+        this.refreshSlider.setValue(GameProps.get().getRefreshTimeMs());
+        this.refreshValueLabel.setText(String.valueOf(GameProps.get().getRefreshTimeMs()));
         this.reverseModeMenuItem.setSelected(true);
 
-        this.selectContext = new SelectContext();
+        this.selectContext = new SelectionContext();
         this.selectedCells = new ArrayList<>();
 
         initGrid();
         initListeners();
         addShortcuts();
-        initStatsFileWritter();
+        initStatsFileWriter();
         initTextWithLocaleLanguage();
 
         double end =  System.currentTimeMillis();
-        logger.info(Language.get("log.gameInitialized") + " (" + (end - start) + "ms)");
+        LOGGER.info(Message.get("log.gameInitialized", end - start));
     }
 
     private void initListeners(){
@@ -159,7 +160,7 @@ public class GameOfLifeController {
                 AnchorPane root = fxmlLoader.load();
 
                 Stage stage = new Stage();
-                stage.titleProperty().bind(Language.createStringBinding("window.init.title"));
+                stage.titleProperty().bind(Message.createStringBinding("window.init.title"));
                 stage.setScene(new Scene(root));
 
                 InitController controller = fxmlLoader.getController();
@@ -167,17 +168,17 @@ public class GameOfLifeController {
 
                 stage.show();
             } catch (Exception e) {
-                logger.fatal(e.getMessage());
+                LOGGER.error(e.getMessage(), e);
                 System.exit(1);
             }
         }));
         this.zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> zoomPercentLabel.textProperty().setValue(String.valueOf((int)zoomSlider.getValue())));
         this.refreshSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             refreshValueLabel.textProperty().setValue(String.valueOf((int) refreshSlider.getValue()));
-            Properties.getInstance().setRefreshTimeMs((long) refreshSlider.getValue());
+            GameProps.get().setRefreshTimeMs((int)refreshSlider.getValue());
         });
         this.shiftModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) {
+            if(Boolean.TRUE.equals(newValue)) {
                 this.mode = GameMode.SHIFT_MODE;
                 this.reverseModeMenuItem.setSelected(false);
                 this.selectModeMenuItem.setSelected(false);
@@ -186,7 +187,7 @@ public class GameOfLifeController {
             }
         });
         this.reverseModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) {
+            if(Boolean.TRUE.equals(newValue)) {
                 this.mode = GameMode.REVERSE_MODE;
                 this.shiftModeMenuItem.setSelected(false);
                 this.selectModeMenuItem.setSelected(false);
@@ -195,7 +196,7 @@ public class GameOfLifeController {
             }
         });
         this.selectModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) {
+            if(Boolean.TRUE.equals(newValue)) {
                 this.mode = GameMode.SELECT_MODE;
                 this.shiftModeMenuItem.setSelected(false);
                 this.reverseModeMenuItem.setSelected(false);
@@ -224,52 +225,50 @@ public class GameOfLifeController {
         aboutMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.A));
     }
 
-    private void initStatsFileWritter(){
-        this.statisticsFile = new File("stats.txt");
+    private void initStatsFileWriter(){
+        final File statisticsFile = new File("stats.txt");
         try {
-            if(this.statisticsFile.createNewFile()){
-                this.statisticsWriter = new FileWriter(this.statisticsFile);
+            if(statisticsFile.createNewFile()){
+                this.statisticsWriter = new FileWriter(statisticsFile);
             } else {
-                if(this.statisticsFile.delete()) {
-                    if(this.statisticsFile.createNewFile()) {
-                        this.statisticsWriter = new FileWriter(this.statisticsFile);
-                    }
-                    else logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
+                Files.delete(statisticsFile.toPath());
+                if(statisticsFile.createNewFile()) {
+                    this.statisticsWriter = new FileWriter(statisticsFile);
                 } else {
-                    logger.warn(Language.get("log.problemCreatingFile") + " stats.txt");
+                    LOGGER.warn(Message.get("log.problemCreatingFile", "stats.txt"));
                 }
             }
         } catch (IOException e){
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
     private void initTextWithLocaleLanguage(){
-        fileMenu.textProperty().bind(Language.createStringBinding("label.file"));
-        saveMenuItem.textProperty().bind(Language.createStringBinding("label.save"));
-        loadMenuItem.textProperty().bind(Language.createStringBinding("label.load"));
-        settingsMenuItem.textProperty().bind(Language.createStringBinding("window.settings.title"));
-        exitMenuButton.textProperty().bind(Language.createStringBinding("label.exit"));
+        fileMenu.textProperty().bind(Message.createStringBinding("label.file"));
+        saveMenuItem.textProperty().bind(Message.createStringBinding("label.save"));
+        loadMenuItem.textProperty().bind(Message.createStringBinding("label.load"));
+        settingsMenuItem.textProperty().bind(Message.createStringBinding("window.settings.title"));
+        exitMenuButton.textProperty().bind(Message.createStringBinding("label.exit"));
 
-        editMenu.textProperty().bind(Language.createStringBinding("label.edit"));
-        multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.startPropagation"));
-        singlePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.performPropagation"));
-        shiftModeMenuItem.textProperty().bind(Language.createStringBinding("label.shiftMode"));
-        reverseModeMenuItem.textProperty().bind(Language.createStringBinding("label.reverseMode"));
-        selectModeMenuItem.textProperty().bind(Language.createStringBinding("label.selectMode"));
-        copySelectionMenuItem.textProperty().bind(Language.createStringBinding("label.copySelection"));
-        pasteSelectionMenuItem.textProperty().bind(Language.createStringBinding("label.pasteSelection"));
-        statsMenuItem.textProperty().bind(Language.createStringBinding("window.stats.title"));
-        resetMenuItem.textProperty().bind(Language.createStringBinding("label.reset"));
+        editMenu.textProperty().bind(Message.createStringBinding("label.edit"));
+        multiplePropagationMenuItem.textProperty().bind(Message.createStringBinding("label.startPropagation"));
+        singlePropagationMenuItem.textProperty().bind(Message.createStringBinding("label.performPropagation"));
+        shiftModeMenuItem.textProperty().bind(Message.createStringBinding("label.shiftMode"));
+        reverseModeMenuItem.textProperty().bind(Message.createStringBinding("label.reverseMode"));
+        selectModeMenuItem.textProperty().bind(Message.createStringBinding("label.selectMode"));
+        copySelectionMenuItem.textProperty().bind(Message.createStringBinding("label.copySelection"));
+        pasteSelectionMenuItem.textProperty().bind(Message.createStringBinding("label.pasteSelection"));
+        statsMenuItem.textProperty().bind(Message.createStringBinding("window.stats.title"));
+        resetMenuItem.textProperty().bind(Message.createStringBinding("label.reset"));
 
-        helpMenu.textProperty().bind(Language.createStringBinding("label.help"));
-        aboutMenuItem.textProperty().bind(Language.createStringBinding("label.about"));
+        helpMenu.textProperty().bind(Message.createStringBinding("label.help"));
+        aboutMenuItem.textProperty().bind(Message.createStringBinding("label.about"));
 
-        propagationLabel.textProperty().bind(Language.createStringBinding("label.propagation"));
-        onPropagationLabel.textProperty().bind(Language.createStringBinding("off"));
-        generationLabel.textProperty().bind(Language.createStringBinding("label.generation"));
-        zoomLabel.textProperty().bind(Language.createStringBinding("label.zoom"));
-        refreshLabel.textProperty().bind(Language.createStringBinding("label.refresh"));
+        propagationLabel.textProperty().bind(Message.createStringBinding("label.propagation"));
+        onPropagationLabel.textProperty().bind(Message.createStringBinding("off"));
+        generationLabel.textProperty().bind(Message.createStringBinding("label.generation"));
+        zoomLabel.textProperty().bind(Message.createStringBinding("label.zoom"));
+        refreshLabel.textProperty().bind(Message.createStringBinding("label.refresh"));
     }
 
     private void doOnClose(){
@@ -277,14 +276,12 @@ public class GameOfLifeController {
         if(statisticsStage != null) statisticsStage.close();
         if(onPropagation.get()) stopPropagation();
 
-        logger.info(Language.get("log.gameOver"));
+        LOGGER.info(Message.get("log.gameOver"));
         try {
             pool.shutdown();
             statisticsWriter.close();
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("???????????1");
+        } catch (IOException | NullPointerException e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -292,28 +289,28 @@ public class GameOfLifeController {
         if(onPropagation.get()) return;
         onPropagation.set(true);
 
-        pool.submit(new Propagation_Handler());
+        pool.submit(new PropagationHandler());
 
-        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Language.createStringBinding("on")));
-        logger.info(Language.get("label.propagation") + " " + Language.get("on"));
+        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Message.createStringBinding("on")));
+        LOGGER.info(Message.get("log.propagationOn"));
     }
 
     public void stopPropagation(){
         if(!onPropagation.get()) return;
         onPropagation.set(false);
 
-        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Language.createStringBinding("off")));
-        logger.info(Language.get("label.propagation") + " " + Language.get("off"));
+        Platform.runLater(() -> onPropagationLabel.textProperty().bind(Message.createStringBinding("off")));
+        LOGGER.info(Message.get("log.propagationOff"));
     }
 
     public void propagate(){
-        List<Cell> activeCells = new ArrayList<>(this.getActiveCells());
-        Set<Cell> toAlive = new HashSet<>();
-        Set<Cell> toDead = new HashSet<>();
+        List<Cell> activeCellsCopy = new ArrayList<>(this.getActiveCells());
+        final Set<Cell> toAlive = new HashSet<>();
+        final Set<Cell> toDead = new HashSet<>();
         boolean gameUpdated = false;
-        for(Cell cell : activeCells){
+        for(Cell cell : activeCellsCopy){
             int nbAliveAroundCells = 0;
-            Set<Cell> aroundCells = cell.getAroundCells();
+            final Set<Cell> aroundCells = cell.getAroundCells();
             if(aroundCells == null) continue;
 
             for(Cell c : cell.getAroundCells()) {
@@ -321,13 +318,13 @@ public class GameOfLifeController {
             }
 
             if(cell.isAlive()){
-                if(!Properties.getInstance().getStayAliveSet().contains(nbAliveAroundCells)){
+                if(!GameProps.get().getStayAlive().contains(String.valueOf(nbAliveAroundCells))){
                     toDead.add(cell);
                     addActiveCell(cell);
                     gameUpdated = true;
                 }
             } else {
-                if(Properties.getInstance().getComeAliveSet().contains(nbAliveAroundCells)){
+                if(GameProps.get().getComesToLife().contains(String.valueOf(nbAliveAroundCells))){
                     toAlive.add(cell);
                     addActiveCell(cell);
                     gameUpdated = true;
@@ -340,8 +337,8 @@ public class GameOfLifeController {
             return;
         }
 
-        for(Cell cell : toAlive) cell.makeAlive();
-        for(Cell cell : toDead) cell.makeDead();
+        toAlive.forEach(Cell::makeAlive);
+        toDead.forEach(Cell::makeDead);
         generationNumberLabel.setText(String.valueOf(++propagationNumber));
 
         colorSelectedCells();
@@ -349,16 +346,14 @@ public class GameOfLifeController {
             statisticsWriter.append(String.valueOf(propagationNumber)).append(";");
             statisticsWriter.append(String.valueOf(toAlive.size())).append("\n");
             statisticsWriter.flush();
-        } catch (IOException e) {
-            //peut être déclanché si on ferme le jeu pendant la propagation
-            logger.error(e.getMessage());
-        } catch (NullPointerException e){
-            System.out.println("???????????2");
+        } catch (IOException | NullPointerException e) {
+            //IOException peut être soulevée si on ferme le jeu pendant la propagation
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
     public Set<Cell> getActiveCells(){
-        Set<Cell> tmp = new HashSet<>();
+        final Set<Cell> tmp = new HashSet<>();
         for(Cell cell : this.activeCells){
             if(cell.isAlive()) {
                 tmp.add(cell);
@@ -366,21 +361,20 @@ public class GameOfLifeController {
                 tmp.addAll(cell.getAroundCells());
             }
         }
-        this.activeCells = new HashSet<>(tmp);
-
-        return activeCells;
+        this.activeCells = tmp;
+        return this.activeCells;
     }
 
     private void addActiveCell(Cell cell){
         activeCells.add(cell);
 
-        Set<Cell> around = this.grid.getAroundCells(cell);
+        final Set<Cell> around = this.grid.getAroundCells(cell);
         if(around == null) return;
         activeCells.addAll(around);
     }
 
     private void initGrid(){
-        this.grid = new Grid(Properties.getInstance().getGridNbColumns(), Properties.getInstance().getGridNbRows());
+        this.grid = new Grid(GameProps.get().getNbColumns(), GameProps.get().getNbRows());
         this.gameAnchorPane.getChildren().add(makeGridWithEventFilters(this.grid));
 
         initCells();
@@ -397,58 +391,55 @@ public class GameOfLifeController {
             if (this.mode.equals(GameMode.SHIFT_MODE)) {
                 // remember initial mouse cursor coordinates
                 // and node position
-                dragContext.mouseAnchorX = mouseEvent.getX();
-                dragContext.mouseAnchorY = mouseEvent.getY();
-                dragContext.initialTranslateX = grid.getTranslateX();
-                dragContext.initialTranslateY = grid.getTranslateY();
+                dragContext.setMouseAnchorX(mouseEvent.getX());
+                dragContext.setMouseAnchorY(mouseEvent.getY());
+                dragContext.setInitialTranslateX(grid.getTranslateX());
+                dragContext.setInitialTranslateY(grid.getTranslateY());
             } else if (this.mode.equals(GameMode.REVERSE_MODE)){
-                if(!(mouseEvent.getTarget() instanceof Cell)) return;
-                Cell cell = (Cell) mouseEvent.getTarget();
+                if(!(mouseEvent.getTarget() instanceof Cell cell)) return;
 
                 cell.reverseState();
                 addActiveCell(cell);
             } else if(this.mode.equals(GameMode.SELECT_MODE)) {
-                if(!(mouseEvent.getTarget() instanceof Cell)) return;
+                if(!(mouseEvent.getTarget() instanceof Cell cell)) return;
 
-                this.selectContext.xCellStart = ((Cell) mouseEvent.getTarget()).getPositionX();
-                this.selectContext.yCellStart = ((Cell) mouseEvent.getTarget()).getPositionY();
+                this.selectContext.setXCellStart(cell.getPositionX());
+                this.selectContext.setYCellStart(cell.getPositionY());
             }
 
             this.copySelectionMenuItem.setDisable(true);
         });
 
         wrapGroup.addEventFilter(MouseEvent.MOUSE_DRAGGED, mouseEvent -> {
-            if (this.mode.equals(GameMode.SHIFT_MODE)) {
+            if (GameMode.SHIFT_MODE.equals(this.mode)) {
                 // shift node from its initial position by delta
                 // calculated from mouse cursor movement
-                grid.setTranslateX(dragContext.initialTranslateX + mouseEvent.getX() - dragContext.mouseAnchorX);
-                grid.setTranslateY(dragContext.initialTranslateY + mouseEvent.getY() - dragContext.mouseAnchorY);
-            } else if(this.mode.equals(GameMode.REVERSE_MODE)) {
-                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell)) return;
-                Cell cell = (Cell) mouseEvent.getPickResult().getIntersectedNode();
-
+                grid.setTranslateX(dragContext.getInitialTranslateX() + mouseEvent.getX() - dragContext.getMouseAnchorX());
+                grid.setTranslateY(dragContext.getInitialTranslateY() + mouseEvent.getY() - dragContext.getMouseAnchorY());
+            } else if(GameMode.REVERSE_MODE.equals(this.mode)) {
+                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell cell)) return;
                 if(cell.equals(lastClickedCell)) return;
-                lastClickedCell = cell;
 
+                lastClickedCell = cell;
                 cell.reverseState();
                 addActiveCell(cell);
-            } else if(this.mode.equals(GameMode.SELECT_MODE)) {
-                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell)) return;
-                this.selectContext.xCellEnd = ((Cell) mouseEvent.getPickResult().getIntersectedNode()).getPositionX();
-                this.selectContext.yCellEnd = ((Cell) mouseEvent.getPickResult().getIntersectedNode()).getPositionY();
+            } else if(GameMode.SELECT_MODE.equals(this.mode)) {
+                if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell cell)) return;
+                this.selectContext.setXCellEnd(cell.getPositionX());
+                this.selectContext.setYCellEnd(cell.getPositionY());
 
                 resetCellsColor(this.selectedCells);
                 this.selectedCells = new ArrayList<>();
 
-                int xMin = Math.min(selectContext.xCellStart, selectContext.xCellEnd);
-                int xMax = Math.max(selectContext.xCellStart, selectContext.xCellEnd);
-                int yMin = Math.min(selectContext.yCellStart, selectContext.yCellEnd);
-                int yMax = Math.max(selectContext.yCellStart, selectContext.yCellEnd);
+                final int xMin = Math.min(selectContext.getXCellStart(), selectContext.getXCellEnd());
+                final int xMax = Math.max(selectContext.getXCellStart(), selectContext.getXCellEnd());
+                final int yMin = Math.min(selectContext.getYCellStart(), selectContext.getYCellEnd());
+                final int yMax = Math.max(selectContext.getYCellStart(), selectContext.getYCellEnd());
                 for(int i = xMin; i <= xMax; ++i) {
                     for(int j = yMin; j <= yMax; ++j) {
-                        Cell cell = this.grid.getCellAtIndex(i, j);
-                        if(cell == null) continue;
-                        this.selectedCells.add(cell);
+                        final Cell c = this.grid.getCellAtIndex(i, j);
+                        if(c == null) continue;
+                        this.selectedCells.add(c);
                     }
                 }
 
@@ -462,37 +453,24 @@ public class GameOfLifeController {
 
     private void colorSelectedCells(){
         for(Cell c : selectedCells){
-            if(c.isAlive()) {
-                Color color = Color.web(c.getAliveColor());
-                Color newColor;
+            final Color color = Color.web(c.isAlive() ? c.getAliveColor() : c.getDeadColor());
+            Color newColor;
 
-                if(color.getBlue() + 0.3 > 1) newColor = Color.color(Math.max(color.getRed() - 0.3, 0.0),
-                        Math.max(color.getRed() - 0.3, 0.0),
-                        color.getBlue());
-                else newColor = Color.color(color.getRed(), color.getGreen(), color.getBlue() + 0.3);
+            if(color.getBlue() + 0.3 > 1) newColor = Color.color(Math.max(color.getRed() - 0.3, 0.0),
+                    Math.max(color.getRed() - 0.3, 0.0),
+                    color.getBlue());
+            else newColor = Color.color(color.getRed(), color.getGreen(), color.getBlue() + 0.3);
 
-                c.setFill(newColor);
-            } else {
-                Color color = Color.web(c.getDeadColor());
-                Color newColor;
-
-                if(color.getBlue() + 0.3 > 1) newColor = Color.color(Math.max(color.getRed() - 0.3, 0.0),
-                        Math.max(color.getRed() - 0.3, 0.0),
-                        color.getBlue());
-                else newColor = Color.color(color.getRed(), color.getGreen(), color.getBlue() + 0.3);
-
-                c.setFill(newColor);
-            }
+            c.setFill(newColor);
         }
     }
 
     private void initCells(){
-        Cell cell;
-        Properties p = Properties.getInstance();
+        final GameProps p = GameProps.get();
         //TODO: vérifier que le SVGPath est valide
-        for(int i = 0; i < p.getGridNbColumns(); ++i){
-            for(int j = 0; j < p.getGridNbRows(); ++j) {
-                cell = new Cell(p.getShapeString(), p.getCellWidth(), p.getCellHeight(), i, j);
+        for(int i = 0; i < p.getNbColumns(); ++i){
+            for(int j = 0; j < p.getNbRows(); ++j) {
+                Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), i, j);
                 cell.setAliveColor(p.getCellAliveColor());
                 cell.setDeadColor(p.getCellDeadColor());
                 cell.makeDead();
@@ -508,20 +486,19 @@ public class GameOfLifeController {
 
     private void resetCellsColor(ArrayList<Cell> cells){
         for(Cell c : cells) {
-            if(c.isAlive()) c.setFill(Color.web(c.getAliveColor()));
-            else c.setFill(Color.web(c.getDeadColor()));
+            c.setFill(Color.web(c.isAlive() ? c.getAliveColor() : c.getDeadColor()));
         }
     }
 
     public void updateAliveColorCell(String newColor){
-        Properties.getInstance().setCellAliveColor(newColor);
+        GameProps.get().setCellAliveColor(newColor);
         for(Cell c : grid.getCells()){
             c.setAliveColor(newColor);
         }
     }
 
     public void updateDeadColorCell(String newColor){
-        Properties.getInstance().setCellDeadColor(newColor);
+        GameProps.get().setCellDeadColor(newColor);
         for(Cell c : grid.getCells()){
             c.setDeadColor(newColor);
         }
@@ -530,51 +507,34 @@ public class GameOfLifeController {
 
     @FXML
     public void saveState(){
-        FileChooser fileChooser = new FileChooser();
+        final FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
 
-        File selectedFile = fileChooser.showSaveDialog(this.gameAnchorPane.getScene().getWindow());
+        final File selectedFile = fileChooser.showSaveDialog(this.gameAnchorPane.getScene().getWindow());
         if(selectedFile == null) return;
 
-        try {
-            FileOutputStream fileOut = new FileOutputStream(selectedFile);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-
+        try(ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(selectedFile))) {
             for (Cell cell : getActiveCells()) {
                 objectOut.writeObject(cell);
             }
-            logger.info(Language.get("log.gameSavedSuccess"));
-            objectOut.close();
-            fileOut.close();
-        } catch (Exception ex) {
-            logger.error(Language.get("log.gameNotSaved") + " : " + ex.getMessage());
+            LOGGER.info(Message.get("log.gameSavedSuccess"));
+        } catch (Exception e) {
+            LOGGER.error(Message.get("log.gameNotSaved"), e);
         }
     }
 
     @FXML
     public void loadSave(){ //TODO: passer a un moyen de stockage type JSON, XML...
-        FileChooser fileChooser = new FileChooser();
+        final FileChooser fileChooser = new FileChooser();
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("text", ".txt"));
 
-        File selectedFile = fileChooser.showOpenDialog(this.gameAnchorPane.getScene().getWindow());
+        final File selectedFile = fileChooser.showOpenDialog(this.gameAnchorPane.getScene().getWindow());
         if(selectedFile == null) return;
 
-        FileInputStream fis;
-        ObjectInputStream ois;
-        try {
-            fis = new FileInputStream(selectedFile);
-            ois = new ObjectInputStream(fis);
-        } catch (IOException e) {
-
-            logger.error(Language.get("log.gameNotLoaded") + " : " + e.getMessage());
-            return;
-        }
-
-        Cell tmp;
-        Cell cell;
-        try {
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(selectedFile))) {
+            Cell tmp;
             while ((tmp = (Cell) ois.readObject()) != null){
-                cell = grid.getCellAtIndex(tmp.getPositionX(), tmp.getPositionY());
+                final Cell cell = grid.getCellAtIndex(tmp.getPositionX(), tmp.getPositionY());
                 if(cell == null) continue; //si la taille de la grille a changée par exemple
 
                 if(tmp.isAlive()) cell.makeAlive();
@@ -582,10 +542,11 @@ public class GameOfLifeController {
 
                 addActiveCell(cell);
             }
-        } catch (EOFException e){
-            logger.info(Language.get("log.gameSuccessLoaded"));
-        } catch (IOException | ClassNotFoundException e){
-            logger.error(Language.get("log.gameSaveContainError") + " : " + e.getMessage());
+
+        } catch (IOException ioe) {
+            LOGGER.error(Message.get("log.gameNotLoaded"), ioe);
+        } catch (ClassNotFoundException cnfe) {
+            LOGGER.info(Message.get("log.gameSuccessLoaded"));
         }
     }
 
@@ -594,42 +555,41 @@ public class GameOfLifeController {
         if (this.settingsStage != null && this.settingsStage.isShowing()) return;
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/settings_view.fxml"));
-            VBox root = fxmlLoader.load();
+            final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/settings_view.fxml"));
+            final VBox root = fxmlLoader.load();
 
             this.settingsStage = new Stage();
-            this.settingsStage.titleProperty().bind(Language.createStringBinding("window.settings.title"));
+            this.settingsStage.titleProperty().bind(Message.createStringBinding("window.settings.title"));
             this.settingsStage.setResizable(false);
             this.settingsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
             this.settingsStage.setScene(new Scene(root));
             this.settingsStage.setOnCloseRequest((event -> this.settingsStage = null));
 
-            SettingsController controller = fxmlLoader.getController();
+            final SettingsController controller = fxmlLoader.getController();
             controller.init(this);
 
             this.settingsStage.show();
         } catch (IOException e){
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
     @FXML
     public void exit(){
         doOnClose();
-        Stage stage = (Stage) this.gameAnchorPane.getScene().getWindow();
-        stage.close();
-        logger.info(Language.get("log.endSession"));
+        ((Stage) this.gameAnchorPane.getScene().getWindow()).close();
+        LOGGER.info(Message.get("log.endSession"));
     }
 
     @FXML
     public void clickMultiplePropagationMenuItem(){
         if (onPropagation.get()){
             stopPropagation();
-            multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.startPropagation"));
+            multiplePropagationMenuItem.textProperty().bind(Message.createStringBinding("label.startPropagation"));
         }
         else {
             startPropagation();
-            multiplePropagationMenuItem.textProperty().bind(Language.createStringBinding("label.stopPropagation"));
+            multiplePropagationMenuItem.textProperty().bind(Message.createStringBinding("label.stopPropagation"));
         }
     }
 
@@ -645,25 +605,25 @@ public class GameOfLifeController {
 
         for(Cell cell : getActiveCells()) cell.makeDead();
 
-        initStatsFileWritter();
+        initStatsFileWriter();
         resetCellsColor(this.selectedCells);
         this.activeCells = new HashSet<>();
         this.selectedCells = new ArrayList<>();
 
         Platform.runLater(() -> {
             generationNumberLabel.setText(String.valueOf(propagationNumber));
-            onPropagationLabel.textProperty().bind(Language.createStringBinding("off"));
+            onPropagationLabel.textProperty().bind(Message.createStringBinding("off"));
         });
-        logger.info(Language.get("log.resetedGrid"));
+        LOGGER.info(Message.get("log.resetedGrid"));
     }
 
     @FXML
     public void copySelection(){
         this.copiedSelection = new ArrayList<>();
-        Properties p = Properties.getInstance();
+        final GameProps p = GameProps.get();
 
         for(Cell c : this.selectedCells){
-            Cell cell = new Cell(p.getShapeString(), p.getCellWidth(), p.getCellHeight(), c.getPositionX(), c.getPositionY());
+            final Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), c.getPositionX(), c.getPositionY());
 
             if(c.isAlive()) cell.makeAlive();
             else cell.makeDead();
@@ -672,24 +632,20 @@ public class GameOfLifeController {
         }
 
         this.pasteSelectionMenuItem.setDisable(false);
-        logger.info("Parcelle copié!");
+        LOGGER.info("Parcelle copié!");
     }
 
     @FXML
     public void pasteSelection(){
-        Cell cell;
-        int xDelta = this.copiedSelection.get(0).getPositionX() - this.selectContext.xCellStart;
-        int yDelta = this.copiedSelection.get(0).getPositionY() - this.selectContext.yCellStart;
+        final int xDelta = this.copiedSelection.get(0).getPositionX() - this.selectContext.getXCellStart();
+        final int yDelta = this.copiedSelection.get(0).getPositionY() - this.selectContext.getYCellStart();
+
         for(Cell c : this.copiedSelection){
-            try {
-                cell = grid.getCellAtIndex(c.getPositionX() - xDelta, c.getPositionY() - yDelta);
-            } catch (IndexOutOfBoundsException e) {
-                continue;
-            }
+            final Cell cell = grid.getCellAtIndex(c.getPositionX() - xDelta, c.getPositionY() - yDelta);
+            if(cell == null) continue;
 
             if(c.isAlive()) cell.makeAlive();
             else cell.makeDead();
-
             this.activeCells.add(cell);
         }
 
@@ -703,16 +659,16 @@ public class GameOfLifeController {
         if(this.statisticsStage != null) return;
 
         try {
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            final Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
             double width = primaryScreenBounds.getWidth();
             double height = primaryScreenBounds.getHeight() - 25;
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/statistics_view.fxml"));
-            AnchorPane root = fxmlLoader.load();
+            final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/statistics_view.fxml"));
+            final AnchorPane root = fxmlLoader.load();
             root.setPrefSize(width, height);
 
             this.statisticsStage = new Stage();
-            this.statisticsStage.titleProperty().bind(Language.createStringBinding("window.stats.title"));
+            this.statisticsStage.titleProperty().bind(Message.createStringBinding("window.stats.title"));
             this.statisticsStage.setResizable(false);
             this.statisticsStage.initModality(Modality.WINDOW_MODAL);
             this.statisticsStage.initOwner(this.gameAnchorPane.getScene().getWindow());
@@ -721,78 +677,49 @@ public class GameOfLifeController {
 
             this.stopPropagation();
 
-            StatisticsController controller = fxmlLoader.getController();
+            final StatisticsController controller = fxmlLoader.getController();
             controller.init();
 
             this.statisticsStage.show();
         } catch (IOException e){
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
     @FXML //TODO: optimiser
     public void makeZoom(){
-        logger.info(Language.get("log.zoomProcessing"));
-        List<Cell> cells = grid.getCells();
-        Properties.getInstance().setCellWidth(Properties.getInstance().getCellWidth() * (zoomSlider.getValue() / 100));
-        Properties.getInstance().setCellHeight(Properties.getInstance().getCellHeight() * (zoomSlider.getValue() / 100));
-        pool.submit(new Zoom_Handler(cells));
+        LOGGER.info(Message.get("log.zoomProcessing"));
+        final List<Cell> cells = grid.getCells();
+
+        Platform.runLater(() -> {
+            double start = System.currentTimeMillis();
+            if(cells.isEmpty()) return;
+
+            for(Cell cell : cells){
+                cell.setShapeWidth(GameProps.get().getCellWidth() * (zoomSlider.getValue() / 100));
+                cell.setShapeHeight(GameProps.get().getCellHeight() * (zoomSlider.getValue() / 100));
+            }
+
+            double end = System.currentTimeMillis();
+            LOGGER.info(Message.get("log.zoomApplied", end - start));
+        });
     }
 
 
 
-    private class Propagation_Handler implements Runnable {
+    private class PropagationHandler implements Runnable {
         @Override
         public void run() {
             while (onPropagation.get()){
                 Platform.runLater(GameOfLifeController.this::propagate);
 
                 try {
-                    Thread.sleep(Properties.getInstance().getRefreshTimeMs());
+                    Thread.sleep(GameProps.get().getRefreshTimeMs());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    LOGGER.error(e.getMessage(), e);
                 }
             }
         }
-    }
-
-    private static class Zoom_Handler implements Runnable {
-        private final List<Cell> cells;
-
-
-        public Zoom_Handler(List<Cell> cells){
-            this.cells = cells;
-        }
-
-        @Override
-        public void run() {
-            Platform.runLater(() -> {
-                double start = System.currentTimeMillis();
-                if(this.cells.size() < 1) return;
-
-                for(Cell cell : cells){
-                    cell.setShapeWidth(Properties.getInstance().getCellWidth());
-                    cell.setShapeHeight(Properties.getInstance().getCellHeight());
-                }
-
-                double end = System.currentTimeMillis();
-                logger.info(Language.get("log.zoomApplied") + " : " + Thread.currentThread().getName() + ", " + (end - start) + "ms");
-            });
-        }
-    }
-
-    private static final class DragContext {
-        public double mouseAnchorX;
-        public double mouseAnchorY;
-        public double initialTranslateX;
-        public double initialTranslateY;
-    }
-
-    private static final class SelectContext {
-        public int xCellStart;
-        public int yCellStart;
-        public int xCellEnd;
-        public int yCellEnd;
     }
 
     private enum GameMode {
