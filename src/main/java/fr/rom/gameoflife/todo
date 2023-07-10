@@ -8,3 +8,5 @@
 - Optimiser le jeu : - améliorer la gestion des cellules (ne plus utiliser de gridpane mais plutot un canvas) ?
                      - mettre en place un système de "chunck" qui se chargerai dynamiquement en fonction de l'évolution des cellules ou du déplacement
 - Améliorer l'interface : - rendre l'appli responsive
+- Ajouter tout les logs/messages/label dans le fichier de messages (notamenent settings_view.fxml)
+- Ajouter des tests

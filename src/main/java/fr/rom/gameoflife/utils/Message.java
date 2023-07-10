@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 
 
-public final class Language {
+public final class Message {
 
     private static final ObjectProperty<Locale> locale;
     static {
@@ -22,7 +22,7 @@ public final class Language {
         locale.addListener((observable, oldValue, newValue) -> Locale.setDefault(newValue));
     }
 
-
+    private Message() {}
 
     public static String get(final String key, final Object... args) {
         ResourceBundle bundle = ResourceBundle.getBundle("messages/message", getLocale());
@@ -33,9 +33,6 @@ public final class Language {
         return Bindings.createStringBinding(() -> get(key, args), locale);
     }
 
-
-
-
     public static List<Locale> getSupportedLocales() {
         return new ArrayList<>(Arrays.asList(Locale.ENGLISH, Locale.FRENCH));
     }
@@ -45,11 +42,12 @@ public final class Language {
         return getSupportedLocales().contains(sysDefault) ? sysDefault : Locale.FRENCH;
     }
 
-    public static Locale getLocaleFromString(String localeSring) {
-        if(getSupportedLocales().contains(new Locale(localeSring))) {
-            return new Locale(localeSring);
+    public static Locale getLocaleFromString(String localeString) {
+        Locale l = Locale.of(localeString);
+        if(getSupportedLocales().contains(l)) {
+            return l;
         } else {
-            return new Locale("fr");
+            return Locale.FRENCH;
         }
     }
 
