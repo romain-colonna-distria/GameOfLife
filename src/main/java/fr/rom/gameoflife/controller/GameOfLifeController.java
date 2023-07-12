@@ -6,6 +6,7 @@ import fr.rom.gameoflife.object.Cell;
 import fr.rom.gameoflife.property.GameProps;
 import fr.rom.gameoflife.controller.uicontext.DragContext;
 import fr.rom.gameoflife.controller.uicontext.SelectionContext;
+import fr.rom.gameoflife.utils.Coordinate;
 import fr.rom.gameoflife.utils.Message;
 
 import javafx.application.Platform;
@@ -310,10 +311,10 @@ public class GameOfLifeController {
         boolean gameUpdated = false;
         for(Cell cell : activeCellsCopy){
             int nbAliveAroundCells = 0;
-            final Set<Cell> aroundCells = cell.getAroundCells();
+            final Collection<Cell> aroundCells = grid.getAroundCells(cell);
             if(aroundCells == null) continue;
 
-            for(Cell c : cell.getAroundCells()) {
+            for(Cell c : aroundCells) {
                 if (c.isAlive()) ++nbAliveAroundCells;
             }
 
@@ -349,16 +350,18 @@ public class GameOfLifeController {
         } catch (IOException | NullPointerException e) {
             //IOException peut être soulevée si on ferme le jeu pendant la propagation
             LOGGER.error(e.getMessage(), e);
+            stopPropagation();
         }
     }
 
     public Set<Cell> getActiveCells(){
         final Set<Cell> tmp = new HashSet<>();
         for(Cell cell : this.activeCells){
-            if(cell.isAlive()) {
+            if(cell != null && cell.isAlive()) {
                 tmp.add(cell);
-                if(cell.getAroundCells() == null) continue;
-                tmp.addAll(cell.getAroundCells());
+                Collection<Cell> aroundCells = grid.getAroundCells(cell);
+                if(aroundCells.isEmpty()) continue;
+                tmp.addAll(aroundCells);
             }
         }
         this.activeCells = tmp;
@@ -368,13 +371,13 @@ public class GameOfLifeController {
     private void addActiveCell(Cell cell){
         activeCells.add(cell);
 
-        final Set<Cell> around = this.grid.getAroundCells(cell);
+        final Collection<Cell> around = this.grid.getAroundCells(cell);
         if(around == null) return;
         activeCells.addAll(around);
     }
 
     private void initGrid(){
-        this.grid = new Grid(GameProps.get().getNbColumns(), GameProps.get().getNbRows());
+        this.grid = new Grid();
         this.gameAnchorPane.getChildren().add(makeGridWithEventFilters(this.grid));
 
         initCells();
@@ -403,8 +406,8 @@ public class GameOfLifeController {
             } else if(this.mode.equals(GameMode.SELECT_MODE)) {
                 if(!(mouseEvent.getTarget() instanceof Cell cell)) return;
 
-                this.selectContext.setXCellStart(cell.getPositionX());
-                this.selectContext.setYCellStart(cell.getPositionY());
+                this.selectContext.setXCellStart(cell.getCoordinate().getX());
+                this.selectContext.setYCellStart(cell.getCoordinate().getY());
             }
 
             this.copySelectionMenuItem.setDisable(true);
@@ -425,8 +428,8 @@ public class GameOfLifeController {
                 addActiveCell(cell);
             } else if(GameMode.SELECT_MODE.equals(this.mode)) {
                 if(!(mouseEvent.getPickResult().getIntersectedNode() instanceof Cell cell)) return;
-                this.selectContext.setXCellEnd(cell.getPositionX());
-                this.selectContext.setYCellEnd(cell.getPositionY());
+                this.selectContext.setXCellEnd(cell.getCoordinate().getX());
+                this.selectContext.setYCellEnd(cell.getCoordinate().getY());
 
                 resetCellsColor(this.selectedCells);
                 this.selectedCells = new ArrayList<>();
@@ -437,7 +440,7 @@ public class GameOfLifeController {
                 final int yMax = Math.max(selectContext.getYCellStart(), selectContext.getYCellEnd());
                 for(int i = xMin; i <= xMax; ++i) {
                     for(int j = yMin; j <= yMax; ++j) {
-                        final Cell c = this.grid.getCellAtIndex(i, j);
+                        final Cell c = this.grid.getCell(i, j);
                         if(c == null) continue;
                         this.selectedCells.add(c);
                     }
@@ -470,17 +473,10 @@ public class GameOfLifeController {
         //TODO: vérifier que le SVGPath est valide
         for(int i = 0; i < p.getNbColumns(); ++i){
             for(int j = 0; j < p.getNbRows(); ++j) {
-                Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), i, j);
-                cell.setAliveColor(p.getCellAliveColor());
-                cell.setDeadColor(p.getCellDeadColor());
-                cell.makeDead();
-
+                final Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), new Coordinate(i, j), p.getCellAliveColor(), p.getCellDeadColor(), false);
+                cell.addStateListener(grid);
                 grid.addCell(cell);
             }
-        }
-
-        for(Cell c : grid.getCells()){
-            c.setAroundCells(this.grid.getAroundCells(c));
         }
     }
 
@@ -534,7 +530,7 @@ public class GameOfLifeController {
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(selectedFile))) {
             Cell tmp;
             while ((tmp = (Cell) ois.readObject()) != null){
-                final Cell cell = grid.getCellAtIndex(tmp.getPositionX(), tmp.getPositionY());
+                final Cell cell = grid.getCell(tmp.getCoordinate().getX(), tmp.getCoordinate().getY());
                 if(cell == null) continue; //si la taille de la grille a changée par exemple
 
                 if(tmp.isAlive()) cell.makeAlive();
@@ -623,25 +619,22 @@ public class GameOfLifeController {
         final GameProps p = GameProps.get();
 
         for(Cell c : this.selectedCells){
-            final Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), c.getPositionX(), c.getPositionY());
-
-            if(c.isAlive()) cell.makeAlive();
-            else cell.makeDead();
-
+            final Cell cell = new Cell(p.getShapePath(), p.getCellWidth(), p.getCellHeight(), new Coordinate(c.getCoordinate().getX(), c.getCoordinate().getY()), p.getCellAliveColor(), p.getCellDeadColor(), c.isAlive());
+            cell.addStateListener(grid);
             this.copiedSelection.add(cell);
         }
 
         this.pasteSelectionMenuItem.setDisable(false);
-        LOGGER.info("Parcelle copié!");
+        LOGGER.info(Message.get("log.chunkCopied"));
     }
 
     @FXML
     public void pasteSelection(){
-        final int xDelta = this.copiedSelection.get(0).getPositionX() - this.selectContext.getXCellStart();
-        final int yDelta = this.copiedSelection.get(0).getPositionY() - this.selectContext.getYCellStart();
+        final int xDelta = this.copiedSelection.get(0).getCoordinate().getX() - this.selectContext.getXCellStart();
+        final int yDelta = this.copiedSelection.get(0).getCoordinate().getY() - this.selectContext.getYCellStart();
 
         for(Cell c : this.copiedSelection){
-            final Cell cell = grid.getCellAtIndex(c.getPositionX() - xDelta, c.getPositionY() - yDelta);
+            final Cell cell = grid.getCell(c.getCoordinate().getX() - xDelta, c.getCoordinate().getY() - yDelta);
             if(cell == null) continue;
 
             if(c.isAlive()) cell.makeAlive();
@@ -689,15 +682,15 @@ public class GameOfLifeController {
     @FXML //TODO: optimiser
     public void makeZoom(){
         LOGGER.info(Message.get("log.zoomProcessing"));
-        final List<Cell> cells = grid.getCells();
+        final Collection<Cell> cells = grid.getCells();
 
         Platform.runLater(() -> {
             double start = System.currentTimeMillis();
             if(cells.isEmpty()) return;
 
             for(Cell cell : cells){
-                cell.setShapeWidth(GameProps.get().getCellWidth() * (zoomSlider.getValue() / 100));
-                cell.setShapeHeight(GameProps.get().getCellHeight() * (zoomSlider.getValue() / 100));
+                cell.setWidth(GameProps.get().getCellWidth() * (zoomSlider.getValue() / 100));
+                cell.setHeight(GameProps.get().getCellHeight() * (zoomSlider.getValue() / 100));
             }
 
             double end = System.currentTimeMillis();
